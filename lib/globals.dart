@@ -8,9 +8,9 @@ class StyleGlobals {
     var tertiaryColor = Colors.blueAccent;//Color(0xFF447DEB);
 
     /// CORES DE TEXTO
-    var textColorForte = Colors.grey.shade800;
+    var textColorForte = Color(0xFF1C1915);
     var textColorMedio = Color(0xFF797979);
-    var textColorFraco = Colors.grey.shade600;
+    var textColorFraco = Color(0xFFB5B5B5);
     var textColorSecundary = Colors.white;
 
     var colorGradiente = LinearGradient(

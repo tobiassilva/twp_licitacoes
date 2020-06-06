@@ -6,4 +6,9 @@ class CadastroStore = _CadastroStore with _$CadastroStore;
 
 abstract class _CadastroStore with Store {
 
+  @observable
+  bool aceitouTermos = false;
+
+  @action
+  void setAceitouTermos() => aceitouTermos = !aceitouTermos;
 }

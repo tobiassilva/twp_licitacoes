@@ -27,6 +27,7 @@ dependencies:
   flutter_mobx: ^1.1.0
   flutter_spinkit: ^4.1.2+1
   font_awesome_flutter:
+  hasura_connect: ^1.2.1+1
   http: ^0.12.0+4
   mobx: ^1.2.1
   provider: ^4.0.5

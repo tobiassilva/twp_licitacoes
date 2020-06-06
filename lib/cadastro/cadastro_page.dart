@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/cadastro/cadastro_widget.dart';
+import 'package:twp_licitacoes/cadastro/Widgets/cadastro_widget.dart';
 
 import '../globals.dart';
+import 'Widgets/pagamento_widget.dart';
+import 'Widgets/planos_widget.dart';
+import 'Widgets/termos_widget.dart';
 import 'cadastro_functions.dart';
 
 class CadastroPage extends StatefulWidget {
@@ -16,6 +19,9 @@ class _CadastroPageState extends State<CadastroPage> {
   @override
   Widget build(BuildContext context) {
     CadastroWidget cadastroWidget = CadastroWidget(context);
+    TermosWidget termosWidget = TermosWidget(context);
+    PlanosWidget planosWidget = PlanosWidget(context);
+    PagamentoWidget pagamentoWidget = PagamentoWidget(context);
     final cadastroFunctions = Provider.of<CadastroFunctions>(context);
     return MaterialApp(
       home: Scaffold(
@@ -29,7 +35,12 @@ class _CadastroPageState extends State<CadastroPage> {
               child: PageView(
                 controller: cadastroFunctions.controllerNavigation,
                 physics: new NeverScrollableScrollPhysics(),
-                children: <Widget>[cadastroWidget.userPage(), cadastroWidget.termosPage()],
+                children: <Widget>[
+                  cadastroWidget.userPage(),
+                  termosWidget.termosPage(),
+                  planosWidget.pagamentoPage(),
+                  pagamentoWidget.planosPage()
+                ],
                 scrollDirection: Axis.horizontal,
               )),
         ),

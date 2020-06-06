@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:twp_licitacoes/cadastro/cadastro_page.dart';
 
 import 'package:twp_licitacoes/home/home.dart';
 
@@ -47,11 +48,14 @@ class LoginFunctions {
   ///
   Future logarEmail(BuildContext context) async {
 
-    final loginStore = Provider.of<LoginStore>(context);
+    //final loginStore = Provider.of<LoginStore>(context);
 
     bool cs = await result();
+    var up;
 
     print('conexao: $cs');
+    print('conexao: ${email.text}');
+    print('conexao: ${senhaLog.text}');
 
     if (cs == false) {
       scaffoldKey.currentState.showSnackBar(new SnackBar(
@@ -61,6 +65,17 @@ class LoginFunctions {
       final FirebaseUser user = await auth.signInWithEmailAndPassword(
           email: email.text, password: senhaLog.text);
       print("singd in " + user.email);
+
+      final notesReference = FirebaseDatabase.instance
+          .reference()
+          .child('userProfile/${user.uid}');
+
+      await notesReference.once().then((DataSnapshot snapshot){
+        if(snapshot.value != null){
+          up = snapshot.value['up'];
+        }
+      });
+
     } else {
       scaffoldKey.currentState
           .showSnackBar(SnackBar(content: Text('Sem conexão com a internet!')));
@@ -71,15 +86,27 @@ class LoginFunctions {
     //loginStore.mudaCarregamento(); //false
     //loginStore.apagaInfos();
 
-    loginStore.setCarregando();
+    //loginStore.setCarregando();
 
-    Navigator.pushReplacement(
-      context,
-      new MaterialPageRoute(
-        builder: (context) => new HomePage(),
-        settings: RouteSettings(name: 'Home'),
-      ),
-    );
+    if(up == 0){
+      Navigator.pushReplacement(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new CadastroPage(),
+          settings: RouteSettings(name: 'Home'),
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new HomePage(),
+          settings: RouteSettings(name: 'Home'),
+        ),
+      );
+    }
+
+
 
     return;
   }
@@ -126,7 +153,7 @@ class LoginFunctions {
     Navigator.pushReplacement(
       context,
       new MaterialPageRoute(
-        builder: (context) => new HomePage(),
+        builder: (context) => new CadastroPage(),
       ),
     );
 

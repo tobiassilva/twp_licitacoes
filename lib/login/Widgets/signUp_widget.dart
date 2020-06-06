@@ -4,9 +4,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../globals.dart';
-import 'login_functions.dart';
-import 'login_store.dart';
+import '../../globals.dart';
+import '../login_functions.dart';
+import '../login_store.dart';
 
 class SignUpWidget {
 
@@ -71,7 +71,7 @@ class SignUpWidget {
                   'JÁ POSSUO CONTA',
                   style: TextStyle(
                       color: Colors.white70,
-                      fontSize: StyleGlobals().sizeSubtitulo
+                      fontSize: StyleGlobals().sizeText
                   ),
                 ),
               ),
@@ -92,7 +92,7 @@ class SignUpWidget {
         children: <Widget>[
           /// CAMPO EMAIL
           Container(
-            height: 65,
+            height: 60,
             //color: Colors.white,
             decoration: BoxDecoration(
               color: Colors.white30,
@@ -110,8 +110,8 @@ class SignUpWidget {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(7))),
-                  height: 65,
-                  width: 45,
+                  height: 60,
+                  width: 43,
                   padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
@@ -152,7 +152,7 @@ class SignUpWidget {
 
           /// CAMPO SENHA
           Container(
-            height: 65,
+            height: 60,
             //color: Colors.white,
             decoration: BoxDecoration(
                 color: Colors.white30,
@@ -167,8 +167,8 @@ class SignUpWidget {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(7))),
-                  height: 65,
-                  width: 45,
+                  height: 60,
+                  width: 43,
                   //padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
@@ -214,7 +214,7 @@ class SignUpWidget {
 
           /// CAMPO CONFIRMA SENHA
           Container(
-            height: 65,
+            height: 60,
             //color: Colors.white,
             decoration: BoxDecoration(
                 color: Colors.white30,
@@ -229,8 +229,8 @@ class SignUpWidget {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(7))),
-                  height: 65,
-                  width: 45,
+                  height: 60,
+                  width: 43,
                   //padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(

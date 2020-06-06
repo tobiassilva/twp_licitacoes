@@ -7,8 +7,8 @@ import 'package:twp_licitacoes/cadastro/cadastro_page.dart';
 
 import 'package:twp_licitacoes/globals.dart';
 
-import 'login_functions.dart';
-import 'login_store.dart';
+import '../login_functions.dart';
+import '../login_store.dart';
 
 class LoginWidget {
 
@@ -73,7 +73,7 @@ class LoginWidget {
                     'CRIAR CONTA',
                     style: TextStyle(
                         color: Colors.white70,
-                        fontSize: StyleGlobals().sizeTextMedio
+                        fontSize: StyleGlobals().sizeText
                     ),
                   ),
                 ),
@@ -97,7 +97,7 @@ class LoginWidget {
                     'RECUPERAR SENHA',
                     style: TextStyle(
                         color: Colors.white70,
-                        fontSize: StyleGlobals().sizeTextMedio
+                        fontSize: StyleGlobals().sizeText
                     ),
                   ),
                 ),
@@ -120,7 +120,7 @@ class LoginWidget {
         children: <Widget>[
           /// CAMPO EMAIL
           Container(
-            height: 65,
+            height: 60,
             //color: Colors.white,
             decoration: BoxDecoration(
                 color: Colors.white30,
@@ -138,8 +138,8 @@ class LoginWidget {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(7))),
-                  height: 65,
-                  width: 45,
+                  height: 60,
+                  width: 43,
                   padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
@@ -180,7 +180,7 @@ class LoginWidget {
 
           /// CAMPO SENHA
           Container(
-            height: 65,
+            height: 60,
             //color: Colors.white,
             decoration: BoxDecoration(
                 color: Colors.white30,
@@ -195,8 +195,8 @@ class LoginWidget {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(7))),
-                  height: 65,
-                  width: 45,
+                  height: 60,
+                  width: 43,
                   //padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
@@ -260,10 +260,7 @@ class LoginWidget {
       padding: EdgeInsets.all(0),
       onPressed: () async {
         print('AAAAAAAAA');
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => CadastroPage())
-        );
-        /*if(!loginStore.carregando){
+        if(!loginStore.carregando){
           loginStore.setCarregando();///TODO: COLOCAR DE VOLTA ESSAS PORRA
           if(loginStore.validaEmail(loginStore.email)){
             if(loginStore.senha.length > 0){
@@ -279,7 +276,7 @@ class LoginWidget {
             loginFunctions.scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Ops! Esse email não é válido')));
           }
           loginStore.setCarregando();
-        }*/
+        }
         //loginStore.setCarregando();
       }, 
       child: Row(
