@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "943255400606",
+    "firebase_url": "https://twplicitacoes.firebaseio.com",
+    "project_id": "twplicitacoes",
+    "storage_bucket": "twplicitacoes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943255400606:android:805aac0956cff195048b8f",
+        "android_client_info": {
+          "package_name": "com.tobiasarantes.twp_licitacoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943255400606-fnup7as9t3ujqie0sn29k6ruv22icknh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tobiasarantes.twp_licitacoes",
+            "certificate_hash": "645ce9707f796d84a6183f46c04b525025c34a15"
+          }
+        },
+        {
+          "client_id": "943255400606-guqd5123cpe39jspj86bjulhq8d54usv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgj2lZr-MKLFWg0FqfWuSEMzaNyuxHp8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943255400606-guqd5123cpe39jspj86bjulhq8d54usv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

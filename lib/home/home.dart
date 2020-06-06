@@ -3,19 +3,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class homePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _homePageState createState() => _homePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _homePageState extends State<homePage> {
+class _HomePageState extends State<HomePage> {
 
   var url = 'http://compras.dados.gov.br/licitacoes/v1/licitacoes.json';
 
   void initState(){
     super.initState();
 
-    recebeLicitacoes();
+    //recebeLicitacoes();
   }
 
   var licitacoes;
@@ -62,7 +62,7 @@ class _homePageState extends State<homePage> {
             Expanded(
               child: Container(
                 padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
-                child: ListView.builder(
+                child: Text('TEM POHA NENHUMMA NESSA CARALHA. é nois'),/*ListView.builder(
                     itemCount: licitacoes['_embedded']['licitacoes'].length,
                     itemBuilder: (BuildContext cont, int index){
                       return Column(
@@ -81,7 +81,7 @@ class _homePageState extends State<homePage> {
                         ],
                       );
                     }
-                ),
+                ),*/
               ),
             ),
           ],
