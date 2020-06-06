@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'cadastro/cadastro_functions.dart';
+import 'cadastro/cadastro_store.dart';
 import 'home/home.dart';
 import 'login/login_functions.dart';
 import 'login/login_page.dart';
@@ -17,10 +18,11 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<LoginStore>(create: (_) => LoginStore()),
         Provider<LoginFunctions>(create: (_) => LoginFunctions(context)),
+        Provider<CadastroStore>(create: (_) => CadastroStore()),
         Provider<CadastroFunctions>(create: (_) => CadastroFunctions(context)),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'TWP Licitações',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 
 import 'package:twp_licitacoes/globals.dart';
 import 'package:twp_licitacoes/login/login_functions.dart';
-import 'package:twp_licitacoes/login/signUp_widget.dart';
+import 'package:twp_licitacoes/login/Widgets/signUp_widget.dart';
 import 'login_store.dart';
-import 'login_widget.dart';
+import 'Widgets/login_widget.dart';
 
 class LoginPage extends StatefulWidget {
   @override
