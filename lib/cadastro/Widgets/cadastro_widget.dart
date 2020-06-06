@@ -119,7 +119,7 @@ class CadastroWidget {
                   padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
-                    FontAwesomeIcons.userAlt,
+                    FontAwesomeIcons.solidBuilding,
                     color: StyleGlobals().secundaryColor,
                     size: 22,
                   ),
@@ -134,11 +134,11 @@ class CadastroWidget {
                               fontSize: StyleGlobals().sizeSubtitulo
                           ),
                           //keyboardType: TextInputType.,
-                          controller: cadastroFunctions.nome,
+                          controller: cadastroFunctions.nome, ///MUDAR CONTROLADOR
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'digite seu nome',
+                            hintText: 'digite o nome da Empresa',
                             hintStyle: TextStyle(
                                 color: StyleGlobals().textColorFraco,
                                 fontSize: StyleGlobals().sizeTextMedio
@@ -154,7 +154,7 @@ class CadastroWidget {
               ],
             ),
           ),
-          
+
           /// CAMPO NOME CONTATO REPRESENTANTE
           Container(
             height: 60,
