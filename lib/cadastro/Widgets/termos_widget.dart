@@ -41,6 +41,14 @@ class TermosWidget {
                   color: Colors.green,
                 ),
                 Icon(
+                  FontAwesomeIcons.chartPie,
+                  color: Colors.green,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.green,
+                ),
+                Icon(
                   FontAwesomeIcons.fileContract,
                   color: StyleGlobals().primaryColor,
                 ),

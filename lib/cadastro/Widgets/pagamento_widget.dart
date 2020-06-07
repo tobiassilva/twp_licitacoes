@@ -37,6 +37,14 @@ class PagamentoWidget {
                   color: Colors.green,
                 ),
                 Icon(
+                  FontAwesomeIcons.chartPie,
+                  color: Colors.green,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.green,
+                ),
+                Icon(
                   FontAwesomeIcons.fileContract,
                   color: Colors.green,
                 ),

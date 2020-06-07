@@ -37,6 +37,12 @@ class CadastroWidget {
                     Icons.arrow_forward_ios
                 ),
                 Icon(
+                  FontAwesomeIcons.chartPie
+                ),
+                Icon(
+                  Icons.arrow_forward_ios
+                ),
+                Icon(
                     FontAwesomeIcons.fileContract
                 ),
                 Icon(
@@ -86,7 +92,7 @@ class CadastroWidget {
       child: Column(
         children: <Widget>[
 
-          /// CAMPO NOME
+          /// CAMPO NOME EMPRESA
           Container(
             height: 60,
             margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
@@ -134,7 +140,7 @@ class CadastroWidget {
                               fontSize: StyleGlobals().sizeSubtitulo
                           ),
                           //keyboardType: TextInputType.,
-                          controller: cadastroFunctions.nome, ///MUDAR CONTROLADOR
+                          controller: cadastroFunctions.nomeEmpresa, ///MUDAR CONTROLADOR
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -207,7 +213,7 @@ class CadastroWidget {
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'digite seu nome',
+                            hintText: 'digite seu nome (Representante)',
                             hintStyle: TextStyle(
                                 color: StyleGlobals().textColorFraco,
                                 fontSize: StyleGlobals().sizeTextMedio
@@ -280,7 +286,7 @@ class CadastroWidget {
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'digite seu email',
+                            hintText: 'email',
                             hintStyle: TextStyle(
                                 color: StyleGlobals().textColorFraco,
                                 fontSize: StyleGlobals().sizeTextMedio
@@ -357,7 +363,7 @@ class CadastroWidget {
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'digite seu telefone',
+                            hintText: 'digite o telefone da empressa',
                             hintStyle: TextStyle(
                               color: StyleGlobals().textColorFraco,
                               fontSize: StyleGlobals().sizeTextMedio
@@ -432,7 +438,487 @@ class CadastroWidget {
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'informe seu CNPJ',
+                            hintText: 'CNPJ',
+                            hintStyle: TextStyle(
+                                color: StyleGlobals().textColorFraco,
+                                fontSize: StyleGlobals().sizeTextMedio
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(
+            height: 25,
+          ),
+
+          /// ENDEREÇO
+          ///
+
+          Container(
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Text(
+              'ENDEREÇO DA EMPRESA',
+              style: TextStyle(
+                fontSize: StyleGlobals().sizeSubtitulo,
+                color: StyleGlobals().textColorForte,
+              ),
+
+            ),
+          ),
+
+          SizedBox(
+            height: 25,
+          ),
+
+          /// CAMPO CEP
+          Container(
+            height: 60,
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            //color: Colors.white,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 20.0,
+                      spreadRadius: 2.0,
+                      offset: Offset(
+                        10.0,
+                        10.0,
+                      )),
+                ]),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: StyleGlobals().tertiaryColor,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(7))),
+                  height: 60,
+                  width: 43,
+                  padding: EdgeInsets.only(left: 8, right: 8),
+                  margin: EdgeInsets.only(right: 7),
+                  child: Icon(
+                    FontAwesomeIcons.mapMarkerAlt,
+                    color: StyleGlobals().secundaryColor,
+                    size: 22,
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: new TextFormField(
+                          style: TextStyle(
+                              color: StyleGlobals().textColorForte,
+                              fontSize: StyleGlobals().sizeSubtitulo
+                          ),
+                          keyboardType: TextInputType.number,
+
+                          //enabled: false,
+                          controller: cadastroFunctions.cep,
+                          //obscureText: !loginStore.verSenha,
+                          //onChanged: loginStore.setSenha,
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'CEP',
+                            hintStyle: TextStyle(
+                                color: StyleGlobals().textColorFraco,
+                                fontSize: StyleGlobals().sizeTextMedio
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(
+            height: 25,
+          ),
+
+          /// CAMPO LOGRADOURO
+          Container(
+            height: 60,
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            //color: Colors.white,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 20.0,
+                      spreadRadius: 2.0,
+                      offset: Offset(
+                        10.0,
+                        10.0,
+                      )),
+                ]),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: StyleGlobals().tertiaryColor,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(7))),
+                  height: 60,
+                  width: 43,
+                  padding: EdgeInsets.only(left: 8, right: 8),
+                  margin: EdgeInsets.only(right: 7),
+                  child: Icon(
+                    FontAwesomeIcons.road,
+                    color: StyleGlobals().secundaryColor,
+                    size: 22,
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: new TextFormField(
+                          style: TextStyle(
+                              color: StyleGlobals().textColorForte,
+                              fontSize: StyleGlobals().sizeSubtitulo
+                          ),
+                          keyboardType: TextInputType.text,
+
+                          //enabled: false,
+                          controller: cadastroFunctions.logradouro,
+                          //obscureText: !loginStore.verSenha,
+                          //onChanged: loginStore.setSenha,
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'logradouro',
+                            hintStyle: TextStyle(
+                                color: StyleGlobals().textColorFraco,
+                                fontSize: StyleGlobals().sizeTextMedio
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(
+            height: 25,
+          ),
+
+          /// CAMPO NUMERO
+          Row(
+            children: <Widget>[
+              Container(
+                height: 60,
+                margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                width: MediaQuery.of(context).size.width/2,
+                //color: Colors.white,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 20.0,
+                          spreadRadius: 2.0,
+                          offset: Offset(
+                            10.0,
+                            10.0,
+                          )),
+                    ]),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                          color: StyleGlobals().tertiaryColor,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(7))),
+                      height: 60,
+                      width: 43,
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      margin: EdgeInsets.only(right: 7),
+                      child: Icon(
+                        Icons.filter_1,
+                        color: StyleGlobals().secundaryColor,
+                        size: 22,
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: new TextFormField(
+                              style: TextStyle(
+                                  color: StyleGlobals().textColorForte,
+                                  fontSize: StyleGlobals().sizeSubtitulo
+                              ),
+                              keyboardType: TextInputType.text,
+
+                              //enabled: false,
+                              controller: cadastroFunctions.numero,
+                              //obscureText: !loginStore.verSenha,
+                              //onChanged: loginStore.setSenha,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'numero',
+                                hintStyle: TextStyle(
+                                    color: StyleGlobals().textColorFraco,
+                                    fontSize: StyleGlobals().sizeTextMedio
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(
+            height: 25,
+          ),
+
+          ///COMPLEMENTO
+
+          Container(
+            height: 60,
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            //color: Colors.white,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 20.0,
+                      spreadRadius: 2.0,
+                      offset: Offset(
+                        10.0,
+                        10.0,
+                      )),
+                ]),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: StyleGlobals().tertiaryColor,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(7))),
+                  height: 60,
+                  width: 43,
+                  padding: EdgeInsets.only(left: 8, right: 8),
+                  margin: EdgeInsets.only(right: 7),
+                  child: Icon(
+                    FontAwesomeIcons.mapSigns,
+                    color: StyleGlobals().secundaryColor,
+                    size: 22,
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: new TextFormField(
+                          style: TextStyle(
+                              color: StyleGlobals().textColorForte,
+                              fontSize: StyleGlobals().sizeSubtitulo
+                          ),
+                          keyboardType: TextInputType.text,
+
+                          //enabled: false,
+                          controller: cadastroFunctions.complemento,
+                          //obscureText: !loginStore.verSenha,
+                          //onChanged: loginStore.setSenha,
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'complemento',
+                            hintStyle: TextStyle(
+                                color: StyleGlobals().textColorFraco,
+                                fontSize: StyleGlobals().sizeTextMedio
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(
+            height: 25,
+          ),
+
+
+          ///CIDADE
+
+          Container(
+            height: 60,
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            //color: Colors.white,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 20.0,
+                      spreadRadius: 2.0,
+                      offset: Offset(
+                        10.0,
+                        10.0,
+                      )),
+                ]),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: StyleGlobals().tertiaryColor,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(7))),
+                  height: 60,
+                  width: 43,
+                  padding: EdgeInsets.only(left: 8, right: 8),
+                  margin: EdgeInsets.only(right: 7),
+                  child: Icon(
+                    FontAwesomeIcons.city,
+                    color: StyleGlobals().secundaryColor,
+                    size: 22,
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: new TextFormField(
+                          style: TextStyle(
+                              color: StyleGlobals().textColorForte,
+                              fontSize: StyleGlobals().sizeSubtitulo
+                          ),
+                          keyboardType: TextInputType.text,
+
+                          //enabled: false,
+                          controller: cadastroFunctions.cidade,
+                          //obscureText: !loginStore.verSenha,
+                          //onChanged: loginStore.setSenha,
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'cidade',
+                            hintStyle: TextStyle(
+                                color: StyleGlobals().textColorFraco,
+                                fontSize: StyleGlobals().sizeTextMedio
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+          SizedBox(
+            height: 25,
+          ),
+
+
+          ///ESTADO
+
+          Container(
+            height: 60,
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            //color: Colors.white,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 20.0,
+                      spreadRadius: 2.0,
+                      offset: Offset(
+                        10.0,
+                        10.0,
+                      )),
+                ]),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: StyleGlobals().tertiaryColor,
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(7))),
+                  height: 60,
+                  width: 43,
+                  padding: EdgeInsets.only(left: 8, right: 8),
+                  margin: EdgeInsets.only(right: 7),
+                  child: Icon(
+                    FontAwesomeIcons.mapMarkedAlt,
+                    color: StyleGlobals().secundaryColor,
+                    size: 22,
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: new TextFormField(
+                          style: TextStyle(
+                              color: StyleGlobals().textColorForte,
+                              fontSize: StyleGlobals().sizeSubtitulo
+                          ),
+                          keyboardType: TextInputType.text,
+
+                          //enabled: false,
+                          controller: cadastroFunctions.estado,
+                          //obscureText: !loginStore.verSenha,
+                          //onChanged: loginStore.setSenha,
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'estado',
                             hintStyle: TextStyle(
                                 color: StyleGlobals().textColorFraco,
                                 fontSize: StyleGlobals().sizeTextMedio
@@ -465,7 +951,7 @@ class CadastroWidget {
         padding: EdgeInsets.all(0),
         onPressed: () async {
           print('AAAAAAAAA');
-          cadastroFunctions.gotoTermos();
+          cadastroFunctions.gotoInteresses();
         },
         child: Row(
           children: <Widget>[
