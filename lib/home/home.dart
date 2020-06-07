@@ -190,22 +190,359 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-/*class StringJson{
+class StringJsonOrgaos{
 
 
-  String jsonBase = '''
-  {
-  "Banco de Dados de Licitações": [
-        {
-        "Categoria de Atividade": "Agricultura Familiar e Produtos Rurais",
-            "Subcategoria de Atividade": "Serviços Veterinári",
-            "Órgão": "Cristina/MG (Prefeitura)"
-        }
-        ]
-        }
+  String jsonListaorgaos = '''
+  [
+ {
+   "Órgão": "1",
+   "FIELD2": "Câmara Municipal de Baependi/MG"
+ },
+ {
+   "Órgão": "2",
+   "FIELD2": "Câmara Municipal de Brazópolis/MG"
+ },
+ {
+   "Órgão": "3",
+   "FIELD2": "Câmara Municipal de Cachoeira de Minas/MG"
+ },
+ {
+   "Órgão": "4",
+   "FIELD2": "Câmara Municipal de Cambuí/MG "
+ },
+ {
+   "Órgão": "5",
+   "FIELD2": "Câmara Municipal de Carmo de Minas/MG"
+ },
+ {
+   "Órgão": "6",
+   "FIELD2": "Câmara Municipal de Caxambu /MG"
+ },
+ {
+   "Órgão": "7",
+   "FIELD2": "Câmara Municipal de Conceição das Pedras/MG"
+ },
+ {
+   "Órgão": "8",
+   "FIELD2": "Câmara Municipal de Conceição dos Ouros/MG"
+ },
+ {
+   "Órgão": "9",
+   "FIELD2": "Câmara Municipal de Cristina/MG"
+ },
+ {
+   "Órgão": "10",
+   "FIELD2": "Câmara Municipal de Delfim Moreira/MG"
+ },
+ {
+   "Órgão": "11",
+   "FIELD2": "Câmara Municipal de Dom Viçoso/MG"
+ },
+ {
+   "Órgão": "12",
+   "FIELD2": "Câmara Municipal de Heliodora/MG"
+ },
+ {
+   "Órgão": "13",
+   "FIELD2": "Câmara Municipal de Itajubá/MG"
+ },
+ {
+   "Órgão": "14",
+   "FIELD2": "Câmara Municipal de Itamonte/MG"
+ },
+ {
+   "Órgão": "15",
+   "FIELD2": "Câmara Municipal de Itanhandu/MG"
+ },
+ {
+   "Órgão": "16",
+   "FIELD2": "Câmara Municipal de Jaceaba/MG"
+ },
+ {
+   "Órgão": "17",
+   "FIELD2": "Câmara Municipal de Lavras/MG"
+ },
+ {
+   "Órgão": "18",
+   "FIELD2": "Câmara Municipal de Maria da Fé/MG"
+ },
+ {
+   "Órgão": "19",
+   "FIELD2": "Câmara Municipal de Marmelópolis/MG"
+ },
+ {
+   "Órgão": "20",
+   "FIELD2": "Câmara Municipal de Natércia  - MG"
+ },
+ {
+   "Órgão": "21",
+   "FIELD2": "Câmara Municipal de Ouro Fino/MG"
+ },
+ {
+   "Órgão": "22",
+   "FIELD2": "Câmara Municipal de Paraisópolis/MG"
+ },
+ {
+   "Órgão": "23",
+   "FIELD2": "Câmara Municipal de Passa Quatro/MG"
+ },
+ {
+   "Órgão": "24",
+   "FIELD2": "Câmara Municipal de Pedralva/MG"
+ },
+ {
+   "Órgão": "25",
+   "FIELD2": "Câmara Municipal de Piranguçu/MG"
+ },
+ {
+   "Órgão": "26",
+   "FIELD2": "Câmara Municipal de Piranguinho/MG"
+ },
+ {
+   "Órgão": "27",
+   "FIELD2": "Câmara Municipal de Poços de Caldas - MG"
+ },
+ {
+   "Órgão": "28",
+   "FIELD2": "Câmara Municipal de Pouso Alegre/MG"
+ },
+ {
+   "Órgão": "29",
+   "FIELD2": "Câmara Municipal de Pouso Alto/MG"
+ },
+ {
+   "Órgão": "30",
+   "FIELD2": "Câmara Municipal de Santa Rita do Sapucaí/MG"
+ },
+ {
+   "Órgão": "31",
+   "FIELD2": "Câmara Municipal de São José do Alegre/MG"
+ },
+ {
+   "Órgão": "32",
+   "FIELD2": "Câmara Municipal de São Lourenço/MG"
+ },
+ {
+   "Órgão": "33",
+   "FIELD2": "Câmara Municipal de São Sebastião da Bela Vista/MG"
+ },
+ {
+   "Órgão": "34",
+   "FIELD2": "Câmara Municipal de São Sebastião do Rio Verde/MG"
+ },
+ {
+   "Órgão": "35",
+   "FIELD2": "Câmara Municipal de São Tomé das Letras/MG"
+ },
+ {
+   "Órgão": "36",
+   "FIELD2": "Câmara Municipal de Uberaba/MG"
+ },
+ {
+   "Órgão": "37",
+   "FIELD2": "Câmara Municipal de Varginha/MG"
+ },
+ {
+   "Órgão": "38",
+   "FIELD2": "Câmara Municipal de Virgínia/MG"
+ },
+ {
+   "Órgão": "39",
+   "FIELD2": "Câmara Municipal de Wenceslau Braz/MG"
+ },
+ {
+   "Órgão": "40",
+   "FIELD2": "CODANORTE - Consórcio Intermunicipal para o Desenvolvimento Sustentável do Norte de Minas "
+ },
+ {
+   "Órgão": "41",
+   "FIELD2": "DNIT - Departamento Nacional de Infra-Estrutura de Transportes"
+ },
+ {
+   "Órgão": "42",
+   "FIELD2": "Jaceaba/MG (Prefeitura)"
+ },
+ {
+   "Órgão": "43",
+   "FIELD2": "João Pinheiro/MG (Câmara)"
+ },
+ {
+   "Órgão": "44",
+   "FIELD2": "Natércia - MG (Prefeitura)"
+ },
+ {
+   "Órgão": "45",
+   "FIELD2": "Prefeitura Municipal de  Cambuí/MG"
+ },
+ {
+   "Órgão": "46",
+   "FIELD2": "Prefeitura Municipal de Baependi/MG"
+ },
+ {
+   "Órgão": "47",
+   "FIELD2": "Prefeitura Municipal de Borda da Mata/MG"
+ },
+ {
+   "Órgão": "48",
+   "FIELD2": "Prefeitura Municipal de Brazópolis/MG"
+ },
+ {
+   "Órgão": "49",
+   "FIELD2": "Prefeitura Municipal de Cachoeira de Minas/MG"
+ },
+ {
+   "Órgão": "50",
+   "FIELD2": "Prefeitura Municipal de Carmo de Minas/MG"
+ },
+ {
+   "Órgão": "51",
+   "FIELD2": "Prefeitura Municipal de Caxambu/íMG "
+ },
+ {
+   "Órgão": "52",
+   "FIELD2": "Prefeitura Municipal de Conceição das Pedras/MG"
+ },
+ {
+   "Órgão": "53",
+   "FIELD2": "Prefeitura Municipal de Conceição dos Ouros/MG"
+ },
+ {
+   "Órgão": "54",
+   "FIELD2": "Prefeitura Municipal de Congonhal/M"
+ },
+ {
+   "Órgão": "55",
+   "FIELD2": "Prefeitura Municipal de Cristina/MG"
+ },
+ {
+   "Órgão": "56",
+   "FIELD2": "Prefeitura Municipal de Delfim Moreira/MG"
+ },
+ {
+   "Órgão": "57",
+   "FIELD2": "Prefeitura Municipal de Dom Viçoso/MG"
+ },
+ {
+   "Órgão": "58",
+   "FIELD2": "Prefeitura Municipal de Heliodora/MG"
+ },
+ {
+   "Órgão": "59",
+   "FIELD2": "Prefeitura Municipal de Itajubá/MG"
+ },
+ {
+   "Órgão": "60",
+   "FIELD2": "Prefeitura Municipal de Itamonte/MG"
+ },
+ {
+   "Órgão": "61",
+   "FIELD2": "Prefeitura Municipal de Itanhandu/MG"
+ },
+ {
+   "Órgão": "62",
+   "FIELD2": "Prefeitura Municipal de João Pinheiro/MG"
+ },
+ {
+   "Órgão": "63",
+   "FIELD2": "Prefeitura Municipal de Lavras/MG"
+ },
+ {
+   "Órgão": "64",
+   "FIELD2": "Prefeitura Municipal de Maria da Fé/MG"
+ },
+ {
+   "Órgão": "65",
+   "FIELD2": "Prefeitura Municipal de Marmelópolis/MG"
+ },
+ {
+   "Órgão": "66",
+   "FIELD2": "Prefeitura Municipal de Ouro Fino/MG"
+ },
+ {
+   "Órgão": "67",
+   "FIELD2": "Prefeitura Municipal de Paraisópolis/MG"
+ },
+ {
+   "Órgão": "68",
+   "FIELD2": "Prefeitura Municipal de Passa Quatro/MG"
+ },
+ {
+   "Órgão": "69",
+   "FIELD2": "Prefeitura Municipal de Pedralva/MG"
+ },
+ {
+   "Órgão": "70",
+   "FIELD2": "Prefeitura Municipal de Piranguçu/MG"
+ },
+ {
+   "Órgão": "71",
+   "FIELD2": "Prefeitura Municipal de Piranguinho/MG"
+ },
+ {
+   "Órgão": "72",
+   "FIELD2": "Prefeitura Municipal de Poços de Caldas/MG"
+ },
+ {
+   "Órgão": "73",
+   "FIELD2": "Prefeitura Municipal de Pouso Alegre/MG"
+ },
+ {
+   "Órgão": "74",
+   "FIELD2": "Prefeitura Municipal de Pouso Alto/MG"
+ },
+ {
+   "Órgão": "75",
+   "FIELD2": "Prefeitura Municipal de Santa Rita do Sapucaí/MG (Câmara)"
+ },
+ {
+   "Órgão": "76",
+   "FIELD2": "Prefeitura Municipal de Santa Vitória/MG"
+ },
+ {
+   "Órgão": "77",
+   "FIELD2": "Prefeitura Municipal de São José do Alegre/MG"
+ },
+ {
+   "Órgão": "78",
+   "FIELD2": "Prefeitura Municipal de São Lourenço/MG"
+ },
+ {
+   "Órgão": "79",
+   "FIELD2": "Prefeitura Municipal de São Sebastião da Bela Vista/MG"
+ },
+ {
+   "Órgão": "80",
+   "FIELD2": "Prefeitura Municipal de São Sebastião do Rio Verde"
+ },
+ {
+   "Órgão": "81",
+   "FIELD2": "Prefeitura Municipal de São Tomé das Letras/MG"
+ },
+ {
+   "Órgão": "82",
+   "FIELD2": "Prefeitura Municipal de Uberaba/MG"
+ },
+ {
+   "Órgão": "83",
+   "FIELD2": "Prefeitura Municipal de Varginha/MG"
+ },
+ {
+   "Órgão": "84",
+   "FIELD2": "Prefeitura Municipal de Virgínia/MG"
+ },
+ {
+   "Órgão": "85",
+   "FIELD2": "Prefeitura Municipal de Wenceslau Braz/MG "
+ },
+ {
+   "Órgão": "86",
+   "FIELD2": "Secretaria de Infraestrutura e Meio Ambiente da Prefeitura de São Paulo"
+ }
+]
   ''';
 
-}*/
+}
 class StringJson{
 
 

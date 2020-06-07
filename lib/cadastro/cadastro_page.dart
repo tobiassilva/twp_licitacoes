@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/cadastro/Widgets/cadastro_widget.dart';
 
 import '../globals.dart';
+import 'Widgets/interesses_widget.dart';
 import 'Widgets/pagamento_widget.dart';
 import 'Widgets/planos_widget.dart';
 import 'Widgets/termos_widget.dart';
@@ -15,14 +16,23 @@ class CadastroPage extends StatefulWidget {
 
 class _CadastroPageState extends State<CadastroPage> {
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
     CadastroWidget cadastroWidget = CadastroWidget(context);
+    InteressesWidget interessesWidget = InteressesWidget(context);
     TermosWidget termosWidget = TermosWidget(context);
     PlanosWidget planosWidget = PlanosWidget(context);
     PagamentoWidget pagamentoWidget = PagamentoWidget(context);
     final cadastroFunctions = Provider.of<CadastroFunctions>(context);
+    cadastroFunctions.getDadosBanco();
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -37,6 +47,7 @@ class _CadastroPageState extends State<CadastroPage> {
                 physics: new NeverScrollableScrollPhysics(),
                 children: <Widget>[
                   cadastroWidget.userPage(),
+                  interessesWidget.interessesPage(),
                   termosWidget.termosPage(),
                   planosWidget.pagamentoPage(),
                   pagamentoWidget.planosPage()
