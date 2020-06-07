@@ -4,6 +4,11 @@ import 'package:hasura_connect/hasura_connect.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
+
+import '../globals.dart';
+
+import 'Widgets/home_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,12 +22,12 @@ class _HomePageState extends State<HomePage> {
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
   void initState(){
+    requisicoes().getDadosOrgaos();
+    requisicoes().getDadosTiposOrgaos();
+    requisicoes().getDadosEstados();
     super.initState();
 
     //recebeLicitacoes();
-
-
-
 
     //this.convertJson(); ///CHAMAR APENAS QUANDO FOR PRA ADICIONAR OS DADOS NO GRAPHQL
     ///FORA ISSO, IGNORA
@@ -142,26 +147,42 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.red,
-          title: Center(child: Text('APP do TWP')),
+          backgroundColor: StyleGlobals().primaryColor,
+          title: Text(
+            "HOME",
+            style: TextStyle(color: StyleGlobals().textColorSecundary),
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: StyleGlobals().colorGradiente,
+            ),
+          ),
+          iconTheme: IconThemeData(
+            color: StyleGlobals().secundaryColor,
+          ),
+          centerTitle: true,
         ),
+        drawer: customDrawer(),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 30),
-              child: Text('ORGÃOS SOLICITANTES',
-                style: TextStyle(color: Colors.blue, fontSize: 20,
-                    fontWeight: FontWeight.bold
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 0, 30),
+                  child: Text('AQUI VAI FICAR A DASHBOARD',
+                    style: TextStyle(color: Colors.blue, fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
-                child: Text('TEM POHA NENHUMMA NESSA CARALHA. é nois'),/*ListView.builder(
+           
+                
+                /*ListView.builder(
                     itemCount: licitacoes['_embedded']['licitacoes'].length,
                     itemBuilder: (BuildContext cont, int index){
                       return Column(
@@ -181,8 +202,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                 ),*/
-              ),
-            ),
+              
           ],
         ),
       ),
