@@ -22,9 +22,9 @@ class _HomePageState extends State<HomePage> {
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
   void initState(){
-    requisicoes().getDadosOrgaos();
-    requisicoes().getDadosTiposOrgaos();
-    requisicoes().getDadosEstados();
+    requisicoesDropdown().getDadosOrgaos();
+    requisicoesDropdown().getDadosTiposOrgaos();
+    requisicoesDropdown().getDadosEstados();
     super.initState();
 
     //recebeLicitacoes();
