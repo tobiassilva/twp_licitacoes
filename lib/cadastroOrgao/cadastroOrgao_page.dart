@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twp_licitacoes/globals.dart';
+import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
 
 class CadastroOrgaoPage extends StatefulWidget {
   @override
@@ -19,6 +20,27 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
   TextEditingController controllerEndereco = TextEditingController();
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+//criando dropdown tipo_orgao  
+String opcaoOrgao = '';
+int itemSel;
+void changedDropDownItem(String itemSelecionado) {
+    int i;
+    setState(() {
+      print(itemSelecionado);
+      print(requisicoesDropdown().jsonTipoOrgao['data']['tipo_orgao'].length);
+      opcaoOrgao = itemSelecionado;
+      for (i = 0; i < requisicoesDropdown().jsonTipoOrgao['data']['tipo_orgao'].length; i++) {
+        if (requisicoesDropdown().jsonTipoOrgao['data']['tipo_orgao'][i]['id'] == opcaoOrgao) {
+          itemSel = i;
+          controllerTipo.text = opcaoOrgao;
+          return;
+        }
+      }
+      controllerTipo.text = '';
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +116,46 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                       EdgeInsets.only(top: 10, bottom: 0, left: 20, right: 10),
                   padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
                   child: Container(
-                    height: 40,
-                    child: TextField(
+                  height: 40,
+                  child: Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 5),
+                    color: Colors.white,
+                    child: new Theme(
+                      data: Theme.of(context).copyWith(
+                        canvasColor: Colors.white,
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Montserrat",
+                          ),
+                          //items: ,
+                          value: opcaoOrgao,
+                          items: requisicoesDropdown().dropDownMenuItems, 
+                          iconSize: 20.0,
+                          iconEnabledColor: Color.fromRGBO(255, 255, 255, 1),
+                          hint: Text(
+                            'Carregando...',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          onChanged: changedDropDownItem,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                    /*child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        style: TextStyle(
+                          color: StyleGlobals().textColorForte,
+                        ),
+                        value: opcaoOrgao,
+                        items: requisicoesDropdown().dropDownMenuItems, 
+                        onChanged: changedDropDownItem,
+                     ),
+                    ),*//*TextField(
                       controller: controllerTipo,
                       decoration: InputDecoration.collapsed(
                         hintText: "Tipo",
@@ -103,7 +163,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                       ),
                       keyboardType: TextInputType.multiline,
                       maxLines: 20,
-                    ),
+                    ),*/
                   ),
                 ),
                 Container(

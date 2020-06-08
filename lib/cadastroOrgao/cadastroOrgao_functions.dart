@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
 
@@ -6,7 +9,13 @@ var url;
 HasuraConnect hasuraConnect =
     HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-class requisicoes {
+class requisicoesDropdown {
+
+var jsonTipoOrgao;
+var jsonEstado;
+List<DropdownMenuItem<String>> dropDownMenuItems;
+bool tipoConexao = true; // false =  sem internet, true = tem internet
+
   String subscriptionOrgao = """
 subscription {
   orgao {
@@ -37,7 +46,7 @@ subscription {
 }
 """;
 
-  bool tipoConexao = true; // false =  sem internet, true = tem internet
+  
 
 //verificando internet
   Future<bool> resultadoInternet() async {
@@ -63,7 +72,7 @@ subscription {
       return true;
     }
   }
-
+// obtendo os tipos de orgaos
   Future getDadosTiposOrgaos() async {
     var resultadoConexao = await resultadoInternet();
 
@@ -71,12 +80,43 @@ subscription {
     var snapshot = hasuraConnect.subscription(subscriptionTipoOrgao);
     snapshot.listen((data) {
       print(data);
+      jsonTipoOrgao = data;
+      dropDownMenuItems = _getDropDownMenuItems(jsonTipoOrgao);
+      return jsonTipoOrgao;
     });
+    print("WWWWWWWWWW: $jsonTipoOrgao");
+    
     }else{
     return true;
   }
   }
+List<DropdownMenuItem<String>> _getDropDownMenuItems(jsonData) {
+ List<DropdownMenuItem<String>> items = new List();
+ int qtde = jsonData['data']['tipo_orgao'].length;
+ int i;
+ items.add(new DropdownMenuItem(
+    value: '',
+    child: Text('Selecione...', style: TextStyle(
+      color: Colors.black54,),),
+  ));
+   for (i = 0; i < qtde; i++) {
+    items.add(new DropdownMenuItem(
+      value: jsonData['data']['tipo_orgao'][i]['id'],
+      child: new Text(jsonData['data']['tipo_orgao'][i]['nome'],
+          style: TextStyle(
+            fontSize: 12.0,
+            color: Colors.black,
+          )),
+    ));
+  }
+  return items;
+}
 
+
+
+
+
+//obtendo estados
   Future getDadosEstados() async {
     var resultadoConexao = await resultadoInternet();
 
@@ -90,3 +130,5 @@ subscription {
   }
   }
 }
+
+
