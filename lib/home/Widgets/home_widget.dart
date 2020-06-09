@@ -20,10 +20,20 @@ class customDrawer extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            new Container(
+
+            Container(
+              alignment: Alignment.center,
               margin: EdgeInsets.only(top: 45),
-              child: Image.asset('assets/images/smart-publica.png',
-                  height: MediaQuery.of(context).size.height / 5),
+              width: MediaQuery.of(context).size.height / 5,
+              height: MediaQuery.of(context).size.height / 5,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset('assets/images/smart-publica.png'),
+              ),
             ),
             Divider(
               color: Colors.transparent,
@@ -114,4 +124,38 @@ class customDrawer extends StatelessWidget {
       ),
     );
   }*/
+}
+
+
+class HomeWidget {
+
+  Widget botoesTopo(titulo, icone){
+    return FlatButton(
+      onPressed: (){
+
+      },
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(9),
+              color: StyleGlobals().tertiaryColor
+            ),
+            child: Icon(icone,
+              color: StyleGlobals().textColorSecundary,
+            ),
+          ),
+          Container(
+            child: Text('$titulo',
+              style: TextStyle(
+                fontSize: StyleGlobals().sizeTextMedio,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }

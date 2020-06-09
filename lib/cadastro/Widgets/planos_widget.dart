@@ -401,7 +401,7 @@ class PlanosWidget {
               padding: EdgeInsets.all(0),
               onPressed: () async {
                 cadastroFunctions.planoEsc = 0;
-                cadastroFunctions.gotoTermos();
+                cadastroFunctions.gotoPagamento();
               },
               child: Row(
                 children: <Widget>[
