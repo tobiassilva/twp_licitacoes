@@ -100,6 +100,51 @@ mixin _$CadastroStore on _CadastroStore, Store {
     });
   }
 
+  final _$carregandoAtom = Atom(name: '_CadastroStore.carregando');
+
+  @override
+  bool get carregando {
+    _$carregandoAtom.reportRead();
+    return super.carregando;
+  }
+
+  @override
+  set carregando(bool value) {
+    _$carregandoAtom.reportWrite(value, super.carregando, () {
+      super.carregando = value;
+    });
+  }
+
+  final _$selecEstadoAtom = Atom(name: '_CadastroStore.selecEstado');
+
+  @override
+  bool get selecEstado {
+    _$selecEstadoAtom.reportRead();
+    return super.selecEstado;
+  }
+
+  @override
+  set selecEstado(bool value) {
+    _$selecEstadoAtom.reportWrite(value, super.selecEstado, () {
+      super.selecEstado = value;
+    });
+  }
+
+  final _$listEstadosAtom = Atom(name: '_CadastroStore.listEstados');
+
+  @override
+  ObservableList<EstadoStore> get listEstados {
+    _$listEstadosAtom.reportRead();
+    return super.listEstados;
+  }
+
+  @override
+  set listEstados(ObservableList<EstadoStore> value) {
+    _$listEstadosAtom.reportWrite(value, super.listEstados, () {
+      super.listEstados = value;
+    });
+  }
+
   final _$_CadastroStoreActionController =
       ActionController(name: '_CadastroStore');
 
@@ -181,6 +226,39 @@ mixin _$CadastroStore on _CadastroStore, Store {
   }
 
   @override
+  void setCarregando() {
+    final _$actionInfo = _$_CadastroStoreActionController.startAction(
+        name: '_CadastroStore.setCarregando');
+    try {
+      return super.setCarregando();
+    } finally {
+      _$_CadastroStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addEmpresas(dynamic nome, dynamic id) {
+    final _$actionInfo = _$_CadastroStoreActionController.startAction(
+        name: '_CadastroStore.addEmpresas');
+    try {
+      return super.addEmpresas(nome, id);
+    } finally {
+      _$_CadastroStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void limpaEmpresas() {
+    final _$actionInfo = _$_CadastroStoreActionController.startAction(
+        name: '_CadastroStore.limpaEmpresas');
+    try {
+      return super.limpaEmpresas();
+    } finally {
+      _$_CadastroStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 nomeCatEscolhido: ${nomeCatEscolhido},
@@ -188,7 +266,10 @@ selCategoria: ${selCategoria},
 nomeSubcatEscolhido: ${nomeSubcatEscolhido},
 selSubcategoria: ${selSubcategoria},
 temSubcat: ${temSubcat},
-aceitouTermos: ${aceitouTermos}
+aceitouTermos: ${aceitouTermos},
+carregando: ${carregando},
+selecEstado: ${selecEstado},
+listEstados: ${listEstados}
     ''';
   }
 }

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/globals.dart';
 
 import '../cadastro_functions.dart';
-import '../cadastro_store.dart';
+import '../Store/cadastro_store.dart';
 
 class CadastroWidget {
 
@@ -209,7 +209,7 @@ class CadastroWidget {
                               fontSize: StyleGlobals().sizeSubtitulo
                           ),
                           //keyboardType: TextInputType.,
-                          controller: cadastroFunctions.nome,
+                          controller: cadastroFunctions.nomeRepresentante,
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -468,6 +468,7 @@ class CadastroWidget {
                 fontSize: StyleGlobals().sizeSubtitulo,
                 color: StyleGlobals().textColorForte,
               ),
+              textAlign: TextAlign.center,
 
             ),
           ),

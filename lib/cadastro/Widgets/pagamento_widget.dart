@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/cadastro/Store/cadastro_store.dart';
 import 'package:twp_licitacoes/home/home.dart';
 
 import '../../globals.dart';
+import '../cadastro_functions.dart';
 
 class PagamentoWidget {
   BuildContext context;
@@ -115,50 +119,58 @@ class PagamentoWidget {
 
   Widget _botaoPago(){
 
-    //final loginStore = Provider.of<LoginStore>(context);
-    //final cadastroFunctions = Provider.of<CadastroFunctions>(context);
+    final cadastroStore = Provider.of<CadastroStore>(context);
+    final cadastroFunctions = Provider.of<CadastroFunctions>(context);
 
     return Container(
       padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-      child: FlatButton(
-        padding: EdgeInsets.all(0),
-        onPressed: () async {
-          print('AAAAAAAAA');
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => HomePage())
+      child: Observer(
+        builder: (_){
+          return FlatButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () async {
+              print('AAAAAAAAA: ${cadastroStore.listEstados}');
+              List value = List();
+              value.addAll(cadastroStore.listEstados);
+              print('AAAAAAAAA555555555555: ${value}');
+              cadastroFunctions.enviaDadosEmpresa(value);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => HomePage())
+              );
+            },
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    child: Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          gradient: StyleGlobals().colorGradiente,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 10.0,
+                                spreadRadius: 1.0,
+                                offset: Offset(
+                                  1.0,
+                                  1.0,
+                                )),
+                          ]
+                      ),
+                      child: Center(
+                        child: Text('PRÓXIMO',
+                          style: TextStyle(
+                              color: StyleGlobals().textColorSecundary,
+                              fontSize: StyleGlobals().sizeSubtitulo
+                          ),
+                        ),
+                      ),
+                    )
+                ),
+              ],
+            ),
           );
         },
-        child: Row(
-          children: <Widget>[
-            Expanded(
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      gradient: StyleGlobals().colorGradiente,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10.0,
-                            spreadRadius: 1.0,
-                            offset: Offset(
-                              1.0,
-                              1.0,
-                            )),
-                      ]
-                  ),
-                  child: Center(
-                    child: Text('PRÓXIMO',
-                      style: TextStyle(
-                          color: StyleGlobals().textColorSecundary,
-                          fontSize: StyleGlobals().sizeSubtitulo
-                      ),
-                    ),
-                  ),
-                )
-            ),
-          ],
-        ),
       ),
     );
 

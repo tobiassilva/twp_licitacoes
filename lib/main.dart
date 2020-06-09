@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'cadastro/Store/estado_store.dart';
 import 'cadastro/cadastro_functions.dart';
-import 'cadastro/cadastro_store.dart';
+import 'cadastro/Store/cadastro_store.dart';
 import 'home/home.dart';
 import 'login/login_functions.dart';
 import 'login/login_page.dart';

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:provider/provider.dart';
 
-import 'cadastro_store.dart';
+import 'Store/cadastro_store.dart';
+import 'Store/estado_store.dart';
 
 class CadastroFunctions {
 
@@ -19,10 +20,11 @@ class CadastroFunctions {
   List listCategorias = List();
   List listSubcategoriasTotal = List();
   List listSubcategoriasAux = List();
+  List listEstados = List();
 
   //CadastroUsuárioEmpresa
   final nomeEmpresa = TextEditingController();
-  final nome = TextEditingController();
+  final nomeRepresentante = TextEditingController();
   final email = TextEditingController();
   final telefone = TextEditingController();
   final cnpj = TextEditingController();
@@ -34,6 +36,8 @@ class CadastroFunctions {
   final estado = TextEditingController();
   int idCategoriaEsc;
   int idSubcategoriaEsc;
+
+  int planoEsc;
 
   // Variáveis Banco
   String queryCategoria = """
@@ -55,10 +59,23 @@ class CadastroFunctions {
         }
       """;
 
+  String queryEstado = """
+        query MyQuery {
+          estados {
+            id
+            nome
+          }
+        }
+      """;
+
   Future getDadosBanco() async {
     listCategorias.clear();
     await getCategoria();
     await getSubcategoria();
+    await getEstados();
+
+    //cadastroStore.setCarregando();
+
 
   }
 
@@ -70,7 +87,7 @@ class CadastroFunctions {
       print(data);
       listCategorias.addAll(data['data']['categorias_de_atividades']);
     });
-    print('listCategorias: $listCategorias');
+    //print('listCategorias: $listCategorias');
 
   }
 
@@ -82,8 +99,95 @@ class CadastroFunctions {
       print(data);
       listSubcategoriasTotal.addAll(data['data']['subcategorias_de_atividades']);
     });
-    print('listSubcategorias: $listSubcategoriasTotal');
+    //print('listSubcategorias: $listSubcategoriasTotal');
 
+  }
+
+  Future getEstados() async {
+    //EstadoStore estadoStore = EstadoStore();
+    var snapshot = hasuraConnect.query(queryEstado);
+    listEstados.clear();
+
+    await snapshot.then((data) {
+      print(data);
+      listEstados.addAll(data['data']['estados']);
+
+    });
+    //print('cadastroStore: ${cadastroStore.listEstados}');
+
+
+  }
+
+  /// ENVIA VALORES PARA O BANCO
+  /// ENVIA VALORES PARA O BANCO
+  ///
+  Future<void> enviaDadosEmpresa(List estadosLidos) async {
+    CadastroStore cadastroStore = CadastroStore();
+    print('cep: "${cep.text}"');
+    print('cidade: "${cidade.text}"');
+    print('complemento: "${complemento.text}"');
+    print('');
+    var data = await hasuraConnect.mutation(queryEmpresa());
+
+    print('33333333333333333#####: $data');
+    print('1111111111111111#####: ${data['data']['insert_empresa']['returning']}');
+    print('1111111111111111#####: ${data['data']['insert_empresa']['returning'][0]}');
+    print('cadastroStore.listEstados[i].id#####: ${estadosLidos}');
+
+    print('cadastroStore.listEstados[i].id#####: ${estadosLidos[0].nome}');
+    print('cadastroStore.listEstados[i].id#####: ${estadosLidos.length}');
+
+    for(int i=0;i< estadosLidos.length;i++){
+      print('entrou $i');
+      if(estadosLidos[i].selec){
+        var dataEst = await hasuraConnect.mutation(queryEmpresaEstadoInteresse(
+          data['data']['insert_empresa']['returning'][0]['id'],
+            estadosLidos[i].id
+        ));
+        print('dataEst: $dataEst');
+      }
+    }
+
+
+  }
+
+  String queryEmpresa() {
+    //CadastroStore cadastroStore = CadastroStore();
+    bool termo = true;
+    return (
+        """
+        mutation MyMutation {
+          insert_empresa(objects: {cep: "${cep.text}", cidade: "${cidade.text}", cnpj: "${cnpj.text}", complemento: "${complemento.text}", email: "${email.text}", estado: "${estado.text}", id_categoria: $idCategoriaEsc, id_subcategoria: $idSubcategoriaEsc, logradouro: "${logradouro.text}", nome_empresa: "${nomeEmpresa.text}", nome_representante: "${nomeRepresentante.text}", numero: "${numero.text}", plano: $planoEsc, telefone: "${telefone.text}", termos: $termo}) {
+            returning {
+              id
+              id_categoria
+              cep
+              termos
+            }
+          }
+        }
+
+      """
+    );
+  }
+
+  String queryEmpresaEstadoInteresse(idEmpresa, idEstado) {
+    //CadastroStore cadastroStore = CadastroStore();
+
+    return (
+        """
+        mutation MyMutation {
+          insert_estado_interesse_empresa(objects: {id_empresa: $idEmpresa, id_estado: $idEstado}) {
+            returning {
+              id
+              id_empresa
+              id_estado
+            }
+          }
+        }
+
+      """
+    );
   }
 
 
