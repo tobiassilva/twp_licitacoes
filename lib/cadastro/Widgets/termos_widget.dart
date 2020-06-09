@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/login/login_page.dart';
 
 import '../../globals.dart';
 import '../cadastro_functions.dart';
@@ -23,7 +24,6 @@ class TermosWidget {
           SizedBox(
             height: 25,
           ),
-
           Padding(
             padding: EdgeInsets.fromLTRB(15, 25, 15, 0),
             child: Row(
@@ -59,26 +59,21 @@ class TermosWidget {
               ],
             ),
           ),
-
           SizedBox(
             height: 35,
           ),
-
           _termosCampo(),
-
           SizedBox(
             height: 15,
           ),
-
           Observer(
-            builder: (_){
+            builder: (_) {
               return SwitchListTile(
                 title: Text(
                   'Li a Política de Privacidade e Termos de Uso',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: StyleGlobals().primaryColor
-                  ),
+                      color: StyleGlobals().primaryColor),
                 ),
                 value: cadastroStore.aceitouTermos,
                 onChanged: (value) {
@@ -87,11 +82,9 @@ class TermosWidget {
               );
             },
           ),
-
           SizedBox(
             height: 10,
           ),
-
           _botaoTermos(),
           SizedBox(
             height: 15,
@@ -101,7 +94,7 @@ class TermosWidget {
     );
   }
 
-  Widget _termosCampo(){
+  Widget _termosCampo() {
     return Expanded(
       child: Container(
         margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -132,6 +125,7 @@ class TermosWidget {
   Widget _botaoTermos() {
     //final loginStore = Provider.of<LoginStore>(context);
     final cadastroFunctions = Provider.of<CadastroFunctions>(context);
+    final cadastroStore = Provider.of<CadastroStore>(context);
 
     return Container(
       padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -142,7 +136,40 @@ class TermosWidget {
               padding: EdgeInsets.all(0),
               onPressed: () async {
                 print('AAAAAAAAA');
-                cadastroFunctions.gotoUser();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AlertDialog(
+                          title: Text('Não Concorda? :('),
+                          content: Text(
+                              'Precisamos que aceite os termos para continuar!'),
+                          actions: <Widget>[
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                              },
+                              child: Text(
+                                'sair',
+                                style: TextStyle(
+                                  color: StyleGlobals().textColorMedio,
+                                  fontSize: StyleGlobals().sizeSubtitulo,
+                                ),
+                              ),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                'OK',
+                                style: TextStyle(
+                                  color: StyleGlobals().tertiaryColor,
+                                  fontSize: StyleGlobals().sizeSubtitulo,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )));
+                //cadastroFunctions.gotoUser();
               },
               child: Row(
                 children: <Widget>[
@@ -150,15 +177,14 @@ class TermosWidget {
                     child: Container(
                       //height: 60,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       child: Center(
                         child: Text(
                           'Não Aceitar',
                           style: TextStyle(
-                              color: StyleGlobals().textColorMedio,
-                              fontSize: StyleGlobals().sizeSubtitulo,
+                            color: StyleGlobals().textColorMedio,
+                            fontSize: StyleGlobals().sizeSubtitulo,
                           ),
                         ),
                       ),
@@ -176,7 +202,30 @@ class TermosWidget {
               padding: EdgeInsets.all(0),
               onPressed: () async {
                 print('AAAAAAAAA');
-                cadastroFunctions.gotoPlano();
+                if (cadastroStore.aceitouTermos) {
+                  cadastroFunctions.gotoPlano();
+                } else {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AlertDialog(
+                            title: Text('Concorda com os Termos?'),
+                            content: Text(
+                                'Precisamos que aceite os termos para continuar!'),
+                            actions: <Widget>[
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  'OK',
+                                  style: TextStyle(
+                                    color: StyleGlobals().tertiaryColor,
+                                    fontSize: StyleGlobals().sizeSubtitulo,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )));
+                }
               },
               child: Row(
                 children: <Widget>[
@@ -185,9 +234,10 @@ class TermosWidget {
                       height: 50,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          gradient: LinearGradient(
-                            colors: [StyleGlobals().tertiaryColor, StyleGlobals().tertiaryColor]
-                          ),
+                          gradient: LinearGradient(colors: [
+                            StyleGlobals().tertiaryColor,
+                            StyleGlobals().tertiaryColor
+                          ]),
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.black12,
@@ -197,8 +247,7 @@ class TermosWidget {
                                   1.0,
                                   1.0,
                                 )),
-                          ]
-                      ),
+                          ]),
                       child: Center(
                         child: Text(
                           'ACEITAR',
@@ -218,7 +267,7 @@ class TermosWidget {
     );
   }
 
-  Widget _politicaPrivacidade(){
+  Widget _politicaPrivacidade() {
     return RichText(
       text: TextSpan(
         children: <TextSpan>[
@@ -229,70 +278,63 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeTitulo,
             ),
           ),
-
+          TextSpan(text: '\n\n'),
           TextSpan(
-            text: '\n\n'
-          ),
-
-          TextSpan(
-            text: 'A sua privacidade é importante para nós. É política do Smart Pública respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no aplicativo Smart Pública, e outros aplicativos/sites que possuímos e operamos.\n\n',
+            text:
+                'A sua privacidade é importante para nós. É política do Smart Pública respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no aplicativo Smart Pública, e outros aplicativos/sites que possuímos e operamos.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: 'Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.\n\n',
+            text:
+                'Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: 'Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis ​​para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.\n\n',
+            text:
+                'Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Quando armazenamos dados, protegemos dentro de meios comercialmente aceitáveis ​​para evitar perdas e roubos, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: 'Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei.\n\n',
+            text:
+                'Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: 'O nosso aplicativo pode ter links para sites/apps externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites/apps e não podemos aceitar responsabilidade por suas respectivas políticas de privacidade.\n\n',
+            text:
+                'O nosso aplicativo pode ter links para sites/apps externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites/apps e não podemos aceitar responsabilidade por suas respectivas políticas de privacidade.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
-
-
           TextSpan(
-            text: 'Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.\n\n',
-
+            text:
+                'Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: 'O uso continuado de nosso aplicativo será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se você tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contacto connosco.\n\n',
+            text:
+                'O uso continuado de nosso aplicativo será considerado como aceitação de nossas práticas em torno de privacidade e informações pessoais. Se você tiver alguma dúvida sobre como lidamos com dados do usuário e informações pessoais, entre em contacto connosco.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: 'Cookies\n\n',
             style: TextStyle(
@@ -300,23 +342,22 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeSubtitulo,
             ),
           ),
-
           TextSpan(
-            text: 'Cookies são arquivos com uma pequena quantidade de dados que são comumente usados ​​como identificadores exclusivos anônimos. Eles são enviados para o navegador a partir dos sites visitados e armazenados na memória interna do dispositivo.\n\n',
+            text:
+                'Cookies são arquivos com uma pequena quantidade de dados que são comumente usados ​​como identificadores exclusivos anônimos. Eles são enviados para o navegador a partir dos sites visitados e armazenados na memória interna do dispositivo.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: 'Este serviço não usa esses "cookies" explicitamente. No entanto, o aplicativo pode usar código e bibliotecas de terceiros que usam "cookies" para coletar informações e melhorar seus serviços. Você tem a opção de aceitar ou recusar esses cookies e saber quando um cookie está sendo enviado para o seu dispositivo. Se você optar por recusar nossos cookies, poderá não conseguir usar algumas partes deste Serviço.\n\n',
+            text:
+                'Este serviço não usa esses "cookies" explicitamente. No entanto, o aplicativo pode usar código e bibliotecas de terceiros que usam "cookies" para coletar informações e melhorar seus serviços. Você tem a opção de aceitar ou recusar esses cookies e saber quando um cookie está sendo enviado para o seu dispositivo. Se você optar por recusar nossos cookies, poderá não conseguir usar algumas partes deste Serviço.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: 'Provedores de serviço\n\n',
             style: TextStyle(
@@ -324,15 +365,14 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeSubtitulo,
             ),
           ),
-
           TextSpan(
-            text: 'Posso empregar empresas e indivíduos de terceiros devido aos seguintes motivos:\n\n',
+            text:
+                'Posso empregar empresas e indivíduos de terceiros devido aos seguintes motivos:\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: '\t\t\tPara facilitar nosso serviço;\n',
             style: TextStyle(
@@ -340,7 +380,6 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: '\t\t\tFornecer o serviço em nosso nome;\n',
             style: TextStyle(
@@ -348,7 +387,6 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: '\t\t\tExecutar serviços relacionados ao serviço; ou\n',
             style: TextStyle(
@@ -356,23 +394,22 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: '\t\t\tPara nos ajudar a analisar como nosso Serviço é usado.\n\n',
+            text:
+                '\t\t\tPara nos ajudar a analisar como nosso Serviço é usado.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
-            text: 'Desejo informar aos usuários deste Serviço que esses terceiros têm acesso às suas Informações Pessoais. O motivo é executar as tarefas atribuídas a eles em nosso nome. No entanto, eles são obrigados a não divulgar ou usar as informações para qualquer outra finalidade.\n\n',
+            text:
+                'Desejo informar aos usuários deste Serviço que esses terceiros têm acesso às suas Informações Pessoais. O motivo é executar as tarefas atribuídas a eles em nosso nome. No entanto, eles são obrigados a não divulgar ou usar as informações para qualquer outra finalidade.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: 'Segurança\n\n',
             style: TextStyle(
@@ -380,15 +417,14 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeSubtitulo,
             ),
           ),
-
           TextSpan(
-            text: 'Valorizo ​​sua confiança em nos fornecer suas informações pessoais, portanto, estamos nos esforçando para usar meios comercialmente aceitáveis ​​de protegê-las. Mas lembre-se de que nenhum método de transmissão pela Internet ou método de armazenamento eletrônico é 100% seguro e confiável, e não posso garantir sua segurança absoluta.\n\n',
+            text:
+                'Valorizo ​​sua confiança em nos fornecer suas informações pessoais, portanto, estamos nos esforçando para usar meios comercialmente aceitáveis ​​de protegê-las. Mas lembre-se de que nenhum método de transmissão pela Internet ou método de armazenamento eletrônico é 100% seguro e confiável, e não posso garantir sua segurança absoluta.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: 'Links para outros sites\n\n',
             style: TextStyle(
@@ -396,15 +432,14 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeSubtitulo,
             ),
           ),
-
           TextSpan(
-            text: 'Este serviço pode conter links para outros sites. Se você clicar em um link de terceiros, será direcionado para esse site. Observe que esses sites externos não são operados por mim. Portanto, recomendo fortemente que você reveja a Política de Privacidade desses sites. Não tenho controle e não assumo responsabilidade pelo conteúdo, políticas de privacidade ou práticas de sites ou serviços de terceiros.\n\n',
+            text:
+                'Este serviço pode conter links para outros sites. Se você clicar em um link de terceiros, será direcionado para esse site. Observe que esses sites externos não são operados por mim. Portanto, recomendo fortemente que você reveja a Política de Privacidade desses sites. Não tenho controle e não assumo responsabilidade pelo conteúdo, políticas de privacidade ou práticas de sites ou serviços de terceiros.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: 'Privacidade das crianças\n\n',
             style: TextStyle(
@@ -412,15 +447,14 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeSubtitulo,
             ),
           ),
-
           TextSpan(
-            text: 'Esses serviços não tratam de menores de 13 anos. Não coleciono intencionalmente informações de identificação pessoal de crianças menores de 13 anos. No caso de descobrir que uma criança menor de 13 anos me forneceu informações pessoais, eu as excluo imediatamente de nossos servidores. Se você é pai ou mãe ou responsável e sabe que seu filho nos forneceu informações pessoais, entre em contato comigo para que eu possa executar as ações necessárias.\n\n',
+            text:
+                'Esses serviços não tratam de menores de 13 anos. Não coleciono intencionalmente informações de identificação pessoal de crianças menores de 13 anos. No caso de descobrir que uma criança menor de 13 anos me forneceu informações pessoais, eu as excluo imediatamente de nossos servidores. Se você é pai ou mãe ou responsável e sabe que seu filho nos forneceu informações pessoais, entre em contato comigo para que eu possa executar as ações necessárias.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: 'Alterações a esta Política de Privacidade\n\n',
             style: TextStyle(
@@ -428,15 +462,14 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeSubtitulo,
             ),
           ),
-
           TextSpan(
-            text: 'Posso atualizar nossa Política de Privacidade periodicamente. Portanto, é recomendável revisar esta página periodicamente para verificar se há alterações. Eu o notificarei de quaisquer alterações postando a nova Política de Privacidade nesta página. Essas alterações são efetivadas imediatamente após serem publicadas nesta página.\n\n',
+            text:
+                'Posso atualizar nossa Política de Privacidade periodicamente. Portanto, é recomendável revisar esta página periodicamente para verificar se há alterações. Eu o notificarei de quaisquer alterações postando a nova Política de Privacidade nesta página. Essas alterações são efetivadas imediatamente após serem publicadas nesta página.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
           TextSpan(
             text: 'Contate-Nos\n\n',
             style: TextStyle(
@@ -444,19 +477,16 @@ class TermosWidget {
               fontSize: StyleGlobals().sizeSubtitulo,
             ),
           ),
-
           TextSpan(
-            text: 'Se você tiver alguma dúvida ou sugestão sobre nossa Política de Privacidade, não hesite em entrar em contato conosco em tobiasarantes0@gmail.com.\n\n',
+            text:
+                'Se você tiver alguma dúvida ou sugestão sobre nossa Política de Privacidade, não hesite em entrar em contato conosco em tobiasarantes0@gmail.com.\n\n',
             style: TextStyle(
               color: StyleGlobals().textColorMedio,
               fontSize: StyleGlobals().sizeText,
             ),
           ),
-
         ],
       ),
     );
   }
-
-
 }

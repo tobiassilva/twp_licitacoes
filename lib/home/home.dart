@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:connectivity/connectivity.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
 import 'package:flutter/material.dart';
@@ -178,6 +179,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+              ],
+            ),
+
+            Row(
+              children: <Widget>[
+                HomeWidget().botoesTopo('Órgao', FontAwesomeIcons.landmark),
+                HomeWidget().botoesTopo('Licitações', FontAwesomeIcons.),
               ],
             ),
            
