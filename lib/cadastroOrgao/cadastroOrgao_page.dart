@@ -3,6 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twp_licitacoes/globals.dart';
 import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
 
+import '../globals.dart';
+import 'cadastroOrgao_functions.dart';
+
 class CadastroOrgaoPage extends StatefulWidget {
   @override
   _CadastroOrgaoPageState createState() => _CadastroOrgaoPageState();
@@ -10,18 +13,20 @@ class CadastroOrgaoPage extends StatefulWidget {
 
 class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
   TextEditingController controllerNome = TextEditingController();
-  TextEditingController controllerTipo = TextEditingController();
+  
   TextEditingController controllerCnpj = TextEditingController();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerTelefone = TextEditingController();
   TextEditingController controllerCep = TextEditingController();
-  TextEditingController controllerEstado = TextEditingController();
+  
   TextEditingController controllerCidade = TextEditingController();
   TextEditingController controllerEndereco = TextEditingController();
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-//criando dropdown tipo_orgao  
+  var jsonOrgaos;
+  var jsonEstados;
+  bool carregando = false;
+/*//criando dropdown tipo_orgao  
 String opcaoOrgao = '';
 int itemSel;
 void changedDropDownItem(String itemSelecionado) {
@@ -39,13 +44,48 @@ void changedDropDownItem(String itemSelecionado) {
       }
       controllerTipo.text = '';
     });
+  }*/
+
+  Future carregaDados() async {
+    //var jsonInformacoes = await requisicoes().carregaInfos();
+
+    var jsonAux1 = await requisicoes().getDadosTiposOrgaos();
+    var jsonAux2 = await requisicoes().getDadosEstados();
+    setState(() {
+      jsonOrgaos = jsonAux1;
+      jsonEstados = jsonAux2;
+    });
+    print("BBBBBBB: $jsonAux1");
+    print("CCCCCCC: $jsonAux2");
   }
 
+  int idTipoOrgao;
+  setSelectedRadio(int val) {
+    setState(() {
+      idTipoOrgao = val;
+    });
+  }
+   int idEstados;
+  setSelectedRadioEstados(int val) {
+    setState(() {
+      idEstados= val;
+    });
+  }
+
+  @override
+  void initState() {
+    carregaDados();
+    idTipoOrgao = 0;
+    idEstados=0;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           backgroundColor: StyleGlobals().primaryColor,
           title: Text(
@@ -116,54 +156,32 @@ void changedDropDownItem(String itemSelecionado) {
                       EdgeInsets.only(top: 10, bottom: 0, left: 20, right: 10),
                   padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
                   child: Container(
-                  height: 40,
-                  child: Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 5),
-                    color: Colors.white,
-                    child: new Theme(
-                      data: Theme.of(context).copyWith(
-                        canvasColor: Colors.white,
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Montserrat",
-                          ),
-                          //items: ,
-                          value: opcaoOrgao,
-                          items: requisicoesDropdown().dropDownMenuItems, 
-                          iconSize: 20.0,
-                          iconEnabledColor: Color.fromRGBO(255, 255, 255, 1),
-                          hint: Text(
-                            'Carregando...',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          onChanged: changedDropDownItem,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                    /*child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        style: TextStyle(
-                          color: StyleGlobals().textColorForte,
-                        ),
-                        value: opcaoOrgao,
-                        items: requisicoesDropdown().dropDownMenuItems, 
-                        onChanged: changedDropDownItem,
-                     ),
-                    ),*//*TextField(
-                      controller: controllerTipo,
-                      decoration: InputDecoration.collapsed(
-                        hintText: "Tipo",
-                        hintStyle: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 20,
-                    ),*/
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: jsonOrgaos['data']['tipo_orgao'].length,
+                        itemBuilder: (BuildContext contex, index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "${jsonOrgaos['data']['tipo_orgao'][index]['nome']}",
+                                style:TextStyle( 
+                                  color: StyleGlobals().textColorForte,
+                                ),
+                              ),
+                          
+                              Radio(
+                                  value: jsonOrgaos['data']['tipo_orgao'][index]['id'],
+                                  groupValue: idTipoOrgao,
+                                  activeColor: Colors.blue,
+                                  onChanged: (val) {
+                                    print("Radio $val");
+                                    setSelectedRadio(val);
+                                  }),
+                            ],
+                          );
+                        }),
                   ),
                 ),
                 Container(
@@ -304,16 +322,32 @@ void changedDropDownItem(String itemSelecionado) {
                       EdgeInsets.only(top: 10, bottom: 0, left: 20, right: 10),
                   padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
                   child: Container(
-                    height: 40,
-                    child: TextField(
-                      controller: controllerEstado,
-                      decoration: InputDecoration.collapsed(
-                        hintText: "Estado",
-                        hintStyle: TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 20,
-                    ),
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: jsonEstados['data']['estados'].length,
+                        itemBuilder: (BuildContext contex, index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "${jsonEstados['data']['estados'][index]['nome']}",
+                                style:TextStyle( 
+                                  color: StyleGlobals().textColorForte,
+                                ),
+                              ),
+                          
+                              Radio(
+                                  value: jsonEstados['data']['estados'][index]['id'],
+                                  groupValue: idEstados,
+                                  activeColor: Colors.blue,
+                                  onChanged: (val) {
+                                    print("Radio $val");
+                                    setSelectedRadioEstados(val);
+                                  }),
+                            ],
+                          );
+                        }),
                   ),
                 ),
                 Container(
@@ -408,23 +442,34 @@ void changedDropDownItem(String itemSelecionado) {
                         ],
                       ),
                       onPressed: () async {
-                        /*if (controllerParecer.text.isNotEmpty) {
+                        if (controllerNome.text.isNotEmpty && idTipoOrgao!=null && controllerCnpj.text.isNotEmpty &&
+  controllerEmail.text.isNotEmpty && controllerTelefone.text.isNotEmpty && controllerCep.text.isNotEmpty
+  && idEstados!=null && controllerCidade.text.isNotEmpty && controllerEndereco.text.isNotEmpty) {
                               setState(() {
                                 carregando = true;
                               });
-                              await enviarFormularioParecer()
-                                  .enviarFormulario(controllerParecer.text);
+                              await requisicoes().enviarFormulario(
+                                controllerNome.text,
+                                idTipoOrgao,
+                                controllerCnpj.text,
+                                controllerEmail.text,
+                                controllerTelefone.text,
+                                controllerCep.text,
+                                idEstados,
+                                controllerCidade.text,
+                                controllerEndereco.text
+                                );
                                   
                               setState(() {
                                 carregando = false;
                               });
 
-                              print('${controllerParecer.text}');
+                              
                             } else {
                               _scaffoldKey.currentState.showSnackBar(SnackBar(
                                 content: Text('O Campo nao pode ser Vazio'),
                               ));
-                            }*/
+                            }
                       },
                     ),
                   ),

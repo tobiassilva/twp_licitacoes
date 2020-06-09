@@ -1,20 +1,21 @@
-import 'dart:convert';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
+import '../home/home.dart';
 
 var url;
 HasuraConnect hasuraConnect =
     HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-class requisicoesDropdown {
+class requisicoes {
 
-var jsonTipoOrgao;
-var jsonEstado;
-List<DropdownMenuItem<String>> dropDownMenuItems;
-bool tipoConexao = true; // false =  sem internet, true = tem internet
+  var jsonTipoOrgao;
+  var jsonEstado;
+  var jsonInfos;
+  //List<DropdownMenuItem<String>> dropDownMenuItems;
+  bool tipoConexao = true; // false =  sem internet, true = tem internet
 
   String subscriptionOrgao = """
 subscription {
@@ -23,6 +24,11 @@ subscription {
     id
     id_tipo_orgao
     id_estados
+    cnpj
+    telefone
+    endereco
+    email
+    
   }
 }
 """;
@@ -46,8 +52,6 @@ subscription {
 }
 """;
 
-  
-
 //verificando internet
   Future<bool> resultadoInternet() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -61,36 +65,39 @@ subscription {
 //obtendo dados dos orgaos
   Future getDadosOrgaos() async {
     var resultadoConexao = await resultadoInternet();
-
     if (resultadoConexao == false) {
       var snapshot = hasuraConnect.subscription(subscriptionOrgao);
-
       snapshot.listen((data) {
-        print(data);
+        print("Orgaos: $data");
       });
     } else {
-      return true;
+      //return true;
     }
   }
+
+  void buscaArmazenaTiposOrgaos() {
+    var snapshot = hasuraConnect.subscription(subscriptionTipoOrgao);
+    snapshot.listen((data) {
+      print("TipoOrgao: $data");
+      jsonTipoOrgao = data;
+      /*dropDownMenuItems = _getDropDownMenuItems(jsonTipoOrgao);
+      return jsonTipoOrgao;*/
+    });
+  }
+
 // obtendo os tipos de orgaos
   Future getDadosTiposOrgaos() async {
     var resultadoConexao = await resultadoInternet();
-
-    if(resultadoConexao == false){
-    var snapshot = hasuraConnect.subscription(subscriptionTipoOrgao);
-    snapshot.listen((data) {
-      print(data);
-      jsonTipoOrgao = data;
-      dropDownMenuItems = _getDropDownMenuItems(jsonTipoOrgao);
-      return jsonTipoOrgao;
-    });
+    if (resultadoConexao == false) {
+       await buscaArmazenaTiposOrgaos();
+    } else {
+      //return true;
+    }
     print("WWWWWWWWWW: $jsonTipoOrgao");
+    return jsonTipoOrgao;
     
-    }else{
-    return true;
   }
-  }
-List<DropdownMenuItem<String>> _getDropDownMenuItems(jsonData) {
+/*List<DropdownMenuItem<String>> _getDropDownMenuItems(jsonData) {
  List<DropdownMenuItem<String>> items = new List();
  int qtde = jsonData['data']['tipo_orgao'].length;
  int i;
@@ -110,24 +117,85 @@ List<DropdownMenuItem<String>> _getDropDownMenuItems(jsonData) {
     ));
   }
   return items;
-}
+}*/
 
 
+ void buscaArmazenaEstados() {
+    var snapshot2 = hasuraConnect.subscription(subscriptionEstado);
+    snapshot2.listen((data) {
+      print("Estado: $data");
+      jsonEstado = data;
 
-
-
+    });
+  }
 //obtendo estados
   Future getDadosEstados() async {
     var resultadoConexao = await resultadoInternet();
 
-    if(resultadoConexao == false){
-    var snapshot = hasuraConnect.subscription(subscriptionEstado);
-    snapshot.listen((data) {
-      print(data);
-    });
-  }else{
-    return true;
+    if (resultadoConexao == false) {
+      await buscaArmazenaEstados();
+    } else {
+      //return true;
+    }
+ print("YYYYYYYYYY: $jsonEstado");
+ return jsonEstado;
   }
+
+  Future carregaDados() async {
+    await getDadosOrgaos();
+    await getDadosTiposOrgaos();
+    await getDadosEstados();
+    print("AQUI!!: $jsonTipoOrgao");
+    print("AQUI22: $jsonEstado");
+  }
+
+   Future carregaInfos() async{
+    await requisicoes().carregaDados();
+
+    return jsonInfos;
+    
+   
+ }
+ final GlobalKey<ScaffoldState> scaffoldState =
+new GlobalKey<ScaffoldState>();
+
+Future <void> enviarFormulario(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco ) async {
+     
+      var resultadoConexao = await requisicoes().resultadoInternet();
+      if (resultadoConexao == false) {
+
+
+        var data = await hasuraConnect.mutation(queryOrgao(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco));
+    
+        print(data);
+      }else{
+        scaffoldState.currentState.showSnackBar(SnackBar(
+          content: Text('Erro no envio, tente enviar novamente mais tarde')));
+      }
+    }
+    
+  
+
+  String queryOrgao(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco){
+    print(nome);
+    print(tipo);
+    print(cnpj);
+    print(email);
+    print(telefone);
+    print(cep); print(estado);
+    print(cidade);
+    print(endereco);
+    return (
+      """
+  mutation MyMutation {
+  insert_orgao(objects: {nome: '$nome', id_tipo_orgao: $tipo, cnpj:'$cnpj', email: '$email', telefone: '$telefone', cep: '$cep', id_estados: $estado, cidade: '$cidade', endereco: '$endereco'}) {
+    returning {
+      id
+    }
+  }
+}
+"""
+    );
   }
 }
 
