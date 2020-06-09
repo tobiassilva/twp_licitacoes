@@ -6,25 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
 
+import '../cadastroOrgao/cadastroOrgao_functions.dart';
+
 import '../globals.dart';
 
 import 'Widgets/home_widget.dart';
 
 class HomePage extends StatefulWidget {
+ 
+  
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
 
-
   var url;
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
-
+ 
   void initState(){
-    requisicoesDropdown().getDadosOrgaos();
-    requisicoesDropdown().getDadosTiposOrgaos();
-    requisicoesDropdown().getDadosEstados();
+    //requisicoes().carregaInfos();
     super.initState();
 
     //recebeLicitacoes();
