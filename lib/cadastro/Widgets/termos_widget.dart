@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../globals.dart';
 import '../cadastro_functions.dart';
-import '../cadastro_store.dart';
+import '../Store/cadastro_store.dart';
 
 class TermosWidget {
   BuildContext context;

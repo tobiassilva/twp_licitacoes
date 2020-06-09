@@ -1,4 +1,7 @@
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
+
+import 'estado_store.dart';
 
 part 'cadastro_store.g.dart';
 
@@ -30,6 +33,9 @@ abstract class _CadastroStore with Store {
   @observable
   bool aceitouTermos = false;
 
+  @observable
+  bool carregando = false;
+
   @action
   void cadastraCategoria(value) => nomeCatEscolhido = value;
 
@@ -51,7 +57,38 @@ abstract class _CadastroStore with Store {
     nomeSubcatEscolhido = '';
   }
 
-
   @action
   void setAceitouTermos() => aceitouTermos = !aceitouTermos;
+
+  @action
+  void setCarregando(){
+    carregando = !carregando;
+    print('CARREGANDO: $carregando');
+  }
+
+  @observable
+  bool selecEstado = false;
+
+  @observable
+  ObservableList<EstadoStore> listEstados = ObservableList<EstadoStore>();
+
+
+
+  @action
+  void addEmpresas(nome, id){
+    //todoList = List.from(todoList..add(newTodoTitle));
+    //print('id nome: $id $nome');
+    //var value = EstadoStore();
+
+    listEstados.insert(0, EstadoStore(nome, id));
+
+  }
+
+  @action
+  void limpaEmpresas(){
+
+    listEstados.clear();
+
+  }
+
 }

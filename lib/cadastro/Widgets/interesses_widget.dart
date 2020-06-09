@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../globals.dart';
 import '../cadastro_functions.dart';
-import '../cadastro_store.dart';
+import '../Store/cadastro_store.dart';
 
 class InteressesWidget {
 
@@ -94,6 +95,24 @@ class InteressesWidget {
       child: Column(
         children: <Widget>[
 
+          SizedBox(
+            height: 25,
+          ),
+
+          Container(
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Text(
+              'CATEGORIA DE ATIVIDADE DA EMPRESA',
+              style: TextStyle(
+                fontSize: StyleGlobals().sizeSubtitulo,
+                color: StyleGlobals().textColorForte,
+              ),
+              textAlign: TextAlign.center,
+
+            ),
+          ),
+
+
           /// CATEGORIAS INTERESSE
           ///
 
@@ -106,6 +125,29 @@ class InteressesWidget {
               Container();
             },
           ),
+
+          /// AREAS GEOGRAFICAS DE INTERESSE
+          ///
+          SizedBox(
+            height: 25,
+          ),
+
+          Container(
+            margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+            child: Text(
+              'ÁREAS GEOGRÁFICAS DE INTERESSE',
+              style: TextStyle(
+                fontSize: StyleGlobals().sizeSubtitulo,
+                color: StyleGlobals().textColorForte,
+              ),
+              textAlign: TextAlign.center,
+
+            ),
+          ),
+
+          estadoInteresse(),
+
+
         ],
       ),
     );
@@ -307,6 +349,55 @@ class InteressesWidget {
       ),
     );
   }
+  ///campo ESTADO DE INTERESSE
+  ///
+  Widget estadoInteresse(){
+    final cadastroFunctions = Provider.of<CadastroFunctions>(context);
+    final cadastroStore = Provider.of<CadastroStore>(context, listen: false);
+    //cadastroStore.addEmpresas(1, 'fasd');
+    cadastroStore.limpaEmpresas();
+    for(int i=0; i<cadastroFunctions.listEstados.length; i++){
+      cadastroStore.addEmpresas(cadastroFunctions.listEstados[i]['nome'], cadastroFunctions.listEstados[i]['id']);
+
+    }
+    //print(cadastroStore.listEstados[0].selec);
+    return
+
+        Container(
+          width: MediaQuery.of(context).size.width/2,
+          child: Observer(
+            builder: (_){
+              print(cadastroStore.listEstados);///nao tirar: esse print obriga a tela do obsever a carregar
+              return
+                  //Text('${cadastroStore.listEstados}');
+                  //Text('${cadastroStore.nomeCatEscolhido}'),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: cadastroStore.listEstados.length,
+                    itemBuilder: (_, index){
+                      final valLista = cadastroStore.listEstados[index];
+                      return SwitchListTile(
+                        value: valLista.selec,
+                        title: Text(
+                          '${valLista.nome}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: StyleGlobals().primaryColor
+                          ),
+                        ),
+
+                        onChanged: (value) {
+                          print('fdsfsd');
+                          valLista.setSelec();
+                        },
+                      );
+                    },
+                  );
+
+            },
+          )
+    );
+  }
 
   Widget _botaoSalvarInteresses(){
 
@@ -431,9 +522,10 @@ class InteressesWidget {
                                         cadastroStore.cadastraCategoria(cadastroFunctions.listCategorias[index]['nome']);
                                         cadastroStore.setSelCategoria(true);
                                         cadastroFunctions.idCategoriaEsc = await cadastroFunctions.listCategorias[index]['id'];
-
+                                        cadastroStore.setSelSubcategoria(false);
                                         await selListaSubcategorias();
                                         cadastroStore.setLimpaSubcategoria();
+                                        cadastroFunctions.idSubcategoriaEsc = null;
 
                                         Navigator.pop(context);
                                       },

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../globals.dart';
 import '../cadastro_functions.dart';
-import '../cadastro_store.dart';
+import '../Store/cadastro_store.dart';
 
 class PlanosWidget {
   BuildContext context;
@@ -400,6 +400,7 @@ class PlanosWidget {
             child: FlatButton(
               padding: EdgeInsets.all(0),
               onPressed: () async {
+                cadastroFunctions.planoEsc = 0;
                 cadastroFunctions.gotoTermos();
               },
               child: Row(
@@ -445,6 +446,7 @@ class PlanosWidget {
               padding: EdgeInsets.all(0),
               onPressed: () async {
                 print('AAAAAAAAA');
+                cadastroFunctions.planoEsc = 1;
                 cadastroFunctions.gotoPagamento();
               },
               child: Row(

@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/cadastro/cadastro_functions.dart';
 import 'package:twp_licitacoes/cadastro/cadastro_page.dart';
 
 import 'package:twp_licitacoes/globals.dart';
@@ -255,6 +256,7 @@ class LoginWidget {
 
     final loginStore = Provider.of<LoginStore>(context);
     final loginFunctions = Provider.of<LoginFunctions>(context);
+    final cadastroFunctions = Provider.of<CadastroFunctions>(context);
 
     return FlatButton(
       padding: EdgeInsets.all(0),

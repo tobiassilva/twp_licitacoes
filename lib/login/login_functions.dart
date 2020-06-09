@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:twp_licitacoes/cadastro/cadastro_functions.dart';
 import 'package:twp_licitacoes/cadastro/cadastro_page.dart';
 
 import 'package:twp_licitacoes/home/home.dart';
@@ -87,6 +88,8 @@ class LoginFunctions {
     //loginStore.apagaInfos();
 
     //loginStore.setCarregando();
+    final cadastroFunctions = Provider.of<CadastroFunctions>(context);
+    cadastroFunctions.getDadosBanco();
 
     if(up == 0){
       Navigator.pushReplacement(
