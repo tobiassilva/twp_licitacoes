@@ -1,6 +1,8 @@
 
 
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +23,8 @@ class CadastroFunctions {
   List listSubcategoriasTotal = List();
   List listSubcategoriasAux = List();
   List listEstados = List();
+
+  var user;
 
   //CadastroUsuárioEmpresa
   final nomeEmpresa = TextEditingController();
@@ -75,8 +79,6 @@ class CadastroFunctions {
     await getEstados();
 
     //cadastroStore.setCarregando();
-
-
   }
 
   Future getCategoria() async {
@@ -122,7 +124,10 @@ class CadastroFunctions {
   /// ENVIA VALORES PARA O BANCO
   ///
   Future<void> enviaDadosEmpresa(List estadosLidos) async {
-    CadastroStore cadastroStore = CadastroStore();
+
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    user = await _auth.currentUser();
+
     print('cep: "${cep.text}"');
     print('cidade: "${cidade.text}"');
     print('complemento: "${complemento.text}"');
@@ -147,6 +152,25 @@ class CadastroFunctions {
         print('dataEst: $dataEst');
       }
     }
+
+
+    print('AQUIIIII');
+
+    final notesReference = FirebaseDatabase.instance
+        .reference()
+        .child('userProfile/${user.uid}');
+
+    await notesReference
+        .update({'up': 1, 'id_empresa': data['data']['insert_empresa']['returning'][0]['id']});
+
+    var up;
+    await notesReference.once().then((DataSnapshot snapshot){
+      if(snapshot.value != null){
+        up = snapshot.value['up'];
+      }
+    });
+
+    print('FOI TUDO APARENTEMENTE');
 
 
   }

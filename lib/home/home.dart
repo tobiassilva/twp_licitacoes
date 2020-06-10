@@ -5,13 +5,16 @@ import 'package:hasura_connect/hasura_connect.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
+import 'package:twp_licitacoes/tabs/menu.dart';
 
 import '../cadastroOrgao/cadastroOrgao_functions.dart';
 
 import '../globals.dart';
 
 import 'Widgets/home_widget.dart';
+import 'home_functions.dart';
 
 class HomePage extends StatefulWidget {
  
@@ -24,18 +27,110 @@ class _HomePageState extends State<HomePage> {
 
   var url;
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
- 
-  void initState(){
-    //requisicoes().carregaInfos();
-    super.initState();
 
-    //recebeLicitacoes();
+  HomeFunctions homeFunctions;
 
-    //this.convertJson(); ///CHAMAR APENAS QUANDO FOR PRA ADICIONAR OS DADOS NO GRAPHQL
-    ///FORA ISSO, IGNORA
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+
+    homeFunctions = Provider.of<HomeFunctions>(context);
+
   }
 
-  /// IGUINORE DAQUI
+
+
+  var licitacoes;
+
+  Future recebeLicitacoes() async {
+
+    var response = await http.get(url);
+
+    setState(() {
+      licitacoes = jsonDecode(response.body);
+    });
+
+    //var dataLicitacoes = await jsonDecode(response.body);
+
+    print("licitacoes");
+    print(licitacoes.length);
+    print(licitacoes["_links"]);
+    print(licitacoes["_links"]["first"]);
+
+
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    HomeWidget homeWidget = HomeWidget(context);
+    return SafeArea(
+      child: Scaffold(
+        key: homeFunctions.scaffoldKey,
+
+        drawer: CustomDrawer(),
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+
+            homeWidget.barraTopo(),
+
+            SizedBox(
+              height: 15,
+            ),
+            /*Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 0, 30),
+                  child: Text('AQUI VAI FICAR A DASHBOARD',
+                    style: TextStyle(color: Colors.blue, fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ],
+            ),*/
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                HomeWidget(context).botoesTopo('Órgao', FontAwesomeIcons.landmark),
+                HomeWidget(context).botoesTopo('Licitações', FontAwesomeIcons.fileSignature),
+              ],
+            ),
+
+
+                /*ListView.builder(
+                    itemCount: licitacoes['_embedded']['licitacoes'].length,
+                    itemBuilder: (BuildContext cont, int index){
+                      return Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Text('$index - '),
+                              Flexible(
+                                  child: Text(
+                                      '${licitacoes['_embedded']['licitacoes'][index]['_links']['uasg']['title']}'
+                                  )
+                              )
+                            ],
+                          ),
+                          Divider(),
+                        ],
+                      );
+                    }
+                ),*/
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*
+/// IGUINORE DAQUI
   ///
   ///
   Future convertJson() async {
@@ -123,102 +218,9 @@ class _HomePageState extends State<HomePage> {
 
   ///
   /// ATÉ AQUI !!!!!!$$$$$$$$$$$$$44
+ */
 
-  var licitacoes;
-
-  Future recebeLicitacoes() async {
-
-    var response = await http.get(url);
-
-    setState(() {
-      licitacoes = jsonDecode(response.body);
-    });
-
-    //var dataLicitacoes = await jsonDecode(response.body);
-
-    print("licitacoes");
-    print(licitacoes.length);
-    print(licitacoes["_links"]);
-    print(licitacoes["_links"]["first"]);
-
-
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: StyleGlobals().primaryColor,
-          title: Text(
-            "HOME",
-            style: TextStyle(color: StyleGlobals().textColorSecundary),
-          ),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: StyleGlobals().colorGradiente,
-            ),
-          ),
-          iconTheme: IconThemeData(
-            color: StyleGlobals().secundaryColor,
-          ),
-          centerTitle: true,
-        ),
-        drawer: customDrawer(),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 30),
-                  child: Text('AQUI VAI FICAR A DASHBOARD',
-                    style: TextStyle(color: Colors.blue, fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            Row(
-              children: <Widget>[
-                HomeWidget().botoesTopo('Órgao', FontAwesomeIcons.landmark),
-                HomeWidget().botoesTopo('Licitações', FontAwesomeIcons.compass),
-              ],
-            ),
-           
-                
-                /*ListView.builder(
-                    itemCount: licitacoes['_embedded']['licitacoes'].length,
-                    itemBuilder: (BuildContext cont, int index){
-                      return Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Text('$index - '),
-                              Flexible(
-                                  child: Text(
-                                      '${licitacoes['_embedded']['licitacoes'][index]['_links']['uasg']['title']}'
-                                  )
-                              )
-                            ],
-                          ),
-                          Divider(),
-                        ],
-                      );
-                    }
-                ),*/
-              
-          ],
-        ),
-      ),
-    );
-  }
-}
-
+/*
 class StringJsonOrgaos{
 
 
@@ -3171,3 +3173,4 @@ class StringJson{
   ''';
 
 }
+*/

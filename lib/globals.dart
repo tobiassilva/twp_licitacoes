@@ -12,6 +12,7 @@ class StyleGlobals {
     var textColorMedio = Color(0xFF797979);
     var textColorFraco = Color(0xFFB5B5B5);
     var textColorSecundary = Colors.white;
+    var textColorTransparent = Colors.white70;
 
     var colorGradiente = LinearGradient(
         colors: [ Colors.orange, Colors.orangeAccent]
