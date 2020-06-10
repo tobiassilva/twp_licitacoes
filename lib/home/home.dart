@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                HomeWidget(context).botoesTopo('Órgao', FontAwesomeIcons.landmark),
+                HomeWidget(context).botoesTopo('Órgãos', FontAwesomeIcons.landmark),
                 HomeWidget(context).botoesTopo('Licitações', FontAwesomeIcons.fileSignature),
               ],
             ),

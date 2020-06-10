@@ -3,10 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
 
 import 'administrador/loginAdm/loginAdm_functions.dart';
-import 'cadastro/Store/estado_store.dart';
-import 'cadastro/cadastro_functions.dart';
-import 'cadastro/Store/cadastro_store.dart';
-import 'home/home.dart';
+import 'empresa/cadastro/Store/cadastro_store.dart';
+import 'empresa/cadastro/cadastro_functions.dart';
 import 'home/home_functions.dart';
 import 'login/login_functions.dart';
 import 'login/login_page.dart';

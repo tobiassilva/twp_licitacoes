@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/cadastro/Widgets/cadastro_widget.dart';
-
-import '../globals.dart';
+import '../../globals.dart';
 import 'Store/cadastro_store.dart';
+import 'Widgets/cadastro_widget.dart';
 import 'Widgets/interesses_widget.dart';
 import 'Widgets/pagamento_widget.dart';
 import 'Widgets/planos_widget.dart';
