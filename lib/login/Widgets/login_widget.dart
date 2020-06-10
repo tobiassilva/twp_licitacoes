@@ -262,10 +262,10 @@ class LoginWidget {
       padding: EdgeInsets.all(0),
       onPressed: () async {
         print('AAAAAAAAA');
-        Navigator.of(context).push(
+        /*Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => CadastroPage())
-        );
-        /*if(!loginStore.carregando){
+        );*/
+        if(!loginStore.carregando){
           loginStore.setCarregando();///TODO: COLOCAR DE VOLTA ESSAS PORRA
           if(loginStore.validaEmail(loginStore.email)){
             if(loginStore.senha.length > 0){
@@ -281,7 +281,7 @@ class LoginWidget {
             loginFunctions.scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Ops! Esse email não é válido')));
           }
           loginStore.setCarregando();
-        }*/
+        }
         //loginStore.setCarregando();
       }, 
       child: Row(

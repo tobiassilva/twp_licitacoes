@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 import 'package:twp_licitacoes/globals.dart';
 import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
 
@@ -448,7 +449,7 @@ void changedDropDownItem(String itemSelecionado) {
                               setState(() {
                                 carregando = true;
                               });
-                              await requisicoes().enviarFormulario(
+                              await enviarFormulario(
                                 controllerNome.text,
                                 idTipoOrgao,
                                 controllerCnpj.text,
@@ -479,6 +480,41 @@ void changedDropDownItem(String itemSelecionado) {
           ),
         ),
       ),
+    );
+  }
+
+
+
+  HasuraConnect conexao =
+  HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
+
+  Future enviarFormulario(nome, int tipo, cnpj, email, telefone, cep, int estado, cidade, endereco ) async {
+
+    var resultadoConexao = await requisicoes().resultadoInternet();
+    if (resultadoConexao == false) {
+
+
+      var data = await conexao.mutation(queryOrgao());
+
+      print(data);
+    }else{
+    }
+  }
+
+
+
+  String queryOrgao(){
+
+    return (
+        """
+        mutation MyMutation {
+          insert_orgao(objects: {nome: '${controllerNome.text}', id_tipo_orgao: $idTipoOrgao, cnpj:'${controllerCnpj.text}', email: '${controllerEmail.text}', telefone: '${controllerTelefone.text}', cep: '${controllerCep.text}', id_estados: $idEstados, cidade: '${controllerCidade.text}', endereco: '${controllerEndereco.text}'}) {
+            returning {
+              id
+            }
+          }
+        }
+      """
     );
   }
 }

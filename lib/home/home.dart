@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: <Widget>[
                 HomeWidget().botoesTopo('Órgao', FontAwesomeIcons.landmark),
-                HomeWidget().botoesTopo('Licitações', FontAwesomeIcons.),
+                HomeWidget().botoesTopo('Licitações', FontAwesomeIcons.compass),
               ],
             ),
            
