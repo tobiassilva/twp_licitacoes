@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../globals.dart';
@@ -98,6 +99,22 @@ class HomeWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+          ),
+
+          ///Icone Editar
+          ///
+          Container(
+            child: FlatButton(
+              padding: EdgeInsets.all(0),
+              onPressed: (){
+
+              },
+              child: Icon(
+                FontAwesomeIcons.userEdit,
+                color: StyleGlobals().primaryColor,
+                //size: StyleGlobals().sizeTitulo,
               ),
             ),
           ),

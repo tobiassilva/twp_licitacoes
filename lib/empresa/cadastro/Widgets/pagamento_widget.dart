@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/cadastro/Store/cadastro_store.dart';
-import 'package:twp_licitacoes/home/home.dart';
 
-import '../../globals.dart';
+import '../../../globals.dart';
 import '../cadastro_functions.dart';
+import 'package:twp_licitacoes/empresa/cadastro/Store/cadastro_store.dart';
+import 'package:twp_licitacoes/home/home.dart';
 
 class PagamentoWidget {
   BuildContext context;

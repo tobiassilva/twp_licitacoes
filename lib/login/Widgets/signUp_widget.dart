@@ -130,6 +130,7 @@ class SignUpWidget {
                           controller: loginFunctions.emailCria,
                           onChanged: loginStore.setCriaEmail,
                           textAlign: TextAlign.left,
+                          enabled: !loginStore.carregando,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'digite seu email',
@@ -192,6 +193,7 @@ class SignUpWidget {
                                 obscureText: true,
                                 onChanged: loginStore.setCriaSenha,
                                 textAlign: TextAlign.left,
+                                enabled: !loginStore.carregando,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'crie uma senha',
@@ -252,6 +254,7 @@ class SignUpWidget {
                                 //enabled: false,
                                 controller: loginFunctions.senhaConfirma,
                                 obscureText: true,
+                                enabled: !loginStore.carregando,
                                 onChanged: loginStore.setConfirmaSenha,
                                 textAlign: TextAlign.left,
                                 decoration: InputDecoration(
