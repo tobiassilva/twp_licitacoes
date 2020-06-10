@@ -133,7 +133,7 @@ class PagamentoWidget {
               List value = List();
               value.addAll(cadastroStore.listEstados);
               print('AAAAAAAAA555555555555: ${value}');
-              cadastroFunctions.enviaDadosEmpresa(value);
+              cadastroFunctions.enviaDadosEmpresa(value); ///TODO: COLOCAR ESSA TRETA DE VOLTA
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => HomePage())
               );

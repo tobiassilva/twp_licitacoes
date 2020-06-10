@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
 
+import 'administrador/loginAdm/loginAdm_functions.dart';
 import 'cadastro/Store/estado_store.dart';
 import 'cadastro/cadastro_functions.dart';
 import 'cadastro/Store/cadastro_store.dart';
 import 'home/home.dart';
+import 'home/home_functions.dart';
 import 'login/login_functions.dart';
 import 'login/login_page.dart';
 import 'login/login_store.dart';
@@ -21,6 +24,9 @@ class MyApp extends StatelessWidget {
         Provider<LoginFunctions>(create: (_) => LoginFunctions(context)),
         Provider<CadastroStore>(create: (_) => CadastroStore()),
         Provider<CadastroFunctions>(create: (_) => CadastroFunctions(context)),
+        Provider<HomeFunctions>(create: (_) => HomeFunctions(context)),
+        Provider<LoginAdmFunctions>(create: (_) => LoginAdmFunctions(context)),
+        Provider<LoginAdmStore>(create: (_) => LoginAdmStore()),
       ],
       child: MaterialApp(
         title: 'TWP Licitações',
