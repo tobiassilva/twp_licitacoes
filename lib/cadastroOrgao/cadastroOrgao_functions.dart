@@ -7,7 +7,7 @@ import '../home/home.dart';
 
 var url;
 HasuraConnect hasuraConnect =
-    HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
+HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
 class requisicoes {
 
@@ -159,44 +159,6 @@ subscription {
  final GlobalKey<ScaffoldState> scaffoldState =
 new GlobalKey<ScaffoldState>();
 
-Future <void> enviarFormulario(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco ) async {
-     
-      var resultadoConexao = await requisicoes().resultadoInternet();
-      if (resultadoConexao == false) {
 
-
-        var data = await hasuraConnect.mutation(queryOrgao(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco));
-    
-        print(data);
-      }else{
-        scaffoldState.currentState.showSnackBar(SnackBar(
-          content: Text('Erro no envio, tente enviar novamente mais tarde')));
-      }
-    }
-    
-  
-
-  String queryOrgao(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco){
-    print(nome);
-    print(tipo);
-    print(cnpj);
-    print(email);
-    print(telefone);
-    print(cep); print(estado);
-    print(cidade);
-    print(endereco);
-    return (
-      """
-  mutation MyMutation {
-  insert_orgao(objects: {nome: '$nome', id_tipo_orgao: $tipo, cnpj:'$cnpj', email: '$email', telefone: '$telefone', cep: '$cep', id_estados: $estado, cidade: '$cidade', endereco: '$endereco'}) {
-    returning {
-      id
-    }
-  }
 }
-"""
-    );
-  }
-}
-
 
