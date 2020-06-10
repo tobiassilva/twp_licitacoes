@@ -71,6 +71,8 @@ class LoginFunctions {
           .reference()
           .child('userProfile/${user.uid}');
 
+      print('AQUIIIII');
+
       await notesReference.once().then((DataSnapshot snapshot){
         if(snapshot.value != null){
           up = snapshot.value['up'];
@@ -88,15 +90,15 @@ class LoginFunctions {
     //loginStore.apagaInfos();
 
     //loginStore.setCarregando();
-    final cadastroFunctions = Provider.of<CadastroFunctions>(context);
-    cadastroFunctions.getDadosBanco();
+    //final cadastroFunctions = Provider.of<CadastroFunctions>(context);
+    //CadastroFunctions.getDadosBanco();
 
     if(up == 0){
       Navigator.pushReplacement(
         context,
         new MaterialPageRoute(
           builder: (context) => new CadastroPage(),
-          settings: RouteSettings(name: 'Home'),
+          settings: RouteSettings(name: 'Cadastro'),
         ),
       );
     } else {
