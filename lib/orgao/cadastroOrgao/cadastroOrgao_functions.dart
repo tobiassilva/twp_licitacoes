@@ -1,15 +1,12 @@
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
-
-import '../home/home.dart';
 
 var url;
 HasuraConnect hasuraConnect =
 HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-class requisicoes {
+class requisicoes{
 
   var jsonTipoOrgao;
   var jsonEstado;
@@ -80,8 +77,6 @@ subscription {
     snapshot.listen((data) {
       print("TipoOrgao: $data");
       jsonTipoOrgao = data;
-      /*dropDownMenuItems = _getDropDownMenuItems(jsonTipoOrgao);
-      return jsonTipoOrgao;*/
     });
   }
 
