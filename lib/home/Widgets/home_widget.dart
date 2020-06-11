@@ -140,8 +140,19 @@ class HomeWidget {
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(9),
-              color: StyleGlobals().primaryColor
+              color: StyleGlobals().primaryColor,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 30.0,
+                      spreadRadius: 0.5,
+                      offset: Offset(
+                        2.0,
+                        2.0,
+                      )),
+                ]
             ),
+
             child: Icon(icone,
               color: StyleGlobals().textColorSecundary,
             ),

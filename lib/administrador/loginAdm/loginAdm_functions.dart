@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_page.dart';
 
-import '../globalsAdm.dart';
+import '../globalsAdm.dart' as globalsAdm;
 
 class LoginAdmFunctions {
 
@@ -55,8 +55,11 @@ class LoginAdmFunctions {
       for(int i=0; i<listLoginsBanco.length; i++){
         if(listLoginsBanco[i]['usuario'] == usuario.text && listLoginsBanco[i]['senha'] == senha.text){
           print('AAAAAAA');
-          UsuarioGlobals().setUsuario(listLoginsBanco[i]['nome'], listLoginsBanco[i]['id'], listLoginsBanco[i]['usuario']);
+          //UsuarioGlobals().setUsuario(listLoginsBanco[i]['nome'], listLoginsBanco[i]['id'], listLoginsBanco[i]['usuario']);
 
+          globalsAdm.id = listLoginsBanco[i]['id'];
+          globalsAdm.nome = listLoginsBanco[i]['nome'];
+          globalsAdm.login = listLoginsBanco[i]['usuario'];
 
 
           Navigator.push(
