@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:provider/provider.dart';
 
-import 'Store/cadastro_store.dart';
-import 'Store/estado_store.dart';
+
 
 class CadastroFunctions {
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/empresa/editarCadastro/editarCadastro_page.dart';
 
 import '../../globals.dart';
 import '../home_functions.dart';
@@ -109,7 +110,9 @@ class HomeWidget {
             child: FlatButton(
               padding: EdgeInsets.all(0),
               onPressed: (){
-
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => EditarCadastroPage())
+                );
               },
               child: Icon(
                 FontAwesomeIcons.userEdit,

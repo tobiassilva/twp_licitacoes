@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/globals.dart';
 
@@ -11,6 +12,15 @@ class CadastroWidget {
   BuildContext context;
   CadastroWidget(this.context);
 
+
+  var maskTextCNPJ = MaskTextInputFormatter(
+      mask: "##.###.###/####-##", filter: {"#": RegExp(r'[0-9]')});
+
+  var maskTextCEP = MaskTextInputFormatter(
+      mask: "##.###-###", filter: {"#": RegExp(r'[0-9]')});
+
+  var maskTextTel = MaskTextInputFormatter(
+      mask: "(##)####-#####", filter: {"#": RegExp(r'[0-9]')});
 
   Widget userPage(){
     return Container(
@@ -355,11 +365,21 @@ class CadastroWidget {
                               fontSize: StyleGlobals().sizeSubtitulo
                           ),
                           keyboardType: TextInputType.phone,
+                          inputFormatters: [maskTextTel],
 
                           //enabled: false,
                           controller: cadastroFunctions.telefone,
                           //obscureText: !loginStore.verSenha,
-                          //onChanged: loginStore.setSenha,
+                          onChanged: (value){
+                            if(cadastroFunctions.telefone.text.length > 13){
+                              cadastroFunctions.telefone.value = maskTextTel.updateMask("(##)#####-####");
+                            } else {
+                              if(cadastroFunctions.telefone.text.length == 13){
+
+                                cadastroFunctions.telefone.value = maskTextTel.updateMask("(##)####-#####");
+                              }
+                          }
+                          },
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -425,6 +445,7 @@ class CadastroWidget {
                     children: <Widget>[
                       Expanded(
                         child: new TextFormField(
+                          inputFormatters: [maskTextCNPJ],
                           style: TextStyle(
                             color: StyleGlobals().textColorForte,
                             fontSize: StyleGlobals().sizeSubtitulo
@@ -525,6 +546,7 @@ class CadastroWidget {
                               fontSize: StyleGlobals().sizeSubtitulo
                           ),
                           keyboardType: TextInputType.number,
+                          inputFormatters: [maskTextCEP],
 
                           //enabled: false,
                           controller: cadastroFunctions.cep,

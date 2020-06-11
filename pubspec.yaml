@@ -29,6 +29,7 @@ dependencies:
   font_awesome_flutter:
   hasura_connect: ^1.2.1+1
   http: ^0.12.0+4
+  mask_text_input_formatter: ^1.0.6
   mobx: ^1.2.1
   provider: ^4.0.5
 
