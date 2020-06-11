@@ -97,28 +97,6 @@ subscription {
     return jsonTipoOrgao;
     
   }
-/*List<DropdownMenuItem<String>> _getDropDownMenuItems(jsonData) {
- List<DropdownMenuItem<String>> items = new List();
- int qtde = jsonData['data']['tipo_orgao'].length;
- int i;
- items.add(new DropdownMenuItem(
-    value: '',
-    child: Text('Selecione...', style: TextStyle(
-      color: Colors.black54,),),
-  ));
-   for (i = 0; i < qtde; i++) {
-    items.add(new DropdownMenuItem(
-      value: jsonData['data']['tipo_orgao'][i]['id'],
-      child: new Text(jsonData['data']['tipo_orgao'][i]['nome'],
-          style: TextStyle(
-            fontSize: 12.0,
-            color: Colors.black,
-          )),
-    ));
-  }
-  return items;
-}*/
-
 
  void buscaArmazenaEstados() {
     var snapshot2 = hasuraConnect.subscription(subscriptionEstado);
@@ -159,6 +137,28 @@ subscription {
  final GlobalKey<ScaffoldState> scaffoldState =
 new GlobalKey<ScaffoldState>();
 
+  Future enviarFormulario(nome,  tipo, cnpj, email, telefone, cep,  estado, cidade, endereco ) async {
 
+    var resultadoConexao = await requisicoes().resultadoInternet();
+    if (resultadoConexao == false) {
+
+      var data = await hasuraConnect.mutation(queryOrgao(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco));
+
+      print(data);
+    }else{
+    }
+  }
+
+  String queryOrgao(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco){
+    return 
+    """mutation MyMutation {
+        insert_orgao(objects: {nome: "$nome", id_tipo_orgao: $tipo, cnpj: "$cnpj", 
+                              email: "$email", telefone: "$telefone", cep: "$cep", id_estados: $estado, 
+                              cidade: "$cidade", endereco: "$endereco"}) {
+    returning {
+      id
+      }
+  }
+}""";
+  }
 }
-
