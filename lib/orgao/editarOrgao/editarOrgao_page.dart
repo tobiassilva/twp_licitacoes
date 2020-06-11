@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hasura_connect/hasura_connect.dart';
-import 'package:twp_licitacoes/globals.dart';
-import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
+import 'package:twp_licitacoes/orgao/editarOrgao/editarOrgao_functions.dart';
 
-import '../globals.dart';
-import 'cadastroOrgao_functions.dart';
 
-class CadastroOrgaoPage extends StatefulWidget {
+import '../../globals.dart';
+
+class EditarOrgaoPage extends StatefulWidget {
+  var jsonOrgao;
+  EditarOrgaoPage(this.jsonOrgao);
   @override
-  _CadastroOrgaoPageState createState() => _CadastroOrgaoPageState();
+  _EditarOrgaoPageState createState() => _EditarOrgaoPageState(this.jsonOrgao);
+  
 }
 
-class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
-  TextEditingController controllerNome = TextEditingController();
+class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
+  var jsonOrgao;
+  _EditarOrgaoPageState(this.jsonOrgao);
+
+
+   TextEditingController controllerNome = TextEditingController();
   TextEditingController controllerCnpj = TextEditingController();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerTelefone = TextEditingController();
@@ -21,56 +26,14 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
   TextEditingController controllerCidade = TextEditingController();
   TextEditingController controllerEndereco = TextEditingController();
 
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  var jsonOrgaos;
-  var jsonEstados;
-  bool carregando = false;
-
-
-  Future carregaDados() async {
-    //var jsonInformacoes = await requisicoes().carregaInfos();
-
-    var jsonAux1 = await requisicoes().getDadosTiposOrgaos();
-    var jsonAux2 = await requisicoes().getDadosEstados();
-    setState(() {
-      jsonOrgaos = jsonAux1;
-      jsonEstados = jsonAux2;
-    });
-    print("BBBBBBB: $jsonAux1");
-    print("CCCCCCC: $jsonAux2");
-  }
-
-  int idTipoOrgao;
-  setSelectedRadio(int val) {
-    setState(() {
-      idTipoOrgao = val;
-    });
-  }
-   int idEstados;
-  setSelectedRadioEstados(int val) {
-    setState(() {
-      idEstados= val;
-    });
-  }
-
-  @override
-  void initState() {
-    carregaDados();
-    idTipoOrgao = 0;
-    idEstados=0;
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
           backgroundColor: StyleGlobals().primaryColor,
           title: Text(
-            "Novo Orgão",
+            "Detalhes",
             style: TextStyle(color: StyleGlobals().textColorSecundary),
           ),
           flexibleSpace: Container(
@@ -109,7 +72,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: controllerNome,
+                      controller: updateOrgaos().nomeOrgao,
                       decoration: InputDecoration.collapsed(
                         hintText: "Nome do orgão",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -137,32 +100,31 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                       EdgeInsets.only(top: 10, bottom: 0, left: 20, right: 10),
                   padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
                   child: Container(
-                    child: ListView.builder(
+                    /*child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: jsonOrgaos['data']['tipo_orgao'].length,
+                        itemCount: jsonOrgao['data']['tipo_orgao'].length,
                         itemBuilder: (BuildContext contex, index) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                "${jsonOrgaos['data']['tipo_orgao'][index]['nome']}",
+                                "${jsonOrgao['data']['tipo_orgao'][index]['nome']}",
                                 style:TextStyle( 
                                   color: StyleGlobals().textColorForte,
                                 ),
                               ),
                           
                               Radio(
-                                  value: jsonOrgaos['data']['tipo_orgao'][index]['id'],
-                                  groupValue: idTipoOrgao,
+                                  value: jsonOrgao['id_tipo_orgao'],
                                   activeColor: Colors.blue,
                                   onChanged: (val) {
                                     print("Radio $val");
-                                    setSelectedRadio(val);
+                                    //setSelectedRadio(val);
                                   }),
                             ],
                           );
-                        }),
+                        }),*/
                   ),
                 ),
                 Container(
@@ -185,7 +147,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: controllerCnpj,
+                      controller: updateOrgaos().cnpj,
                       decoration: InputDecoration.collapsed(
                         hintText: "CNPJ",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -215,7 +177,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: controllerEmail,
+                      controller: updateOrgaos().email,
                       decoration: InputDecoration.collapsed(
                         hintText: "Email",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -245,7 +207,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: controllerTelefone,
+                      controller: updateOrgaos().telefone,
                       decoration: InputDecoration.collapsed(
                         hintText: "Telefone",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -275,7 +237,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: controllerCep,
+                      controller: updateOrgaos().cep,
                       decoration: InputDecoration.collapsed(
                         hintText: "CEP",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -303,7 +265,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                       EdgeInsets.only(top: 10, bottom: 0, left: 20, right: 10),
                   padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
                   child: Container(
-                    child: ListView.builder(
+                    /*child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: jsonEstados['data']['estados'].length,
@@ -328,7 +290,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                                   }),
                             ],
                           );
-                        }),
+                        }),*/
                   ),
                 ),
                 Container(
@@ -351,7 +313,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: controllerCidade,
+                      controller: updateOrgaos().cidade,
                       decoration: InputDecoration.collapsed(
                         hintText: "Cidade",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -381,7 +343,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: controllerEndereco,
+                      controller: updateOrgaos().endereco,
                       decoration: InputDecoration.collapsed(
                         hintText: "Endereço",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -423,7 +385,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                         ],
                       ),
                       onPressed: () async {
-                        if (controllerNome.text.isNotEmpty && idTipoOrgao!=null && controllerCnpj.text.isNotEmpty &&
+                        /*if (controllerNome.text.isNotEmpty && idTipoOrgao!=null && controllerCnpj.text.isNotEmpty &&
   controllerEmail.text.isNotEmpty && controllerTelefone.text.isNotEmpty && controllerCep.text.isNotEmpty
   && idEstados!=null && controllerCidade.text.isNotEmpty && controllerEndereco.text.isNotEmpty) {
                               setState(() {
@@ -450,7 +412,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                               _scaffoldKey.currentState.showSnackBar(SnackBar(
                                 content: Text('O Campo nao pode ser Vazio'),
                               ));
-                            }
+                            }*/
                       },
                     ),
                   ),
@@ -459,7 +421,6 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
             ),
           ),
         ),
-      ),
     );
   }
 }

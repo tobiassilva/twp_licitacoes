@@ -1,17 +1,14 @@
 import 'dart:convert';
-import 'package:connectivity/connectivity.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
+
 import 'package:twp_licitacoes/tabs/menu.dart';
 
-import '../cadastroOrgao/cadastroOrgao_functions.dart';
-
-import '../globals.dart';
 
 import 'Widgets/home_widget.dart';
 import 'home_functions.dart';

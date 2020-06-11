@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_functions.dart';
-import 'package:twp_licitacoes/cadastroOrgao/cadastroOrgao_page.dart';
-import '../../globals.dart';
+import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_functions.dart';
+import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_page.dart';
+import 'package:twp_licitacoes/globals.dart';
 
 
 class dropdownOrgao{
-  /*var jsonOrgao;
+  var jsonOrgao;
 List<DropdownMenuItem<String>> dropDownMenuItems;
 Future<String> getOrgaoEmissor() async {
   var data = await http.get(
@@ -57,6 +57,6 @@ List<DropdownMenuItem<String>> _getDropDownMenuItems(jsonData) {
       }
       DIglobal.formOrgaoEmissor.text = '';
     });
-  }*/
+  }
 
-}
+}*/
