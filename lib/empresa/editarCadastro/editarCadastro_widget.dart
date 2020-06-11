@@ -15,26 +15,73 @@ class EditarCadastroWidget {
   EditarCadastroWidget(this.context);
 
   Widget editarWidget(){
-    return Column(
-      children: <Widget>[
-
-        Expanded(
-          child: ListView(
-            children: <Widget>[
-              _formulario_widget(),
-              SizedBox(
-                height: 25,
-              ),
-              _botaoEnviarEmpresa(),
-              SizedBox(
-                height: 25,
-              ),
-            ],
-          )
-        ),
-      ],
+    return Expanded(
+        child: ListView(
+          children: <Widget>[
+            barraTopo(),
+            _formulario_widget(),
+            SizedBox(
+              height: 25,
+            ),
+            _botaoEnviarEmpresa(),
+            SizedBox(
+              height: 25,
+            ),
+          ],
+        )
     );
   }
+
+  ///BARRA DO TOPO
+  ///
+  Widget barraTopo() {
+    final editarCadastroFunctions = Provider.of<EditarCadastroFunctions>(context);
+    return Container(
+      height: 75,
+      width: MediaQuery.of(context).size.width,
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            //margin: EdgeInsets.only(left: 20, right: 20),
+            child: GestureDetector(
+            //clipBehavior: Clip.none,
+
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 75,
+                    width: 75,
+                    color: Colors.transparent,
+                    //color: Colors.red,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.arrow_back_ios,
+                          size: StyleGlobals().sizeTitulo,
+                          color: StyleGlobals().primaryColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+
+
+        ],
+      ),
+    );
+  }
+
 
   Widget _formulario_widget() {
 

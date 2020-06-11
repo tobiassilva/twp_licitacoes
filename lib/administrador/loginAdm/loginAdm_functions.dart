@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_page.dart';
 
+import '../globalsAdm.dart';
+
 class LoginAdmFunctions {
 
   BuildContext context;
@@ -52,6 +54,10 @@ class LoginAdmFunctions {
 
       for(int i=0; i<listLoginsBanco.length; i++){
         if(listLoginsBanco[i]['usuario'] == usuario.text && listLoginsBanco[i]['senha'] == senha.text){
+          print('AAAAAAA');
+          UsuarioGlobals().setUsuario(listLoginsBanco[i]['nome'], listLoginsBanco[i]['id'], listLoginsBanco[i]['usuario']);
+
+
 
           Navigator.push(
             context,

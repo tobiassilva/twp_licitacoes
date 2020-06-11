@@ -49,12 +49,19 @@ class _EditarCadastroPageState extends State<EditarCadastroPage> {
   @override
   Widget build(BuildContext context) {
     EditarCadastroWidget editarCadastroWidget = EditarCadastroWidget(context);
-    return Scaffold(
-      body: _carregando ? SpinKitThreeBounce(
-          color: StyleGlobals().primaryColor,
-          size: StyleGlobals().sizeTitulo,
-        )
-          : editarCadastroWidget.editarWidget(),
+    return SafeArea(
+      child: Scaffold(
+        body: _carregando ? SpinKitThreeBounce(
+            color: StyleGlobals().primaryColor,
+            size: StyleGlobals().sizeTitulo,
+          )
+            : Column(
+              children: <Widget>[
+                //editarCadastroWidget.barraTopo(),
+                editarCadastroWidget.editarWidget(),
+              ],
+            ),
+      ),
     );
   }
 }
