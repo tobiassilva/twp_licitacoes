@@ -14,12 +14,10 @@ class CadastroOrgaoPage extends StatefulWidget {
 
 class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
   TextEditingController controllerNome = TextEditingController();
-  
   TextEditingController controllerCnpj = TextEditingController();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerTelefone = TextEditingController();
   TextEditingController controllerCep = TextEditingController();
-  
   TextEditingController controllerCidade = TextEditingController();
   TextEditingController controllerEndereco = TextEditingController();
 
@@ -27,25 +25,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
   var jsonOrgaos;
   var jsonEstados;
   bool carregando = false;
-/*//criando dropdown tipo_orgao  
-String opcaoOrgao = '';
-int itemSel;
-void changedDropDownItem(String itemSelecionado) {
-    int i;
-    setState(() {
-      print(itemSelecionado);
-      print(requisicoesDropdown().jsonTipoOrgao['data']['tipo_orgao'].length);
-      opcaoOrgao = itemSelecionado;
-      for (i = 0; i < requisicoesDropdown().jsonTipoOrgao['data']['tipo_orgao'].length; i++) {
-        if (requisicoesDropdown().jsonTipoOrgao['data']['tipo_orgao'][i]['id'] == opcaoOrgao) {
-          itemSel = i;
-          controllerTipo.text = opcaoOrgao;
-          return;
-        }
-      }
-      controllerTipo.text = '';
-    });
-  }*/
+
 
   Future carregaDados() async {
     //var jsonInformacoes = await requisicoes().carregaInfos();
@@ -449,7 +429,7 @@ void changedDropDownItem(String itemSelecionado) {
                               setState(() {
                                 carregando = true;
                               });
-                              await enviarFormulario(
+                              await requisicoes().enviarFormulario(
                                 controllerNome.text,
                                 idTipoOrgao,
                                 controllerCnpj.text,
@@ -480,41 +460,6 @@ void changedDropDownItem(String itemSelecionado) {
           ),
         ),
       ),
-    );
-  }
-
-
-
-  HasuraConnect conexao =
-  HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
-
-  Future enviarFormulario(nome, int tipo, cnpj, email, telefone, cep, int estado, cidade, endereco ) async {
-
-    var resultadoConexao = await requisicoes().resultadoInternet();
-    if (resultadoConexao == false) {
-
-
-      var data = await conexao.mutation(queryOrgao());
-
-      print(data);
-    }else{
-    }
-  }
-
-
-
-  String queryOrgao(){
-
-    return (
-        """
-        mutation MyMutation {
-          insert_orgao(objects: {nome: '${controllerNome.text}', id_tipo_orgao: $idTipoOrgao, cnpj:'${controllerCnpj.text}', email: '${controllerEmail.text}', telefone: '${controllerTelefone.text}', cep: '${controllerCep.text}', id_estados: $idEstados, cidade: '${controllerCidade.text}', endereco: '${controllerEndereco.text}'}) {
-            returning {
-              id
-            }
-          }
-        }
-      """
     );
   }
 }
