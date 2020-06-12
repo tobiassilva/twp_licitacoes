@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/orgao/editarOrgao/editarOrgao_functions.dart';
 
 
@@ -14,17 +16,43 @@ class EditarOrgaoPage extends StatefulWidget {
 }
 
 class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
-  var jsonOrgao;
-  _EditarOrgaoPageState(this.jsonOrgao);
+  var jsonOrgaoEsc;
+  _EditarOrgaoPageState(this.jsonOrgaoEsc);
 
 
-   TextEditingController controllerNome = TextEditingController();
+  /*TextEditingController controllerNome = TextEditingController();
   TextEditingController controllerCnpj = TextEditingController();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerTelefone = TextEditingController();
   TextEditingController controllerCep = TextEditingController();
   TextEditingController controllerCidade = TextEditingController();
-  TextEditingController controllerEndereco = TextEditingController();
+  TextEditingController controllerEndereco = TextEditingController();*/
+
+  UpdateOrgaoFunctions editarOrgaoFunctions;
+  bool carregando = true;
+  bool leuBanco = true;
+
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    editarOrgaoFunctions = Provider.of<UpdateOrgaoFunctions>(context);
+    if(leuBanco){
+      leuBanco = false;
+      atualizaControllers();
+    }
+
+  }
+
+  Future atualizaControllers() async {
+    await editarOrgaoFunctions.atualizaControladores(jsonOrgaoEsc);
+
+    setState(() {
+      carregando = false;
+    });
+  }
 
 
   @override
@@ -46,7 +74,11 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
           ),
           centerTitle: true,
         ),
-        body: Container(
+        body: carregando ? SpinKitThreeBounce(
+          color: StyleGlobals().primaryColor,
+          size: StyleGlobals().sizeTitulo,
+        )
+            : Container(
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
             child: Column(
@@ -72,7 +104,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: updateOrgaos().nomeOrgao,
+                      controller: editarOrgaoFunctions.nomeOrgao,
                       decoration: InputDecoration.collapsed(
                         hintText: "Nome do orgão",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -147,7 +179,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: updateOrgaos().cnpj,
+                      controller: editarOrgaoFunctions.cnpj,
                       decoration: InputDecoration.collapsed(
                         hintText: "CNPJ",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -177,7 +209,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: updateOrgaos().email,
+                      controller: editarOrgaoFunctions.email,
                       decoration: InputDecoration.collapsed(
                         hintText: "Email",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -207,7 +239,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: updateOrgaos().telefone,
+                      controller: editarOrgaoFunctions.telefone,
                       decoration: InputDecoration.collapsed(
                         hintText: "Telefone",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -237,7 +269,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: updateOrgaos().cep,
+                      controller: editarOrgaoFunctions.cep,
                       decoration: InputDecoration.collapsed(
                         hintText: "CEP",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -313,7 +345,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: updateOrgaos().cidade,
+                      controller: editarOrgaoFunctions.cidade,
                       decoration: InputDecoration.collapsed(
                         hintText: "Cidade",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -343,7 +375,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                   child: Container(
                     height: 40,
                     child: TextField(
-                      controller: updateOrgaos().endereco,
+                      controller: editarOrgaoFunctions.endereco,
                       decoration: InputDecoration.collapsed(
                         hintText: "Endereço",
                         hintStyle: TextStyle(fontWeight: FontWeight.w600),

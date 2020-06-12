@@ -13,6 +13,7 @@ import 'home/home_functions.dart';
 import 'login/login_functions.dart';
 import 'login/login_page.dart';
 import 'login/login_store.dart';
+import 'orgao/editarOrgao/editarOrgao_functions.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         Provider<EditarCadastroStore>(create: (_) => EditarCadastroStore()),
         Provider<HomeAdmFunctions>(create: (_) => HomeAdmFunctions(context)),
         Provider<EmpresasAdmFunctions>(create: (_) => EmpresasAdmFunctions(context)),
+        Provider<UpdateOrgaoFunctions>(create: (_) => UpdateOrgaoFunctions(context)),
       ],
       child: MaterialApp(
         title: 'TWP Licitações',
