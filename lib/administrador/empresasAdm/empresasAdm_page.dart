@@ -28,7 +28,7 @@ class _EmpresasAdmPageState extends State<EmpresasAdmPage> {
     EmpresasAdmWidget empresaAdmWidget = EmpresasAdmWidget(context);
     return SafeArea(
       child: Scaffold(
-        key: empresaAdmFunctions.scaffoldKey,
+        //key: empresaAdmFunctions.scaffoldKeyEmp,
         body: /*carregando ? SpinKitThreeBounce(
           color: StyleGlobals().primaryColor,
           size: StyleGlobals().sizeTitulo,

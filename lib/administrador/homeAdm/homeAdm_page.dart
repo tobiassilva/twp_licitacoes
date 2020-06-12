@@ -6,6 +6,7 @@ import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_widget.dart';
 
 import '../../globals.dart';
 import '../globalsAdm.dart' as globalsAdm;
+import 'homeAdm_store.dart';
 
 class HomeAdmPage extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class HomeAdmPage extends StatefulWidget {
 class _HomeAdmPageState extends State<HomeAdmPage> {
 
   HomeAdmFunctions homeAdmFunctions;
+  HomeAdmStore homeAdmStore;
   bool _lerBanco = true;
   bool carregando = false;
 
@@ -37,6 +39,7 @@ class _HomeAdmPageState extends State<HomeAdmPage> {
     super.didChangeDependencies();
 
     homeAdmFunctions = Provider.of<HomeAdmFunctions>(context);
+    homeAdmStore = Provider.of<HomeAdmStore>(context);
 
     if(_lerBanco){
       _getDadosDB();
@@ -47,7 +50,9 @@ class _HomeAdmPageState extends State<HomeAdmPage> {
 
   Future _getDadosDB() async {
     print('SDDDDDD');
+    homeAdmStore.setCarregandoQtde(true);
     await homeAdmFunctions.getDadosBanco();
+    homeAdmStore.setCarregandoQtde(false);
 
     setState(() {
       carregando = false;
@@ -59,9 +64,10 @@ class _HomeAdmPageState extends State<HomeAdmPage> {
   @override
   Widget build(BuildContext context) {
     HomeAdmWidget homeAdmWidget = HomeAdmWidget(context);
+    final homeAdmStore = Provider.of<HomeAdmStore>(context);
     return SafeArea(
       child: Scaffold(
-        key: homeAdmFunctions.scaffoldKey,
+        //key: homeAdmFunctions.scaffoldKeyHomeAdm,
         body: carregando ? SpinKitThreeBounce(
           color: StyleGlobals().primaryColor,
           size: StyleGlobals().sizeTitulo,

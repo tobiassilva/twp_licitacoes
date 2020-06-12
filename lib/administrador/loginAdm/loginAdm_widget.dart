@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_store.dart';
 
 import '../../globals.dart';
 import 'loginAdm_functions.dart';
@@ -129,6 +130,7 @@ class LoginAdmWidget {
                           keyboardType: TextInputType.emailAddress,
                           controller: loginAdmFunctions.usuario,
                           //onChanged: loginStore.setEmail,
+                          enabled: !loginAdmStore.carregando,
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -189,11 +191,12 @@ class LoginAdmWidget {
                                 ),
                                 keyboardType: TextInputType.visiblePassword,
 
-                                //enabled: false,
+                                enabled: !loginAdmStore.carregando,
                                 controller: loginAdmFunctions.senha,
                                 obscureText: !loginAdmStore.verSenha,
                                 onChanged: loginAdmStore.setSenha,
                                 textAlign: TextAlign.left,
+
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'digite sua senha',
@@ -230,6 +233,7 @@ class LoginAdmWidget {
 
     final loginAdmFunctions = Provider.of<LoginAdmFunctions>(context);
     final loginAdmStore = Provider.of<LoginAdmStore>(context);
+    final homeAdmStore = Provider.of<HomeAdmStore>(context);
 
     return FlatButton(
       padding: EdgeInsets.all(0),
@@ -242,6 +246,7 @@ class LoginAdmWidget {
           loginAdmStore.setCarregando();///TODO: COLOCAR DE VOLTA ESSAS PORRA
           if(loginAdmFunctions.usuario.text.isNotEmpty){
             if(loginAdmFunctions.senha.text.length > 0){
+              homeAdmStore.setCarregandoQtde(true);
               await loginAdmFunctions.logarAdm(context).then((value){
 
               }).catchError((e){
