@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:provider/provider.dart';
 
 import '../globalsAdm.dart' as globalsAdm;
+import 'homeAdm_store.dart';
 
 class HomeAdmFunctions {
 
@@ -10,7 +12,7 @@ class HomeAdmFunctions {
 
   HasuraConnect _hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKeyHomeAdm = GlobalKey<ScaffoldState>();
 
 
   String queryEmpresa = """
@@ -86,18 +88,22 @@ class HomeAdmFunctions {
   }
   """;
 
-  Future getDadosBanco() async {
+  Future _zeraListas(){
     globalsAdm.dbEmpresas.clear();
     globalsAdm.dbLicitacoes.clear();
     globalsAdm.dbOrgaos.clear();
     globalsAdm.dbEstados.clear();
+  }
+
+  Future getDadosBanco() async {
+
+    await _zeraListas();
 
     print('EMPRESA');
     var snapshotEmp = await _hasuraConnect.query(queryEmpresa);
 
     print(snapshotEmp);
     globalsAdm.dbEmpresas.addAll(snapshotEmp['data']['empresa']);
-
 
     print('LICITACOES');
     var snapshotLic = await _hasuraConnect.query(queryLicitacoes);

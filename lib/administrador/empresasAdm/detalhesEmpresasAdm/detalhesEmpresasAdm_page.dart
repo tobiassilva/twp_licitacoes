@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'detalhesEmpresasAdm_functions.dart';
 import 'detalhesEmpresasAdm_widget.dart';
 
 class DetalhesEmpresasAdm extends StatefulWidget {
@@ -18,7 +20,9 @@ class _DetalhesEmpresasAdmState extends State<DetalhesEmpresasAdm> {
   @override
   Widget build(BuildContext context) {
     DetalhesEmpresasAdmWidget detalhesEmpresaAdmWidget = DetalhesEmpresasAdmWidget(context, jsonEmpresa);
+    final detalhesEmpresasAdmFunctions = Provider.of<DetalhesEmpresasAdmFunctions>(context);
     return SafeArea(
+      //key: detalhesEmpresasAdmFunctions.scaffoldKey,
       child: Scaffold(
         //key: empresaAdmFunctions.scaffoldKey,
         body: /*carregando ? SpinKitThreeBounce(
