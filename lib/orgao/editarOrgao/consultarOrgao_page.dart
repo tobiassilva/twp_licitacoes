@@ -7,7 +7,6 @@ import 'package:twp_licitacoes/orgao/editarOrgao/editarOrgao_functions.dart';
 
 import '../../globals.dart';
 
-
 class ConsultarOrgaoPage extends StatefulWidget {
   @override
   _ConsultarOrgaoPageState createState() => _ConsultarOrgaoPageState();
@@ -35,7 +34,7 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
 
     editarOrgaoFunctions = Provider.of<UpdateOrgaoFunctions>(context);
 
-    if(leuBanco){
+    if (leuBanco) {
       leuBanco = false;
       carregaDadosConsulta();
     }
@@ -54,8 +53,6 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
       carregando = false;
     });
   }
-
-
 
   int idTipoOrgao;
 
@@ -101,74 +98,77 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
           ),
           centerTitle: true,
         ),
-        body: carregando ? SpinKitThreeBounce(
-          color: StyleGlobals().primaryColor,
-          size: StyleGlobals().sizeTitulo,
-        )
+        body: carregando
+            ? SpinKitThreeBounce(
+                color: StyleGlobals().primaryColor,
+                size: StyleGlobals().sizeTitulo,
+              )
             : Container(
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-            child: ListView.builder(
-                physics: ScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: editarOrgaoFunctions.jsonOrgao['data']['orgao'].length,
-                itemBuilder: (_, index) {
-                  return GestureDetector(
-                    onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              EditarOrgaoPage(editarOrgaoFunctions.jsonOrgao['data']['orgao'][index])));
-                    },
-
-                  child: Container(
-                    decoration: BoxDecoration(
-                    color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow:[
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 5,
-                          spreadRadius: 2,
-                          offset: Offset(
-                            5,
-                            5,
-                          )),
-                      ]),
-                      margin: EdgeInsets.only(top: 10, bottom: 0, left: 20, right: 10),
-                      padding:EdgeInsets.fromLTRB(10, 10, 30, 0),
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Flexible(
-                            child: Text(
-                              "${editarOrgaoFunctions.jsonOrgao['data']['orgao'][index]['nome']}",
-                              maxLines: 1,
-                               textAlign: TextAlign.start,
-                              style: TextStyle(
-                                color: StyleGlobals().textColorForte,
-                                fontSize: StyleGlobals().sizeTextMedio,
-                              ),
-                            ),
-                          ),
-                          Text(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: ListView.builder(
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: editarOrgaoFunctions
+                          .jsonOrgao['data']['orgao'].length,
+                      itemBuilder: (_, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    EditarOrgaoPage(editarOrgaoFunctions
+                                        .jsonOrgao['data']['orgao'][index])));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 5,
+                                      spreadRadius: 2,
+                                      offset: Offset(
+                                        5,
+                                        5,
+                                      )),
+                                ]),
+                            margin: EdgeInsets.only(
+                                top: 10, bottom: 0, left: 20, right: 10),
+                            padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Flexible(
+                                    child: Text(
+                                      "${editarOrgaoFunctions.jsonOrgao['data']['orgao'][index]['nome']}",
+                                      maxLines: 1,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        color: StyleGlobals().textColorForte,
+                                        fontSize: StyleGlobals().sizeTextMedio,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
                                     "...",
                                     style: TextStyle(
                                         color: StyleGlobals().primaryColor,
                                         fontSize: StyleGlobals().sizeTextMedio),
                                   ),
-                          SizedBox(
-                            height: 5,
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  );
-                }),
-          ),
-        ),
+                        );
+                      }),
+                ),
+              ),
       ),
     );
   }

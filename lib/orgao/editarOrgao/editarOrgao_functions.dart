@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_functions.dart';
 
+HasuraConnect hasuraConnect =
+    HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
-
-class UpdateOrgaoFunctions{
-
+class UpdateOrgaoFunctions {
   BuildContext context;
   UpdateOrgaoFunctions(this.context);
 
@@ -16,8 +15,7 @@ class UpdateOrgaoFunctions{
   var jsonEstado;
   bool tipoConexao = true; // false =  sem internet, true = tem internet
 
-
-   //Editar Orgaos
+  //Editar Orgaos
   final nomeOrgao = TextEditingController();
   final cnpj = TextEditingController();
   final email = TextEditingController();
@@ -25,11 +23,8 @@ class UpdateOrgaoFunctions{
   final cep = TextEditingController();
   final cidade = TextEditingController();
   final endereco = TextEditingController();
-  
-    
 
-  String subscriptionOrgao = 
-    """
+  String subscriptionOrgao = """
 subscription {
   orgao {
     nome
@@ -57,7 +52,6 @@ subscription {
   Future recebeDadosDB() async {
     await getDadosOrgaos();
     await getDadosEstados();
-
   }
 
 //verificando internet
@@ -78,15 +72,13 @@ subscription {
     } else {
       //return true;
     }
-
   }
 
-   void buscaArmazenaOrgaos() {
+  void buscaArmazenaOrgaos() {
     var snapshot = hasuraConnect.subscription(subscriptionOrgao);
     snapshot.listen((data) {
       print("Orgao: $data");
       jsonOrgao = data;
-      
     });
   }
 
@@ -95,12 +87,11 @@ subscription {
     print("TEM QUE APARECER AQUI: $jsonEscolhido");
     nomeOrgao.text = jsonEscolhido['nome'];
     cnpj.text = jsonEscolhido['cnpj'];
-    email.text= jsonEscolhido['email'];
+    email.text = jsonEscolhido['email'];
     telefone.text = jsonEscolhido['telefone'];
     cep.text = jsonEscolhido['cep'];
     cidade.text = jsonEscolhido['cidade'];
     endereco.text = jsonEscolhido['endereco'];
-  
   }
 
   Future buscaArmazenaEstados() async {
@@ -109,9 +100,9 @@ subscription {
     snapshot2.listen((data) {
       print("Estado: $data");
       jsonEstado = data;
-
     });
   }
+
 //obtendo estados
   Future getDadosEstados() async {
     var resultadoConexao = await resultadoInternet();
@@ -121,15 +112,11 @@ subscription {
     } else {
       //return true;
     }
-
   }
 
-   /*Future carregaInfos() async{
+  /*Future carregaInfos() async{
     await carregaDados();
     return jsonInfos;
  }*/
 
-
-
- 
 }
