@@ -441,7 +441,50 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                       },
                     ),
                   ),
-                )
+                ),
+
+                SizedBox(
+                  height: 5,
+                ),
+
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  width: 250,
+                  height: 45,
+                  decoration: BoxDecoration(
+                      color: StyleGlobals().primaryColor,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                    child: FlatButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            FontAwesomeIcons.solidTrashAlt,
+                            size: 20,
+                            color: StyleGlobals().textColorSecundary,
+                          )
+                        ],
+                      ),
+                      onPressed: () async {
+                        
+                              setState(() {
+                                carregando = true;
+                              });
+
+                              await deleteFormulario(
+                               editarOrgaoFunctions.nomeOrgao.text,
+                              
+                               );
+                                  
+                              setState(() {
+                                carregando = false;
+                              });
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -450,7 +493,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
   }
 
 
-
+//enviando Atualização
   Future updateFormulario(nome,  cnpj, email, telefone, cep, cidade, endereco ) async {
 
     var resultadoConexao = await requisicoes().resultadoInternet();
@@ -478,6 +521,31 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
     }
   }
 } 
+""";
+  }
+
+  //deletando Orgao
+  Future deleteFormulario(nome) async {
+
+    var resultadoConexao = await requisicoes().resultadoInternet();
+    if (resultadoConexao == false) {
+
+      var data = await hasuraConnect.mutation(deleteQueryOrgao(nome));
+
+      print(data);
+    }else{
+    }
+  }
+
+  String deleteQueryOrgao(nome){
+    return """
+    mutation MyMutation {
+    delete_orgao(where: {nome: {_eq: "$nome"}}) {
+    returning {
+      id
+    }
+  }
+}
 """;
   }
 }
