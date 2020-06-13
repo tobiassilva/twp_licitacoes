@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_functions.dart';
 import 'package:twp_licitacoes/orgao/editarOrgao/editarOrgao_functions.dart';
 
 
 import '../../globals.dart';
+
+HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
 class EditarOrgaoPage extends StatefulWidget {
   var jsonOrgao;
@@ -53,7 +57,6 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
       carregando = false;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -402,7 +405,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Enviar ",
+                            "Atualizar ",
                             style: TextStyle(
                               color: StyleGlobals().textColorSecundary,
                               fontWeight: FontWeight.normal,
@@ -417,34 +420,24 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                         ],
                       ),
                       onPressed: () async {
-                        /*if (controllerNome.text.isNotEmpty && idTipoOrgao!=null && controllerCnpj.text.isNotEmpty &&
-  controllerEmail.text.isNotEmpty && controllerTelefone.text.isNotEmpty && controllerCep.text.isNotEmpty
-  && idEstados!=null && controllerCidade.text.isNotEmpty && controllerEndereco.text.isNotEmpty) {
+                        
                               setState(() {
                                 carregando = true;
                               });
-                              await requisicoes().enviarFormulario(
-                                controllerNome.text,
-                                idTipoOrgao,
-                                controllerCnpj.text,
-                                controllerEmail.text,
-                                controllerTelefone.text,
-                                controllerCep.text,
-                                idEstados,
-                                controllerCidade.text,
-                                controllerEndereco.text
-                                );
+
+                              await updateFormulario(
+                               editarOrgaoFunctions.nomeOrgao.text,
+                               editarOrgaoFunctions.cnpj.text,
+                               editarOrgaoFunctions.email.text,
+                               editarOrgaoFunctions.endereco.text,
+                               editarOrgaoFunctions.telefone.text,
+                               editarOrgaoFunctions.cidade.text,
+                               editarOrgaoFunctions.cep.text,
+                               );
                                   
                               setState(() {
                                 carregando = false;
                               });
-
-                              
-                            } else {
-                              _scaffoldKey.currentState.showSnackBar(SnackBar(
-                                content: Text('O Campo nao pode ser Vazio'),
-                              ));
-                            }*/
                       },
                     ),
                   ),
@@ -454,5 +447,37 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
           ),
         ),
     );
+  }
+
+
+
+  Future updateFormulario(nome,  cnpj, email, telefone, cep, cidade, endereco ) async {
+
+    var resultadoConexao = await requisicoes().resultadoInternet();
+    if (resultadoConexao == false) {
+
+      var data = await hasuraConnect.mutation(updateQueryOrgao(nome, cnpj, email, telefone, cep, cidade, endereco));
+
+      print(data);
+    }else{
+    }
+  }
+
+   String updateQueryOrgao(nome, cnpj, email, telefone, cep, cidade, endereco) {
+    return """
+   mutation MyMutation {
+   update_orgao(where: {nome: {_eq: "$nome"}}, _set: {nome: "${editarOrgaoFunctions.nomeOrgao.text}", 
+    cnpj: "${editarOrgaoFunctions.cnpj.text}", 
+    email: "${editarOrgaoFunctions.email.text}", 
+    telefone: "${editarOrgaoFunctions.telefone.text}", 
+    cep: "${editarOrgaoFunctions.cep.text}", 
+    cidade: "${editarOrgaoFunctions.cidade.text}", 
+    endereco: "${editarOrgaoFunctions.endereco.text}"}){
+      returning {
+      id
+    }
+  }
+} 
+""";
   }
 }
