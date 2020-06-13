@@ -24,6 +24,23 @@ mixin _$HomeAdmStore on _HomeAdmStore, Store {
     });
   }
 
+  final _$carregandoCategoriasAtom =
+      Atom(name: '_HomeAdmStore.carregandoCategorias');
+
+  @override
+  bool get carregandoCategorias {
+    _$carregandoCategoriasAtom.reportRead();
+    return super.carregandoCategorias;
+  }
+
+  @override
+  set carregandoCategorias(bool value) {
+    _$carregandoCategoriasAtom.reportWrite(value, super.carregandoCategorias,
+        () {
+      super.carregandoCategorias = value;
+    });
+  }
+
   final _$_HomeAdmStoreActionController =
       ActionController(name: '_HomeAdmStore');
 
@@ -39,9 +56,21 @@ mixin _$HomeAdmStore on _HomeAdmStore, Store {
   }
 
   @override
+  void setCarregandoCategorias(dynamic value) {
+    final _$actionInfo = _$_HomeAdmStoreActionController.startAction(
+        name: '_HomeAdmStore.setCarregandoCategorias');
+    try {
+      return super.setCarregandoCategorias(value);
+    } finally {
+      _$_HomeAdmStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-carregandoQtde: ${carregandoQtde}
+carregandoQtde: ${carregandoQtde},
+carregandoCategorias: ${carregandoCategorias}
     ''';
   }
 }

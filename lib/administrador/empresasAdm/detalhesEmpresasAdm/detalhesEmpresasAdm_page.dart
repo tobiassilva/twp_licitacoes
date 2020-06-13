@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_functions.dart';
 
 import 'detalhesEmpresasAdm_functions.dart';
 import 'detalhesEmpresasAdm_widget.dart';
@@ -24,7 +25,7 @@ class _DetalhesEmpresasAdmState extends State<DetalhesEmpresasAdm> {
     return SafeArea(
       //key: detalhesEmpresasAdmFunctions.scaffoldKey,
       child: Scaffold(
-        //key: empresaAdmFunctions.scaffoldKey,
+        //key: homeAdmFunctions.scaffoldKeyHomeAdm,
         body: /*carregando ? SpinKitThreeBounce(
           color: StyleGlobals().primaryColor,
           size: StyleGlobals().sizeTitulo,

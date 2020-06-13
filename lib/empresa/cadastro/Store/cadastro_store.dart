@@ -72,6 +72,11 @@ abstract class _CadastroStore with Store {
   @observable
   ObservableList<EstadoStore> listEstados = ObservableList<EstadoStore>();
 
+  @observable
+  bool carregandoEnvio = false;
+
+  @action
+  void setCarregandoEnvio(value) => carregandoEnvio = value;
 
 
   @action

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 
@@ -91,52 +92,93 @@ class EmpresasAdmWidget {
             },
             child: Container(
               margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
-              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+              padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
               decoration: BoxDecoration(
                 //color: Colors.red,
                   gradient: LinearGradient(colors: [Colors.white, Colors.white]),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 20.0,
+                        color: Colors.black12,
+                        blurRadius: 10.0,
                         spreadRadius: 2.0,
                         offset: Offset(
-                          2.0,
-                          2.0,
+                          1.0,
+                          1.0,
                         )),
                   ]),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: <Widget>[
-                  Text(
-                    '${_nomeEmpresa == '' ? "Não Informado" : _nomeEmpresa}',
-                    style: TextStyle(
-                      color: StyleGlobals().textColorForte,
-                      fontSize: StyleGlobals().sizeTextMedio,
+
+                  Container(
+                    child: Icon(
+                      FontAwesomeIcons.solidBuilding,
+                      size: 35,
+                      color: StyleGlobals().primaryColor,
                     ),
                   ),
 
-                  Text(
-                    '${_nomeRepre == '' ? "Não Informado" : _nomeRepre}',
-                    style: TextStyle(
-                      color: StyleGlobals().textColorMedio,
-                      fontSize: StyleGlobals().sizeTextMedio,
-                    ),
+                  SizedBox(
+                    width: 15,
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'Plano: ${_plano == 0 ? "Básico" : _plano == 1 ? "Profissional" : "Não Informado"}',
-                        style: TextStyle(
-                          color: StyleGlobals().tertiaryColor,
-                          fontSize: StyleGlobals().sizeTextMedio,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '${_nomeEmpresa == '' ? "Não Informado" : _nomeEmpresa}',
+                          style: TextStyle(
+                            color: StyleGlobals().textColorMedio,
+                            fontSize: StyleGlobals().sizeSubtitulo,
+                          ),
                         ),
-                      ),
-                    ],
+
+                        SizedBox(
+                          height: 5,
+                        ),
+
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              FontAwesomeIcons.userAlt,
+                              size: StyleGlobals().sizeText,
+                              color: StyleGlobals().tertiaryColor,
+                            ),
+                            Text(
+                              ' ${_nomeRepre == '' ? "Não Informado" : _nomeRepre}',
+                              style: TextStyle(
+                                color: StyleGlobals().textColorMedio,
+                                fontSize: StyleGlobals().sizeText,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(
+                          height: 5,
+                        ),
+
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              FontAwesomeIcons.coins,
+                              size: StyleGlobals().sizeText,
+                              color: StyleGlobals().tertiaryColor,
+                            ),
+                            Text(
+                              ' ${_plano == 0 ? "Básico" : _plano == 1 ? "Profissional" : "Não Informado"}',
+                              style: TextStyle(
+                                color: StyleGlobals().textColorMedio,
+                                fontSize: StyleGlobals().sizeText,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+
                 ],
               ),
             ),

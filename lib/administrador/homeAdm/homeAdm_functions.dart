@@ -1,7 +1,9 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:provider/provider.dart';
 
+import '../../globals.dart';
 import '../globalsAdm.dart' as globalsAdm;
 import 'homeAdm_store.dart';
 
@@ -12,7 +14,7 @@ class HomeAdmFunctions {
 
   HasuraConnect _hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-  GlobalKey<ScaffoldState> scaffoldKeyHomeAdm = GlobalKey<ScaffoldState>();
+  //GlobalKey<ScaffoldState> scaffoldKeyHomeAdm = GlobalKey<ScaffoldState>();
 
 
   String queryEmpresa = """
@@ -88,6 +90,16 @@ class HomeAdmFunctions {
   }
   """;
 
+  //verificando internet
+  Future<bool> resultadoInternet() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future _zeraListas(){
     globalsAdm.dbEmpresas.clear();
     globalsAdm.dbLicitacoes.clear();
@@ -96,6 +108,38 @@ class HomeAdmFunctions {
   }
 
   Future getDadosBanco() async {
+
+    bool conexaoInternet = await resultadoInternet();
+
+    if(conexaoInternet){
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => AlertDialog(
+            title: Text('Você precisa estar Conectado para esta ação'),
+            //backgroundColor: Colors.transparent,
+            content: Icon(
+              Icons.signal_wifi_off,
+              color: Colors.red,
+              size: 60,
+            ),
+
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  //await detalhesEmpresasAdmFunctions.deleteEmpresaAdm(jsonEmpresa['id']);
+                },
+                child: Text('OK',
+                  style: TextStyle(
+                    fontSize: StyleGlobals().sizeTextMedio,
+                    color: StyleGlobals().tertiaryColor,
+                  ),
+                ),
+              ),
+            ],
+          )));
+      //scaffoldKeyHomeAdm.currentState.showSnackBar(SnackBar(content: Text('SEM INTERNET. Conecte-se a internet e tente novamente')));
+      return;
+    }
 
     await _zeraListas();
 

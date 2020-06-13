@@ -145,6 +145,21 @@ mixin _$CadastroStore on _CadastroStore, Store {
     });
   }
 
+  final _$carregandoEnvioAtom = Atom(name: '_CadastroStore.carregandoEnvio');
+
+  @override
+  bool get carregandoEnvio {
+    _$carregandoEnvioAtom.reportRead();
+    return super.carregandoEnvio;
+  }
+
+  @override
+  set carregandoEnvio(bool value) {
+    _$carregandoEnvioAtom.reportWrite(value, super.carregandoEnvio, () {
+      super.carregandoEnvio = value;
+    });
+  }
+
   final _$_CadastroStoreActionController =
       ActionController(name: '_CadastroStore');
 
@@ -237,6 +252,17 @@ mixin _$CadastroStore on _CadastroStore, Store {
   }
 
   @override
+  void setCarregandoEnvio(dynamic value) {
+    final _$actionInfo = _$_CadastroStoreActionController.startAction(
+        name: '_CadastroStore.setCarregandoEnvio');
+    try {
+      return super.setCarregandoEnvio(value);
+    } finally {
+      _$_CadastroStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addEmpresas(dynamic nome, dynamic id) {
     final _$actionInfo = _$_CadastroStoreActionController.startAction(
         name: '_CadastroStore.addEmpresas');
@@ -269,7 +295,8 @@ temSubcat: ${temSubcat},
 aceitouTermos: ${aceitouTermos},
 carregando: ${carregando},
 selecEstado: ${selecEstado},
-listEstados: ${listEstados}
+listEstados: ${listEstados},
+carregandoEnvio: ${carregandoEnvio}
     ''';
   }
 }

@@ -102,7 +102,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -171,7 +171,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -244,7 +244,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -317,7 +317,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -402,7 +402,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -498,7 +498,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -574,7 +574,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -652,7 +652,7 @@ class EditarCadastroWidget {
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black26,
+                          color: Colors.black12,
                           blurRadius: 20.0,
                           spreadRadius: 2.0,
                           offset: Offset(
@@ -730,7 +730,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -807,7 +807,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
@@ -885,7 +885,7 @@ class EditarCadastroWidget {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black26,
+                      color: Colors.black12,
                       blurRadius: 20.0,
                       spreadRadius: 2.0,
                       offset: Offset(
