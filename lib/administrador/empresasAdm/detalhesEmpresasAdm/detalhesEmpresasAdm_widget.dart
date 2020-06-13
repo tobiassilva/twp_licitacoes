@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_page.dart';
 
 import '../../../globals.dart';
+import 'detalhesEmpresasAdm_store.dart';
 import 'detalhesEmpresasAdm_functions.dart';
 
 class DetalhesEmpresasAdmWidget {
@@ -32,6 +35,7 @@ class DetalhesEmpresasAdmWidget {
 
   Widget barraTopo() {
     final detalhesEmpresasAdmFunctions = Provider.of<DetalhesEmpresasAdmFunctions>(context);
+    final detalhesEmpresasAdmStore = Provider.of<DetalhesEmpresasAdmStore>(context);
     return Container(
       height: 75,
       width: MediaQuery.of(context).size.width,
@@ -84,11 +88,10 @@ class DetalhesEmpresasAdmWidget {
 
           Container(
             //margin: EdgeInsets.only(left: 20, right: 20),
-            child: FlatButton(
-              padding: EdgeInsets.all(0),
+            child: GestureDetector(
               //clipBehavior: Clip.none,
 
-              onPressed: () {
+              onTap: () {
                 //Navigator.of(context).pop();
                 print('APAGANDO?');
                 Navigator.of(context).push(MaterialPageRoute(
@@ -109,40 +112,81 @@ class DetalhesEmpresasAdmWidget {
                     ),
                     FlatButton(
                       onPressed: () async {
-                        await detalhesEmpresasAdmFunctions.deleteEmpresaAdm(jsonEmpresa['id']);
+                        detalhesEmpresasAdmStore.setCarregando(true);
+                        bool _apagou = await detalhesEmpresasAdmFunctions.deleteEmpresaAdm(jsonEmpresa['id']);
                         Navigator.of(context).pop();
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => AlertDialog(
-                              title: Text('"${jsonEmpresa['nome_empresa']}" Apagada com Sucesso'),
-                              //backgroundColor: Colors.transparent,
-                              content: Icon(
-                                FontAwesomeIcons.check,
-                                color: Colors.green,
-                                size: 60,
-                              ),
+                        if(_apagou){
+                          detalhesEmpresasAdmStore.setCarregando(false);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AlertDialog(
+                                title: Text('"${jsonEmpresa['nome_empresa']}" Apagada com Sucesso'),
+                                //backgroundColor: Colors.transparent,
+                                content: Icon(
+                                  FontAwesomeIcons.check,
+                                  color: Colors.green,
+                                  size: 60,
+                                ),
 
-                              actions: <Widget>[
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => HomeAdmPage()));
-                                    //await detalhesEmpresasAdmFunctions.deleteEmpresaAdm(jsonEmpresa['id']);
-                                  },
-                                  child: Text('OK',
-                                    style: TextStyle(
-                                      fontSize: StyleGlobals().sizeTextMedio,
-                                      color: StyleGlobals().tertiaryColor,
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                          builder: (context) => HomeAdmPage()));
+                                      //await detalhesEmpresasAdmFunctions.deleteEmpresaAdm(jsonEmpresa['id']);
+                                    },
+                                    child: Text('OK',
+                                      style: TextStyle(
+                                        fontSize: StyleGlobals().sizeTextMedio,
+                                        color: StyleGlobals().tertiaryColor,
+                                      ),
                                     ),
                                   ),
+                                ],
+                              )));
+                        } else {
+                          detalhesEmpresasAdmStore.setCarregando(false);
+                          //NAO TEM INTERNET
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AlertDialog(
+                                title: Text('Você precisa estar Conectado para esta ação'),
+                                //backgroundColor: Colors.transparent,
+                                content: Icon(
+                                  Icons.signal_wifi_off,
+                                  color: Colors.red,
+                                  size: 60,
                                 ),
-                              ],
-                            )));
+
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      //await detalhesEmpresasAdmFunctions.deleteEmpresaAdm(jsonEmpresa['id']);
+                                    },
+                                    child: Text('OK',
+                                      style: TextStyle(
+                                        fontSize: StyleGlobals().sizeTextMedio,
+                                        color: StyleGlobals().tertiaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )));
+                        }
                       },
-                      child: Text('Confirmar',
-                        style: TextStyle(
-                          fontSize: StyleGlobals().sizeTextMedio,
-                          color: StyleGlobals().tertiaryColor,
-                        ),
+                      child: Observer(
+                        builder: (_){
+                          return detalhesEmpresasAdmStore.carregando ?
+                          SpinKitThreeBounce(
+                            color: StyleGlobals().primaryColor,
+                            size: StyleGlobals().sizeTitulo,
+                          )
+                              : Text('Confirmar',
+                            style: TextStyle(
+                              fontSize: StyleGlobals().sizeTextMedio,
+                              color: StyleGlobals().tertiaryColor,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

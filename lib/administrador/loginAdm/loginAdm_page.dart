@@ -28,7 +28,7 @@ class _LoginAdmPageState extends State<LoginAdmPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: loginAdmFunctions.scaffoldKey,
+      key: loginAdmFunctions.scaffoldKeyLoginAdm,
       body: loginAdmWidget.login(),
     );
   }

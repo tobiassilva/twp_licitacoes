@@ -15,6 +15,16 @@ abstract class _HomeAdmStore with Store {
     print(carregandoQtde);
   }
 
+
+  @observable
+  bool carregandoCategorias = true;
+
+  @action
+  void setCarregandoCategorias(value) {
+    carregandoCategorias = value;
+    print(carregandoCategorias);
+  }
+
   /*
   @observable
   bool carregandoQtdeEmpresas = true;

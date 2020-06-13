@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_store.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
 
+import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_store.dart';
 import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_functions.dart';
 import 'administrador/empresasAdm/empresasAdm_functions.dart';
+import 'administrador/homeAdm/HomeAdm_analytics.dart';
 import 'administrador/homeAdm/homeAdm_functions.dart';
 import 'administrador/loginAdm/loginAdm_functions.dart';
 import 'empresa/cadastro/Store/cadastro_store.dart';
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
         Provider<EmpresasAdmFunctions>(create: (_) => EmpresasAdmFunctions(context)),
         Provider<UpdateOrgaoFunctions>(create: (_) => UpdateOrgaoFunctions(context)),
         Provider<DetalhesEmpresasAdmFunctions>(create: (_) => DetalhesEmpresasAdmFunctions(context)),
+        Provider<DetalhesEmpresasAdmStore>(create: (_) => DetalhesEmpresasAdmStore()),
+        Provider<HomeAdmAnalytics>(create: (_) => HomeAdmAnalytics(context)),
       ],
       child: MaterialApp(
         title: 'TWP Licitações',

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/empresa/cadastro/cadastro_page.dart';
 
 import '../../../globals.dart';
 import '../cadastro_functions.dart';
@@ -129,14 +131,21 @@ class PagamentoWidget {
           return FlatButton(
             padding: EdgeInsets.all(0),
             onPressed: () async {
-              print('AAAAAAAAA: ${cadastroStore.listEstados}');
-              List value = List();
-              value.addAll(cadastroStore.listEstados);
-              print('AAAAAAAAA555555555555: ${value}');
-              cadastroFunctions.enviaDadosEmpresa(value);
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomePage())
-              );
+              if(!cadastroStore.carregandoEnvio){
+                cadastroStore.setCarregandoEnvio(true);
+                print('AAAAAAAAA: ${cadastroStore.listEstados}');
+
+                List value = List();
+                value.addAll(cadastroStore.listEstados);
+                print('AAAAAAAAA555555555555: ${value}');
+                await cadastroFunctions.enviaDadosEmpresa(value);
+                cadastroStore.setCarregandoEnvio(false);
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomePage())
+                );
+
+              }
+
             },
             child: Row(
               children: <Widget>[
@@ -157,7 +166,12 @@ class PagamentoWidget {
                                 )),
                           ]
                       ),
-                      child: Center(
+                      child: cadastroStore.carregandoEnvio ?
+                      SpinKitThreeBounce(
+                        color: StyleGlobals().secundaryColor,
+                        size: StyleGlobals().sizeTitulo,
+                      )
+                          : Center(
                         child: Text('PRÓXIMO',
                           style: TextStyle(
                               color: StyleGlobals().textColorSecundary,

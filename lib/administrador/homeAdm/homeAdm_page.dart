@@ -6,6 +6,7 @@ import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_widget.dart';
 
 import '../../globals.dart';
 import '../globalsAdm.dart' as globalsAdm;
+import 'HomeAdm_analytics.dart';
 import 'homeAdm_store.dart';
 
 class HomeAdmPage extends StatefulWidget {
@@ -17,21 +18,10 @@ class _HomeAdmPageState extends State<HomeAdmPage> {
 
   HomeAdmFunctions homeAdmFunctions;
   HomeAdmStore homeAdmStore;
+  HomeAdmAnalytics homeAdmAnalytics;
   bool _lerBanco = true;
   bool carregando = false;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    print('id: ${globalsAdm.id}');
-    print('nome ${globalsAdm.nome}');
-    print('login: ${globalsAdm.login}');
-
-    //_getDadosDB();
-
-  }
 
   @override
   void didChangeDependencies() {
@@ -40,9 +30,12 @@ class _HomeAdmPageState extends State<HomeAdmPage> {
 
     homeAdmFunctions = Provider.of<HomeAdmFunctions>(context);
     homeAdmStore = Provider.of<HomeAdmStore>(context);
+    homeAdmAnalytics = Provider.of<HomeAdmAnalytics>(context);
 
     if(_lerBanco){
+      _getAnalytics();
       _getDadosDB();
+      //homeAdmAnalytics.criaGrafico();
       _lerBanco = false;
     }
 
@@ -57,7 +50,13 @@ class _HomeAdmPageState extends State<HomeAdmPage> {
     setState(() {
       carregando = false;
     });
+  }
 
+  Future _getAnalytics() async {
+
+    homeAdmStore.setCarregandoCategorias(true);
+    await homeAdmAnalytics.criaGraficoEstados();
+    homeAdmStore.setCarregandoCategorias(false);
   }
 
 

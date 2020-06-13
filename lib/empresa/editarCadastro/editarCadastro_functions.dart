@@ -71,7 +71,7 @@ class EditarCadastroFunctions{
   String updateQueryEmpresa() {
     return """
     mutation MyMutation {
-      update_empresa(where: {id: {_eq: ${empresaUserFirebase['id_empresa']}}}, _set: {nome_empresa: "${nomeEmpresa.text}", nome_representante: "${nomeRepresentante.text}"}) {
+      update_empresa(where: {id: {_eq: ${empresaUserFirebase['id_empresa']}}}, _set: {nome_empresa: "${nomeEmpresa.text}", nome_representante: "${nomeRepresentante.text}", logradouro: "${logradouro.text}", numero: "${numero.text}", telefone: "${telefone.text}", cep: "${cep.text}", cidade: "${cidade.text}", cnpj: "${cnpj.text}", complemento: "${complemento.text}", email: "${email.text}", estado: "${estado.text}"}) {
         returning {
           id
           id_categoria
@@ -144,18 +144,6 @@ class EditarCadastroFunctions{
 
     print('FFFFFFF');
 
-    var mutations = r"""
-    mutation update_empresa($nome: String, $representante: String) {
-      update_empresa(where: {id: {_eq: 39}}, _set: {nome_empresa: $nome, nome_representante: $representante}) 
-        {
-          returning{
-            id
-          }
-        }
-      
-    }
-
-    """;
 
     var snapshot = await hasuraConnect.mutation(updateQueryEmpresa());
     /*var snapshot = await hasuraConnect.mutation(mutations, variables: {

@@ -54,72 +54,72 @@ class _HomePageState extends State<HomePage> {
     print(licitacoes["_links"]);
     print(licitacoes["_links"]["first"]);
 
-
-
   }
 
   @override
   Widget build(BuildContext context) {
     HomeWidget homeWidget = HomeWidget(context);
-    return SafeArea(
-      child: Scaffold(
-        key: homeFunctions.scaffoldKey,
+    return MaterialApp(
+      home: SafeArea(
+        child: Scaffold(
+          key: homeFunctions.scaffoldKey,
 
-        drawer: CustomDrawer(),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
+          drawer: CustomDrawer(),
+          body: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
 
-            homeWidget.barraTopo(),
+              homeWidget.barraTopo(),
 
-            SizedBox(
-              height: 15,
-            ),
-            /*Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 30),
-                  child: Text('AQUI VAI FICAR A DASHBOARD',
-                    style: TextStyle(color: Colors.blue, fontSize: 20,
-                        fontWeight: FontWeight.bold
+              SizedBox(
+                height: 15,
+              ),
+              /*Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 30),
+                    child: Text('AQUI VAI FICAR A DASHBOARD',
+                      style: TextStyle(color: Colors.blue, fontSize: 20,
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),*/
+                ],
+              ),*/
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                HomeWidget(context).botoesTopo('Órgãos', FontAwesomeIcons.landmark),
-                HomeWidget(context).botoesTopo('Licitações', FontAwesomeIcons.fileSignature),
-              ],
-            ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  HomeWidget(context).botoesTopo('Órgãos', FontAwesomeIcons.landmark),
+                  HomeWidget(context).botoesTopo('Licitações', FontAwesomeIcons.fileSignature),
+                ],
+              ),
 
 
-                /*ListView.builder(
-                    itemCount: licitacoes['_embedded']['licitacoes'].length,
-                    itemBuilder: (BuildContext cont, int index){
-                      return Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Text('$index - '),
-                              Flexible(
-                                  child: Text(
-                                      '${licitacoes['_embedded']['licitacoes'][index]['_links']['uasg']['title']}'
-                                  )
-                              )
-                            ],
-                          ),
-                          Divider(),
-                        ],
-                      );
-                    }
-                ),*/
+                  /*ListView.builder(
+                      itemCount: licitacoes['_embedded']['licitacoes'].length,
+                      itemBuilder: (BuildContext cont, int index){
+                        return Column(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Text('$index - '),
+                                Flexible(
+                                    child: Text(
+                                        '${licitacoes['_embedded']['licitacoes'][index]['_links']['uasg']['title']}'
+                                    )
+                                )
+                              ],
+                            ),
+                            Divider(),
+                          ],
+                        );
+                      }
+                  ),*/
 
-          ],
+            ],
+          ),
         ),
       ),
     );

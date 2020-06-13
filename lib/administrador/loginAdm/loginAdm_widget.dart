@@ -250,13 +250,13 @@ class LoginAdmWidget {
               await loginAdmFunctions.logarAdm(context).then((value){
 
               }).catchError((e){
-                loginAdmFunctions.scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Usuário não encontrado :(')));
+                loginAdmFunctions.scaffoldKeyLoginAdm.currentState.showSnackBar(SnackBar(content: Text('Usuário não encontrado :(')));
               });
             } else {
-              loginAdmFunctions.scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Ops! Não esqueça da senha')));
+              loginAdmFunctions.scaffoldKeyLoginAdm.currentState.showSnackBar(SnackBar(content: Text('Ops! Não esqueça da senha')));
             }
           } else {
-            loginAdmFunctions.scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Ops! Esse email não é válido')));
+            loginAdmFunctions.scaffoldKeyLoginAdm.currentState.showSnackBar(SnackBar(content: Text('Ops! Esse email não é válido')));
           }
           loginAdmStore.setCarregando();
         }

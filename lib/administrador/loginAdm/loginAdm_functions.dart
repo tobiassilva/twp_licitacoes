@@ -13,7 +13,7 @@ class LoginAdmFunctions {
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
   // Variáveis
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKeyLoginAdm = new GlobalKey<ScaffoldState>();
   final usuario = TextEditingController();
   final senha = TextEditingController();
   List listLoginsBanco = List();
@@ -75,12 +75,12 @@ class LoginAdmFunctions {
 
 
     } else {
-      scaffoldKey.currentState
+      scaffoldKeyLoginAdm.currentState
           .showSnackBar(SnackBar(content: Text('Sem conexão com a internet!')));
 
       return;
     }
-    scaffoldKey.currentState
+    scaffoldKeyLoginAdm.currentState
         .showSnackBar(SnackBar(content: Text('Login Inválido!')));
 
     return;

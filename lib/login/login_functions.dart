@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:twp_licitacoes/empresa/cadastro/cadastro_page.dart';
 
 import 'package:twp_licitacoes/home/home.dart';
+import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_functions.dart';
 
 import 'login_store.dart';
 
@@ -15,10 +16,11 @@ class LoginFunctions {
   LoginFunctions(context);
 
   //Variáveis
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   //final GoogleSignIn _googleSignIn = GoogleSignIn();
   //static final FacebookLogin facebookSignIn = new FacebookLogin();
+  int empresa_id;
 
   //Login
   final formKeyLogin = GlobalKey<FormState>();
@@ -42,6 +44,17 @@ class LoginFunctions {
     }
   }
 
+  String queryEmpresa(idEmpresa){
+    return """
+    query MyQuery {
+      empresa(where: {id: {_eq: $idEmpresa}}) {
+        id
+        email
+      }
+    }
+""";
+  }
+
 
   /// LOGAR COM EMAIL E SENHA
   ///
@@ -50,6 +63,7 @@ class LoginFunctions {
     //final loginStore = Provider.of<LoginStore>(context);
 
     bool cs = await result();
+    var snapshot;
     var up;
 
     print('conexao: $cs');
@@ -74,8 +88,12 @@ class LoginFunctions {
       await notesReference.once().then((DataSnapshot snapshot){
         if(snapshot.value != null){
           up = snapshot.value['up'];
+          empresa_id = snapshot.value['id_empresa'];
         }
       });
+
+      snapshot = await hasuraConnect.query(queryEmpresa(empresa_id));
+
 
     } else {
       scaffoldKey.currentState
@@ -92,7 +110,7 @@ class LoginFunctions {
     //CadastroFunctions.getDadosBanco();
 
     if(up == 0){
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         new MaterialPageRoute(
           builder: (context) => new CadastroPage(),
@@ -100,13 +118,24 @@ class LoginFunctions {
         ),
       );
     } else {
-      Navigator.pushReplacement(
-        context,
-        new MaterialPageRoute(
-          builder: (context) => new HomePage(),
-          settings: RouteSettings(name: 'Home'),
-        ),
-      );
+      if(snapshot['data']['empresa'].length == 0){
+
+        Navigator.push(
+          context,
+          new MaterialPageRoute(
+            builder: (context) => new CadastroPage(),
+            settings: RouteSettings(name: 'Cadastro'),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          new MaterialPageRoute(
+            builder: (context) => new HomePage(),
+            settings: RouteSettings(name: 'Home'),
+          ),
+        );
+      }
     }
 
 
@@ -153,7 +182,7 @@ class LoginFunctions {
 
     //loginStore.setCarregando(); //false
 
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       new MaterialPageRoute(
         builder: (context) => new CadastroPage(),
