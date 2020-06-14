@@ -21,11 +21,11 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var jsonOrgaos;
   var jsonEstados;
-  bool carregando = false;
+  bool carregando = true;
+  bool leuBanco = true;
 
   Future carregaDados() async {
     //var jsonInformacoes = await requisicoes().carregaInfos();
-
     var jsonAux1 = await requisicoes().getDadosTiposOrgaos();
     var jsonAux2 = await requisicoes().getDadosEstados();
     setState(() {
@@ -34,6 +34,14 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
     });
     print("BBBBBBB: $jsonAux1");
     print("CCCCCCC: $jsonAux2");
+  }
+
+   Future carregandoCampos() async {
+    await carregaDados();
+
+    setState(() {
+      carregando = false;
+    });
   }
 
   int idTipoOrgao;
@@ -50,9 +58,21 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
     });
   }
 
+  
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+
+    if (leuBanco) {
+      leuBanco = false;
+      carregandoCampos();
+    }
+  }
+
+
   @override
   void initState() {
-    carregaDados();
     idTipoOrgao = 0;
     idEstados = 0;
 

@@ -1,7 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
-import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_functions.dart';
+
 
 HasuraConnect hasuraConnect =
     HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');

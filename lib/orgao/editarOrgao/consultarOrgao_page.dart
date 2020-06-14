@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/orgao/EditarOrgao/EditarOrgao_page.dart';
-import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_functions.dart';
+
+import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_page.dart';
 import 'package:twp_licitacoes/orgao/editarOrgao/editarOrgao_functions.dart';
 
 import '../../globals.dart';
@@ -84,14 +86,31 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
         key: _scaffoldKey,
         appBar: AppBar(
           backgroundColor: StyleGlobals().primaryColor,
-          title: Text(
-            "Consultar Orgãos",
-            style: TextStyle(color: StyleGlobals().textColorSecundary),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                "Consultar Orgãos",
+                style: TextStyle(color: StyleGlobals().textColorSecundary),
+              ),
+              GestureDetector(
+                child: Icon(
+                    FontAwesomeIcons.plus, 
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) => CadastroOrgaoPage()));
+                  },
+              )
+            ],
           ),
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: StyleGlobals().colorGradiente,
             ),
+            
           ),
           iconTheme: IconThemeData(
             color: StyleGlobals().secundaryColor,

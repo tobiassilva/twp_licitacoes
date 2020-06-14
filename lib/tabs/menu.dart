@@ -4,7 +4,6 @@ import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/cadastrarAtiv
 import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/consultarAtividade_page.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_page.dart';
 import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_page.dart';
-import 'package:twp_licitacoes/orgao/editarOrgao/consultarOrgao_page.dart';
 import 'package:twp_licitacoes/login/login_page.dart';
 
 import '../globals.dart';
@@ -42,16 +41,16 @@ class CustomDrawer extends StatelessWidget {
             Divider(
               color: Colors.transparent,
             ),
-            _botoesMenuPush(FontAwesomeIcons.plus, "Cadastrar Orgão",
+            /*_botoesMenuPush(FontAwesomeIcons.plus, "Cadastrar Orgão",
                 CadastroOrgaoPage(), context),
+            SizedBox(
+              height: 5,
+            ),*/
+            _botoesMenuPush(FontAwesomeIcons.plus, "Cadastrar Atividade", CadastrarAtividadePage(), context),
             SizedBox(
               height: 5,
             ),
             _botoesMenuPush(FontAwesomeIcons.search, "Consultar Atividades", ConsultarAtividades(), context),
-            SizedBox(
-              height: 5,
-            ),
-            _botoesMenuPush(FontAwesomeIcons.plus, "Cadastrar Atividade", CadastrarAtividadePage(), context),
             SizedBox(
               height: 5,
             ),
