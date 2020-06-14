@@ -6,7 +6,7 @@ HasuraConnect hasuraConnect =
 
 class requisicoesAtividades {
   var jsonAtividades;
-  var jsonSegmento;
+  //var jsonSegmento;
   var jsonInfosAtividades;
 
   bool tipoConexao = true; // false =  tem internet, true = sem internet
@@ -61,7 +61,10 @@ class requisicoesAtividades {
     await carregaDadosAtividades();
     return jsonInfosAtividades;
   }
-
+  Future recebeDadosAtividades() async {
+      await getDadosAtividades();
+      
+    }
   Future enviarFormularioAtividades(nome) async {
     var resultadoConexao = await resultadoInternet();
     if (resultadoConexao == false) {

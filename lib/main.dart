@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/editarAtividade_functions.dart';
 import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_store.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         Provider<HomeAdmStore>(create: (_) => HomeAdmStore()),
         Provider<EmpresasAdmFunctions>(create: (_) => EmpresasAdmFunctions(context)),
         Provider<UpdateOrgaoFunctions>(create: (_) => UpdateOrgaoFunctions(context)),
+        Provider<UpdateAtividadesFunctions>(create: (_) => UpdateAtividadesFunctions(context)),
         Provider<DetalhesEmpresasAdmFunctions>(create: (_) => DetalhesEmpresasAdmFunctions(context)),
         Provider<DetalhesEmpresasAdmStore>(create: (_) => DetalhesEmpresasAdmStore()),
         Provider<HomeAdmAnalytics>(create: (_) => HomeAdmAnalytics(context)),
