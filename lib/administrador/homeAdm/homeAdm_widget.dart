@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:twp_licitacoes/administrador/empresasAdm/empresasAdm_page.dart';
 import 'package:twp_licitacoes/home/home.dart';
+import 'package:twp_licitacoes/orgao/editarOrgao/consultarOrgao_page.dart';
 
 import '../../globals.dart';
 import 'HomeAdm_analytics.dart';
@@ -200,10 +201,10 @@ class HomeAdmWidget {
                         ],
                       )));
                 } else {
-                  /*Navigator.of(context).push(
+                  Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          EmpresasAdmPage()));*/
+                          ConsultarOrgaoPage()));
                 }
               },
               child: _cardOpcoes(
@@ -250,7 +251,7 @@ class HomeAdmWidget {
                   /*Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          EmpresasAdmPage()));*/
+                          ConsultarOrgaoPage()));*/
                 }
               },
               child: _cardOpcoes(

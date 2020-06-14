@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/cadastrarAtividade/cadastrarAtividade_page.dart';
+import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/consultarAtividade_page.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_page.dart';
 import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_page.dart';
 import 'package:twp_licitacoes/orgao/editarOrgao/consultarOrgao_page.dart';
@@ -46,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            _botoesMenuPush(FontAwesomeIcons.search, "Consultar Orgãos", ConsultarOrgaoPage(), context),
+            _botoesMenuPush(FontAwesomeIcons.search, "Consultar Atividades", ConsultarAtividades(), context),
             SizedBox(
               height: 5,
             ),
@@ -186,4 +187,7 @@ class CustomDrawer extends StatelessWidget {
       ),
     );
   }*/
+}
+
+class ConsultarAtividadesPage {
 }
