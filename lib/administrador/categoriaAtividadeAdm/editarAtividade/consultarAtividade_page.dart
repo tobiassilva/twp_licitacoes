@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/cadastrarAtividade/cadastrarAtividade_functions.dart';
 import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/editarAtividade_functions.dart';
+import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/editarAtividade_page.dart';
 import 'package:twp_licitacoes/globals.dart';
 
 
@@ -63,10 +63,10 @@ GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                       itemBuilder: (_, index) {
                         return GestureDetector(
                           onTap: () {
-                            /*Navigator.of(context).push(MaterialPageRoute(
+                            Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    EditarOrgaoPage(editarOrgaoFunctions
-                                        .jsonOrgao['data']['orgao'][index])));*/
+                                    EditarAtividadesPage(editarAtividadesFunctions
+                                        .jsonAtividades['data']['categorias_de_atividades'][index])));
                           },
                           child: Container(
                             decoration: BoxDecoration(
