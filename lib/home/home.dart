@@ -96,6 +96,8 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
 
+          HomeWidget(context).botoes(),
+
 
                   /*ListView.builder(
                       itemCount: licitacoes['_embedded']['licitacoes'].length,

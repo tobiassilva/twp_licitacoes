@@ -304,12 +304,12 @@ class HomeAdmWidget {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 20.0,
+                        color: Colors.black12,
+                        blurRadius: 10.0,
                         spreadRadius: 2.0,
                         offset: Offset(
-                          2.0,
-                          2.0,
+                          1.0,
+                          1.0,
                         )),
                   ]),
             ),
