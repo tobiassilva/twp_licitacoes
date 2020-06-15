@@ -9,10 +9,6 @@ import 'package:twp_licitacoes/orgao/editarOrgao/editarOrgao_functions.dart';
 
 import '../../administrador/homeAdm/homeAdm_page.dart';
 import '../../globals.dart';
-import '../../globals.dart';
-import '../../globals.dart';
-import '../../globals.dart';
-import '../../globals.dart';
 
 class ConsultarOrgaoPage extends StatefulWidget {
   @override
@@ -36,7 +32,7 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
+    
     super.didChangeDependencies();
 
     editarOrgaoFunctions = Provider.of<UpdateOrgaoFunctions>(context);

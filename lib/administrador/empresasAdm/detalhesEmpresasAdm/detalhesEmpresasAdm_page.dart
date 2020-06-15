@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_functions.dart';
 
 import 'detalhesEmpresasAdm_functions.dart';
 import 'detalhesEmpresasAdm_widget.dart';

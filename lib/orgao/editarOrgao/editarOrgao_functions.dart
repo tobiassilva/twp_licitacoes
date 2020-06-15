@@ -18,9 +18,11 @@ class UpdateOrgaoFunctions {
   //Editar Orgaos
   var id;
   final nomeOrgao = TextEditingController();
+  var idTipo;
   final cnpj = TextEditingController();
   final email = TextEditingController();
   final telefone = TextEditingController();
+  var idEstado;
   final cep = TextEditingController();
   final cidade = TextEditingController();
   final endereco = TextEditingController();
@@ -88,9 +90,11 @@ subscription {
     print("TEM QUE APARECER AQUI: $jsonEscolhido");
     id = jsonEscolhido['id'];
     nomeOrgao.text = jsonEscolhido['nome'];
+    idTipo = jsonEscolhido['id_tipo_orgao'];
     cnpj.text = jsonEscolhido['cnpj'];
     email.text = jsonEscolhido['email'];
     telefone.text = jsonEscolhido['telefone'];
+    idEstado = jsonEscolhido['id_estados'];
     cep.text = jsonEscolhido['cep'];
     cidade.text = jsonEscolhido['cidade'];
     endereco.text = jsonEscolhido['endereco'];
