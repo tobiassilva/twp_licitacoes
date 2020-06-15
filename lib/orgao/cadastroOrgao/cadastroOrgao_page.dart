@@ -274,7 +274,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                                       hintStyle: TextStyle(
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    keyboardType: TextInputType.multiline,
+                                    keyboardType: TextInputType.emailAddress,
                                     maxLines: 20,
                                   ),
                                 ),
@@ -305,7 +305,7 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                                       hintStyle: TextStyle(
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    keyboardType: TextInputType.multiline,
+                                    keyboardType: TextInputType.phone,
                                     maxLines: 20,
                                   ),
                                 ),
@@ -514,6 +514,11 @@ class _CadastroOrgaoPageState extends State<CadastroOrgaoPage> {
                                         setState(() {
                                           carregando = false;
                                         });
+
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          ConsultarOrgaoPage()));
+
                                       } else {
                                         _scaffoldKey.currentState
                                             .showSnackBar(SnackBar(
