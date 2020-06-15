@@ -6,7 +6,7 @@ var url;
 HasuraConnect hasuraConnect =
 HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-class requisicoes{
+class Requisicoes{
 
   var jsonTipoOrgao;
   var jsonEstado;
@@ -72,7 +72,7 @@ subscription {
     }
   }
 
-  void buscaArmazenaTiposOrgaos() {
+  Future buscaArmazenaTiposOrgaos() async {
     var snapshot = hasuraConnect.subscription(subscriptionTipoOrgao);
     snapshot.listen((data) {
       print("TipoOrgao: $data");
@@ -93,7 +93,7 @@ subscription {
     
   }
 
- void buscaArmazenaEstados() {
+ Future buscaArmazenaEstados() async{
     var snapshot2 = hasuraConnect.subscription(subscriptionEstado);
     snapshot2.listen((data) {
       print("Estado: $data");
@@ -123,7 +123,7 @@ subscription {
   }
 
    Future carregaInfos() async{
-    await requisicoes().carregaDados();
+    await Requisicoes().carregaDados();
 
     return jsonInfos;
     
@@ -134,7 +134,7 @@ new GlobalKey<ScaffoldState>();
 
   Future enviarFormulario(nome,  tipo, cnpj, email, telefone, cep,  estado, cidade, endereco ) async {
 
-    var resultadoConexao = await requisicoes().resultadoInternet();
+    var resultadoConexao = await Requisicoes().resultadoInternet();
     if (resultadoConexao == false) {
 
       var data = await hasuraConnect.mutation(queryOrgao(nome, tipo, cnpj, email, telefone, cep, estado, cidade, endereco));

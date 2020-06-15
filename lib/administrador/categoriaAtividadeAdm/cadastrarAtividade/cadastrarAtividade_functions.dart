@@ -4,7 +4,7 @@ import 'package:hasura_connect/hasura_connect.dart';
 HasuraConnect hasuraConnect =
     HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-class requisicoesAtividades {
+class RequisicoesAtividades {
   var jsonAtividades;
   //var jsonSegmento;
   var jsonInfosAtividades;
@@ -32,7 +32,7 @@ class requisicoesAtividades {
     }
   }
 
-  void buscaArmazenaAtividades() {
+  Future buscaArmazenaAtividades() async{
     var snapshot = hasuraConnect.subscription(subscriptionAtividades);
     snapshot.listen((data) {
       print("Atividade: $data");

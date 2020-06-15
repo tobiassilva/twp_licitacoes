@@ -7,6 +7,11 @@ import 'package:twp_licitacoes/orgao/EditarOrgao/EditarOrgao_page.dart';
 import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_page.dart';
 import 'package:twp_licitacoes/orgao/editarOrgao/editarOrgao_functions.dart';
 
+import '../../administrador/homeAdm/homeAdm_page.dart';
+import '../../globals.dart';
+import '../../globals.dart';
+import '../../globals.dart';
+import '../../globals.dart';
 import '../../globals.dart';
 
 class ConsultarOrgaoPage extends StatefulWidget {
@@ -82,9 +87,147 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
+      home: SafeArea(
+        child: Scaffold(
+          key: _scaffoldKey,
+          body: carregando
+              ? SpinKitThreeBounce(
+                  color: StyleGlobals().primaryColor,
+                  size: StyleGlobals().sizeTitulo,
+                )
+              : Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: 75,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                              child: GestureDetector(
+                                child: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: StyleGlobals().sizeTitulo,
+                                  color: StyleGlobals().primaryColor,
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          HomeAdmPage()));
+                                },
+                              ),
+                            ),
+                            Text(
+                              "Consultar Orgãos",
+                              style: TextStyle(
+                                  fontSize: StyleGlobals().sizeTitulo,
+                                  color: StyleGlobals().textColorForte),
+                            ),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                              child: GestureDetector(
+                                child: Icon(
+                                  FontAwesomeIcons.plus,
+                                  size: StyleGlobals().sizeTitulo,
+                                  color: StyleGlobals().primaryColor,
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          CadastroOrgaoPage()));
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: ListView.builder(
+                              physics: ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: editarOrgaoFunctions
+                                  .jsonOrgao['data']['orgao'].length,
+                              itemBuilder: (_, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                EditarOrgaoPage(
+                                                    editarOrgaoFunctions
+                                                            .jsonOrgao['data']
+                                                        ['orgao'][index])));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black26,
+                                              blurRadius: 5,
+                                              spreadRadius: 2,
+                                              offset: Offset(
+                                                5,
+                                                5,
+                                              )),
+                                        ]),
+                                    margin: EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 0,
+                                        left: 20,
+                                        right: 10),
+                                    padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
+                                    child: Container(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Flexible(
+                                            child: Text(
+                                              "${editarOrgaoFunctions.jsonOrgao['data']['orgao'][index]['nome']}",
+                                              maxLines: 1,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                color: StyleGlobals()
+                                                    .textColorForte,
+                                                fontSize: StyleGlobals()
+                                                    .sizeTextMedio,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            "...",
+                                            style: TextStyle(
+                                                color:
+                                                    StyleGlobals().primaryColor,
+                                                fontSize: StyleGlobals()
+                                                    .sizeTextMedio),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+/*appBar: AppBar(
           backgroundColor: StyleGlobals().primaryColor,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,17 +236,7 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
                 "Consultar Orgãos",
                 style: TextStyle(color: StyleGlobals().textColorSecundary),
               ),
-              GestureDetector(
-                child: Icon(
-                    FontAwesomeIcons.plus, 
-                    size: 20,
-                    color: Colors.white,
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) => CadastroOrgaoPage()));
-                  },
-              )
+              
             ],
           ),
           flexibleSpace: Container(
@@ -116,79 +249,4 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
             color: StyleGlobals().secundaryColor,
           ),
           centerTitle: true,
-        ),
-        body: carregando
-            ? SpinKitThreeBounce(
-                color: StyleGlobals().primaryColor,
-                size: StyleGlobals().sizeTitulo,
-              )
-            : Container(
-                height: MediaQuery.of(context).size.height,
-                child: SingleChildScrollView(
-                  child: ListView.builder(
-                      physics: ScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: editarOrgaoFunctions
-                          .jsonOrgao['data']['orgao'].length,
-                      itemBuilder: (_, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    EditarOrgaoPage(editarOrgaoFunctions
-                                        .jsonOrgao['data']['orgao'][index])));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 5,
-                                      spreadRadius: 2,
-                                      offset: Offset(
-                                        5,
-                                        5,
-                                      )),
-                                ]),
-                            margin: EdgeInsets.only(
-                                top: 10, bottom: 0, left: 20, right: 10),
-                            padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Text(
-                                      "${editarOrgaoFunctions.jsonOrgao['data']['orgao'][index]['nome']}",
-                                      maxLines: 1,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: StyleGlobals().textColorForte,
-                                        fontSize: StyleGlobals().sizeTextMedio,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "...",
-                                    style: TextStyle(
-                                        color: StyleGlobals().primaryColor,
-                                        fontSize: StyleGlobals().sizeTextMedio),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                ),
-              ),
-      ),
-    );
-  }
-}
+        ),*/
