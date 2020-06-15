@@ -15,11 +15,13 @@ class UpdateAtividadesFunctions {
   bool tipoConexao = true; // false =  sem internet, true = tem internet
 
   //Editar Orgaos
+  var id;
   final nomeAtividade = TextEditingController();
 
   String subscriptionAtividades = """
 subscription MySubscription {
   categorias_de_atividades {
+    id
     nome
   }
 }
@@ -49,7 +51,7 @@ subscription MySubscription {
     }
   }
 
-  void buscaArmazenaAtividades() {
+  Future buscaArmazenaAtividades() async{
     var snapshot = hasuraConnect.subscription(subscriptionAtividades);
     snapshot.listen((data) {
       print("ATIVIDADE UPDATE: $data");
@@ -60,6 +62,7 @@ subscription MySubscription {
   Future atualizaControladores(jsonEscolhido) async {
     //await getDadosOrgaos();
     print("TEM QUE APARECER AQUI ATIVIDADE: $jsonEscolhido");
+    id = jsonEscolhido['id'];
     nomeAtividade.text = jsonEscolhido['nome'];
   }
 

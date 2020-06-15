@@ -46,10 +46,10 @@ class CustomDrawer extends StatelessWidget {
             SizedBox(
               height: 5,
             ),*/
-            _botoesMenuPush(FontAwesomeIcons.plus, "Cadastrar Atividade", CadastrarAtividadePage(), context),
+            /*_botoesMenuPush(FontAwesomeIcons.plus, "Cadastrar Atividade", CadastrarAtividadePage(), context),
             SizedBox(
               height: 5,
-            ),
+            ),*/
             _botoesMenuPush(FontAwesomeIcons.search, "Consultar Atividades", ConsultarAtividades(), context),
             SizedBox(
               height: 5,

@@ -16,6 +16,7 @@ class UpdateOrgaoFunctions {
   bool tipoConexao = true; // false =  sem internet, true = tem internet
 
   //Editar Orgaos
+  var id;
   final nomeOrgao = TextEditingController();
   final cnpj = TextEditingController();
   final email = TextEditingController();
@@ -74,7 +75,7 @@ subscription {
     }
   }
 
-  void buscaArmazenaOrgaos() {
+  Future buscaArmazenaOrgaos() async {
     var snapshot = hasuraConnect.subscription(subscriptionOrgao);
     snapshot.listen((data) {
       print("Orgao: $data");
@@ -85,6 +86,7 @@ subscription {
   Future atualizaControladores(jsonEscolhido) async {
     //await getDadosOrgaos();
     print("TEM QUE APARECER AQUI: $jsonEscolhido");
+    id = jsonEscolhido['id'];
     nomeOrgao.text = jsonEscolhido['nome'];
     cnpj.text = jsonEscolhido['cnpj'];
     email.text = jsonEscolhido['email'];
