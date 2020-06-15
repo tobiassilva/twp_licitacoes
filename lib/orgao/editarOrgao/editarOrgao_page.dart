@@ -36,11 +36,44 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
   bool carregando = true;
   bool leuBanco = true;
 
-   
+  var jsonOrgaos;
+  var jsonEstados;
+
+   Future carregaDados() async {
+    //var jsonInformacoes = await requisicoes().carregaInfos();
+    var jsonAux1 = await Requisicoes().getDadosTiposOrgaos();
+    var jsonAux2 = await Requisicoes().getDadosEstados();
+    setState(() {
+      jsonOrgaos = jsonAux1;
+      jsonEstados = jsonAux2;
+    });
+    print("BBBBBBB: $jsonAux1");
+    print("CCCCCCC: $jsonAux2");
+  }
+
+  Future carregandoCampos() async {
+    await carregaDados();
+
+    setState(() {
+      carregando = false;
+    });
+  }
+
+ setSelectedRadio(int val) {
+    setState(() {
+      editarOrgaoFunctions.idTipo = val;
+    });
+  } 
+
+  setSelectedRadioEstados(int val) {
+    setState(() {
+      editarOrgaoFunctions.idEstado = val;
+    });
+  }
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
+    
     super.didChangeDependencies();
 
     editarOrgaoFunctions = Provider.of<UpdateOrgaoFunctions>(context);
@@ -57,7 +90,13 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
       carregando = false;
     });
   }
-
+@override
+  void initState() {
+    /*editarOrgaoFunctions.idTipo;
+    editarOrgaoFunctions.idEstado;*/
+    carregandoCampos();
+    super.initState();
+  }
   
  
   @override
@@ -162,31 +201,35 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                                   top: 10, bottom: 0, left: 20, right: 10),
                               padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
                               child: Container(
-                                  /*child: ListView.builder(
+                                  child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: jsonOrgao['data']['tipo_orgao'].length,
+                                itemCount: jsonOrgaos['data']
+                                              ['tipo_orgao']
+                                          .length,
                                 itemBuilder: (BuildContext contex, index) {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Text(
-                                        "${jsonOrgao['data']['tipo_orgao'][index]['nome']}",
+                                        "${jsonOrgaos['data']['tipo_orgao'][index]['nome']}",
                                         style:TextStyle( 
                                           color: StyleGlobals().textColorForte,
                                         ),
                                       ),
                                   
                                       Radio(
-                                          value: jsonOrgao['id_tipo_orgao'],
+                                          value: jsonOrgaos['data']
+                                                    ['tipo_orgao'][index]['id'],
                                           activeColor: Colors.blue,
+                                          groupValue: editarOrgaoFunctions.idTipo,
                                           onChanged: (val) {
                                             print("Radio $val");
                                             //setSelectedRadio(val);
                                           }),
                                     ],
                                   );
-                                }),*/
+                                }),
                                   ),
                             ),
                             Container(
@@ -331,7 +374,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                                   top: 10, bottom: 0, left: 20, right: 10),
                               padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
                               child: Container(
-                                  /*child: ListView.builder(
+                                  child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: jsonEstados['data']['estados'].length,
@@ -348,15 +391,15 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                                   
                                       Radio(
                                           value: jsonEstados['data']['estados'][index]['id'],
-                                          groupValue: idEstados,
+                                          groupValue: editarOrgaoFunctions.idEstado,
                                           activeColor: Colors.blue,
                                           onChanged: (val) {
                                             print("Radio $val");
-                                            setSelectedRadioEstados(val);
+                                            //setSelectedRadioEstados(val);
                                           }),
                                     ],
                                   );
-                                }),*/
+                                }),
                                   ),
                             ),
                             Container(

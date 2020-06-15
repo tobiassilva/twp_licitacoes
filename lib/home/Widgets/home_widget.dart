@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hasura_connect/hasura_connect.dart';
 import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/empresa/editarCadastro/editarCadastro_page.dart';
 

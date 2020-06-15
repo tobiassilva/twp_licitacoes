@@ -18,7 +18,6 @@ class _CadastrarAtividadePageState extends State<CadastrarAtividadePage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

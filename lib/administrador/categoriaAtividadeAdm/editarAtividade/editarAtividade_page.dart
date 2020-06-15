@@ -28,7 +28,6 @@ class _EditarAtividadesPageState extends State<EditarAtividadesPage> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     editarAtividadesFunctions = Provider.of<UpdateAtividadesFunctions>(context);
