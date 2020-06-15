@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/cadastrarAtividade/cadastrarAtividade_page.dart';
 import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/consultarAtividade_page.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_page.dart';
-import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_page.dart';
 import 'package:twp_licitacoes/login/login_page.dart';
 
 import '../globals.dart';

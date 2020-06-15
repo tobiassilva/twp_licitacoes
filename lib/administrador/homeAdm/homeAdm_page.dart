@@ -47,6 +47,7 @@ class _HomeAdmPageState extends State<HomeAdmPage> {
     await homeAdmFunctions.getDadosBanco();
     homeAdmStore.setCarregandoQtde(false);
 
+    if(!mounted) return false; 
     setState(() {
       carregando = false;
     });
