@@ -80,7 +80,6 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
   void initState() {
     idTipoOrgao = 1;
     idEstados = 1;
-
     super.initState();
   }
 

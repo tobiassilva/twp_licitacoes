@@ -36,6 +36,8 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
   bool carregando = true;
   bool leuBanco = true;
 
+   
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -45,17 +47,19 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
     if (leuBanco) {
       leuBanco = false;
       atualizaControllers();
+      
     }
   }
 
   Future atualizaControllers() async {
     await editarOrgaoFunctions.atualizaControladores(jsonOrgaoEsc);
-
     setState(() {
       carregando = false;
     });
   }
 
+  
+ 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -443,7 +447,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                                         ),
                                       ),
                                       Icon(
-                                        FontAwesomeIcons.check,
+                                        FontAwesomeIcons.wrench,
                                         size: 20,
                                         color:
                                             StyleGlobals().textColorSecundary,
