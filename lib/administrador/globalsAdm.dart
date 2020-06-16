@@ -11,6 +11,9 @@ List dbEmpresas = List();
 List dbLicitacoes = List();
 List dbOrgaos = List();
 List dbEstados = List();
+
+
+List dbLicitacoesFiltro = List();
 /*
 class UsuarioGlobals {
 

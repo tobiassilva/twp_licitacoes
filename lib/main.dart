@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/editarAtividade_functions.dart';
 import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_store.dart';
+import 'package:twp_licitacoes/administrador/licitacaoAdm/cadastroLicitacao/cadastroLicitacaoAdm_store.dart';
+import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/consultarLicitacaoAdm_store.dart';
+import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/detalhesLicitacaoAdm/detalhesLicitacaoAdm_store.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
 
 import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_store.dart';
@@ -9,6 +12,8 @@ import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_functi
 import 'administrador/empresasAdm/empresasAdm_functions.dart';
 import 'administrador/homeAdm/HomeAdm_analytics.dart';
 import 'administrador/homeAdm/homeAdm_functions.dart';
+import 'administrador/licitacaoAdm/cadastroLicitacao/cadastroLicitacaoAdm_functions.dart';
+import 'administrador/licitacaoAdm/consultarLicitacao/detalhesLicitacaoAdm/detalhesLicitacaoAdm_functions.dart';
 import 'administrador/loginAdm/loginAdm_functions.dart';
 import 'empresa/cadastro/Store/cadastro_store.dart';
 import 'empresa/cadastro/cadastro_functions.dart';
@@ -19,6 +24,7 @@ import 'login/login_functions.dart';
 import 'login/login_page.dart';
 import 'login/login_store.dart';
 import 'orgao/editarOrgao/editarOrgao_functions.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,6 +51,11 @@ class MyApp extends StatelessWidget {
         Provider<DetalhesEmpresasAdmFunctions>(create: (_) => DetalhesEmpresasAdmFunctions(context)),
         Provider<DetalhesEmpresasAdmStore>(create: (_) => DetalhesEmpresasAdmStore()),
         Provider<HomeAdmAnalytics>(create: (_) => HomeAdmAnalytics(context)),
+        Provider<DetalhesLicitacaoAdmFunctions>(create: (_) => DetalhesLicitacaoAdmFunctions(context)),
+        Provider<DetalhesLicitacaoAdmStore>(create: (_) => DetalhesLicitacaoAdmStore()),
+        Provider<CadastroLicitacaoAdmFunctions>(create: (_) => CadastroLicitacaoAdmFunctions(context)),
+        Provider<CadastroLicitacaoAdmStore>(create: (_) => CadastroLicitacaoAdmStore()),
+        Provider<ConsultarLicitacaoAdmStore>(create: (_) => ConsultarLicitacaoAdmStore()),
       ],
       child: MaterialApp(
         title: 'TWP Licitações',
@@ -52,6 +63,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: LoginPage(),//MyHomePage(title: 'Flutter Demo Home Page'),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('pt'),
+        ],
       ),
     );
   }
