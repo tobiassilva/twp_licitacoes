@@ -154,6 +154,7 @@ class HomeAdmFunctions {
 
     print(snapshotLic);
     globalsAdm.dbLicitacoes.addAll(snapshotLic['data']['licitacoes']);
+    globalsAdm.dbLicitacoesFiltro.addAll(snapshotLic['data']['licitacoes']);
 
     print('ORGAOS');
     var snapshotOrg = await _hasuraConnect.query(queryOrgaos);

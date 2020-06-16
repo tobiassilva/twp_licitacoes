@@ -5,6 +5,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:twp_licitacoes/administrador/empresasAdm/empresasAdm_page.dart';
+import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/consultarLicitacaoAdm_page.dart';
 import 'package:twp_licitacoes/home/home.dart';
 import 'package:twp_licitacoes/orgao/editarOrgao/consultarOrgao_page.dart';
 
@@ -154,10 +155,10 @@ class HomeAdmWidget {
                         ],
                       )));
                 } else {
-                  /*Navigator.of(context).push(
+                  Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          EmpresasAdmPage()));*/
+                          ConsultarLicitacaoAdmPage()));
                 }
               },
               child: _cardOpcoes(

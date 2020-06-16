@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/administrador/homeAdm/homeAdm_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../globals.dart';
 import 'detalhesEmpresasAdm_store.dart';
@@ -235,13 +236,16 @@ class DetalhesEmpresasAdmWidget {
         _informacaoDado('Complemento:', jsonEmpresa['complemento']),
         _informacaoDado('Cidade:', jsonEmpresa['cidade']),
         _informacaoDado('Estado:', jsonEmpresa['estado']),
+
+        jsonEmpresa['telefone'] != null && jsonEmpresa['telefone'] != ''
+        ? _ligar(jsonEmpresa['telefone']) : Container(),
       ],
     );
   }
 
   Widget _informacaoDado(text, value){
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 7, 0, 7),
+      margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -256,19 +260,69 @@ class DetalhesEmpresasAdmWidget {
               textAlign: TextAlign.left,
             ),
           ),
-          Text(
-            '${ value == '' ? 'Não Informado' : value}',
-            style: TextStyle(
-              fontSize: StyleGlobals().sizeTextMedio,
-              color: StyleGlobals().textColorForte,
-              //fontWeight: FontWeight.bold
+
+          SizedBox(
+            width: 5,
+          ),
+          Flexible(
+            child: Text(
+              '${ value == '' || value == null || value == 'null' ? 'Não Informado' : value}',
+              style: TextStyle(
+                fontSize: StyleGlobals().sizeTextMedio,
+                color: StyleGlobals().textColorForte,
+                //fontWeight: FontWeight.bold
+              ),
+              textAlign: TextAlign.end,
             ),
-            textAlign: TextAlign.left,
           ),
         ],
       ),
     );
   }
 
+  Widget _ligar(_numeroTel) {
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 15,
+        ),
+        Container(
+          height: 40,
+          margin: EdgeInsets.only(
+              left: 30, right: 30, bottom: 4, top: 15),
+          decoration: BoxDecoration(
+            //color: Color.fromRGBO(19, 104, 136, 1),
+            borderRadius: BorderRadius.circular(30),
+            border:
+            Border.all(color: Colors.green, width: 3.0),
+          ),
+          child: FlatButton(
+            onPressed: ()async {
+              if (await canLaunch('tel://+55$_numeroTel')) {
+              await launch(
+                'tel://+55$_numeroTel');
+              } else {
+              throw 'Could not launch $_numeroTel';
+              }
+            },
+            child: Row(
+              //crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.phone,
+                  color: Colors.green,
+                ),
+                Text(
+                  'ligar',
+                  style: TextStyle(color: Colors.green),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
 }

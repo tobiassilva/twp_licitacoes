@@ -349,6 +349,8 @@ class InteressesWidget {
       ),
     );
   }
+
+
   ///campo ESTADO DE INTERESSE
   ///
   Widget estadoInteresse(){
