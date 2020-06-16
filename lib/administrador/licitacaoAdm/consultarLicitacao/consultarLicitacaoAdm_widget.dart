@@ -112,6 +112,7 @@ class ConsultarLicitacaoAdmWidget {
           String _categoria = globalsAdm.dbLicitacoes[index]['categoria_de_atividade'];
           String _nomeLicit = globalsAdm.dbLicitacoes[index]['nome'];
           int _id = globalsAdm.dbLicitacoes[index]['id'];
+          print('_nomeLicit: $_nomeLicit');
           return GestureDetector(
             onTap: (){
               Navigator.of(context).push(

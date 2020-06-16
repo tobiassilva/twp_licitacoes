@@ -44,12 +44,12 @@ class HomeAdmFunctions {
   String queryLicitacoes = """
   query MyQuery {
     licitacoes {
+      id
       categoria_de_atividade
       data_e_hora_da_sessao_publica
       data_limite_envio_de_documentos
       data_limite_para_crc_orgao
       edital
-      id
       link
       modalidade_de_licitacao
       objeto_resumido
@@ -58,8 +58,15 @@ class HomeAdmFunctions {
       preco_estimado
       situacao
       subcategoria_de_atividade
+      nome
+      id_categoria_de_atividade
+      id_modalidade_de_licitacao
+      id_orgao
+      id_situacao
+      id_subcategoria_de_atividade
     }
   }
+
   """;
 
 
