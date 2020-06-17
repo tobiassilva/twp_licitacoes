@@ -87,6 +87,7 @@ subscription {
 
   Future atualizaControladores(jsonEscolhido) async {
     //await getDadosOrgaos();
+    await zeraControladores();
     print("TEM QUE APARECER AQUI: $jsonEscolhido");
     id = jsonEscolhido['id'];
     nomeOrgao.text = jsonEscolhido['nome'];
@@ -98,6 +99,18 @@ subscription {
     cep.text = jsonEscolhido['cep'];
     cidade.text = jsonEscolhido['cidade'];
     endereco.text = jsonEscolhido['endereco'];
+  }
+
+  Future zeraControladores(){
+    nomeOrgao.text = '';
+    idTipo = null;
+    cnpj.text = '';
+    email.text = '';
+    telefone.text = '';
+    idEstado = null;
+    cep.text = '';
+    cidade.text = '';
+    endereco.text = '';
   }
 
   Future buscaArmazenaEstados() async {

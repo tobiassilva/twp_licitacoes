@@ -38,8 +38,9 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
     editarOrgaoFunctions = Provider.of<UpdateOrgaoFunctions>(context);
 
     if (leuBanco) {
-      leuBanco = false;
+
       carregaDadosConsulta();
+      leuBanco = false;
     }
   }
 
@@ -145,6 +146,9 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
                               itemCount: editarOrgaoFunctions
                                   .jsonOrgao['data']['orgao'].length,
                               itemBuilder: (_, index) {
+                                String _nome = editarOrgaoFunctions.jsonOrgao['data']['orgao'][index]['nome'];
+                                String _cnpj = editarOrgaoFunctions.jsonOrgao['data']['orgao'][index]['cnpj'];
+                                String _email = editarOrgaoFunctions.jsonOrgao['data']['orgao'][index]['email'];
                                 return GestureDetector(
                                   onTap: () {
                                     Navigator.of(context).push(
@@ -156,6 +160,97 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
                                                         ['orgao'][index])));
                                   },
                                   child: Container(
+                                    margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                                    padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
+                                    decoration: BoxDecoration(
+                                      //color: Colors.red,
+                                        gradient: LinearGradient(colors: [Colors.white, Colors.white]),
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 10.0,
+                                              spreadRadius: 2.0,
+                                              offset: Offset(
+                                                1.0,
+                                                1.0,
+                                              )),
+                                        ]),
+                                    child: Row(
+                                      children: <Widget>[
+
+                                        Container(
+                                          child: Icon(
+                                            FontAwesomeIcons.landmark,
+                                            size: 35,
+                                            color: StyleGlobals().primaryColor,
+                                          ),
+                                        ),
+
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(
+                                                '${_nome == '' || _nome == null ? "Não Informado" : _nome}',
+                                                style: TextStyle(
+                                                  color: StyleGlobals().textColorMedio,
+                                                  fontSize: StyleGlobals().sizeSubtitulo,
+                                                ),
+                                              ),
+
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+
+                                              Row(
+                                                children: <Widget>[
+                                                  Icon(
+                                                    FontAwesomeIcons.solidIdCard,
+                                                    size: StyleGlobals().sizeText,
+                                                    color: StyleGlobals().tertiaryColor,
+                                                  ),
+                                                  Text(
+                                                    ' ${_cnpj == '' || _cnpj == null ? "CNPJ Não Informado" : _cnpj}',
+                                                    style: TextStyle(
+                                                      color: StyleGlobals().textColorMedio,
+                                                      fontSize: StyleGlobals().sizeText,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+
+                                              Row(
+                                                children: <Widget>[
+                                                  Icon(
+                                                    FontAwesomeIcons.at,
+                                                    size: StyleGlobals().sizeText,
+                                                    color: StyleGlobals().tertiaryColor,
+                                                  ),
+                                                  Text(
+                                                    ' ${_email == '' || _email == null ? "Email Não Informado" : _email}',
+                                                    style: TextStyle(
+                                                      color: StyleGlobals().textColorMedio,
+                                                      fontSize: StyleGlobals().sizeText,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),/*Container(
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(15),
@@ -208,7 +303,7 @@ class _ConsultarOrgaoPageState extends State<ConsultarOrgaoPage> {
                                         ],
                                       ),
                                     ),
-                                  ),
+                                  ),*/
                                 );
                               }),
                         ),

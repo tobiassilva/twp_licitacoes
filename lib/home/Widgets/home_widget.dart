@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/empresa/editarCadastro/editarCadastro_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:twp_licitacoes/empresa/editarCadastro/editarCadastro_page.dart';
+import 'package:twp_licitacoes/home/listasLicitacoes/novasLicitacoes/novasLicitacoes_page.dart';
 import '../../globals.dart';
 import '../home_functions.dart';
 
@@ -175,7 +177,9 @@ class HomeWidget {
         children: <Widget>[
           FlatButton(
             onPressed: (){
-
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => NovasLicitacoesPage())
+              );
             },
 
             splashColor: Colors.transparent,

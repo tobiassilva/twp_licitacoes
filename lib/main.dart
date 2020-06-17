@@ -6,6 +6,8 @@ import 'package:twp_licitacoes/administrador/licitacaoAdm/cadastroLicitacao/cada
 import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/consultarLicitacaoAdm_store.dart';
 import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/detalhesLicitacaoAdm/detalhesLicitacaoAdm_store.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
+import 'package:twp_licitacoes/globalsVars.dart';
+import 'package:twp_licitacoes/home/Store/home_store.dart';
 
 import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_store.dart';
 import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_functions.dart';
@@ -56,6 +58,8 @@ class MyApp extends StatelessWidget {
         Provider<CadastroLicitacaoAdmFunctions>(create: (_) => CadastroLicitacaoAdmFunctions(context)),
         Provider<CadastroLicitacaoAdmStore>(create: (_) => CadastroLicitacaoAdmStore()),
         Provider<ConsultarLicitacaoAdmStore>(create: (_) => ConsultarLicitacaoAdmStore()),
+        Provider<GlobalsVariaveis>(create: (_) => GlobalsVariaveis()),
+        Provider<HomeStore>(create: (_) => HomeStore()),
       ],
       child: MaterialApp(
         title: 'TWP Licitações',

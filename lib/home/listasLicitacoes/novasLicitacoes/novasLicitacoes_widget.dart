@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:twp_licitacoes/globalsVars.dart';
 
+import '../../../globals.dart';
+import 'novasLicitacoesDetalhes/novasLicitacoesDetalhes_page.dart';
 
-import '../../globals.dart';
-import 'detalhesEmpresasAdm/detalhesEmpresasAdm_page.dart';
-import 'empresasAdm_functions.dart';
-import '../globalsAdm.dart' as globalsAdm;
-
-
-class EmpresasAdmWidget {
+class NovasLicitacoesWidget {
 
   BuildContext context;
-  EmpresasAdmWidget(this.context);
+  NovasLicitacoesWidget(this.context);
 
-  Widget empresasAdmPrincipal(){
+  Widget novasWidgetPrincipal(){
     return Container(
       height: MediaQuery.of(context).size.height,
       child: Column(
-          children: <Widget>[
-            barraTopo(),
-            Expanded(child: listaEmpresas()),
-          ],
+        children: <Widget>[
+          barraTopo(),
+          Expanded(child: listaLicitacoes()),
+        ],
       ),
     );
   }
 
   Widget barraTopo() {
-    final empresasAdmFunctions = Provider.of<EmpresasAdmFunctions>(context);
+
     return Container(
       height: 75,
       width: MediaQuery.of(context).size.width,
@@ -67,27 +63,29 @@ class EmpresasAdmWidget {
             ),
           ),
 
+
         ],
       ),
     );
   }
 
-  Widget listaEmpresas(){
+  Widget listaLicitacoes(){
 
     return Scrollbar(
       child: ListView.builder(
         //physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: globalsAdm.dbEmpresas.length,
+        itemCount: GlobalsVariaveis.dbUserLicitacoes.length,
         itemBuilder: (_, index){
-          int _plano = globalsAdm.dbEmpresas[index]['plano'];
-          String _nomeRepre = globalsAdm.dbEmpresas[index]['nome_representante'];
-          String _nomeEmpresa = globalsAdm.dbEmpresas[index]['nome_empresa'];
-          int _id = globalsAdm.dbEmpresas[index]['id'];
+          String _orgao = GlobalsVariaveis.dbUserLicitacoes[index]['orgao'];
+          String _categoria = GlobalsVariaveis.dbUserLicitacoes[index]['categoria_de_atividade'];
+          String _nomeLicit = GlobalsVariaveis.dbUserLicitacoes[index]['nome'];
+          int _id = GlobalsVariaveis.dbUserLicitacoes[index]['id'];
+          print('_nomeLicit: $_nomeLicit');
           return GestureDetector(
             onTap: (){
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => DetalhesEmpresasAdm(globalsAdm.dbEmpresas[index]))
+                  MaterialPageRoute(builder: (context) => NovasLicitacoesDetalhesPage(GlobalsVariaveis.dbUserLicitacoes[index]))
               );
             },
             child: Container(
@@ -112,7 +110,7 @@ class EmpresasAdmWidget {
 
                   Container(
                     child: Icon(
-                      FontAwesomeIcons.solidBuilding,
+                      FontAwesomeIcons.fileSignature,
                       size: 35,
                       color: StyleGlobals().primaryColor,
                     ),
@@ -127,7 +125,7 @@ class EmpresasAdmWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          '${_nomeEmpresa == '' ? "Não Informado" : _nomeEmpresa}',
+                          '${_nomeLicit == '' || _nomeLicit == null ? "Não Informado" : _nomeLicit}',
                           style: TextStyle(
                             color: StyleGlobals().textColorMedio,
                             fontSize: StyleGlobals().sizeSubtitulo,
@@ -141,15 +139,20 @@ class EmpresasAdmWidget {
                         Row(
                           children: <Widget>[
                             Icon(
-                              FontAwesomeIcons.userAlt,
+                              FontAwesomeIcons.landmark,
                               size: StyleGlobals().sizeText,
                               color: StyleGlobals().tertiaryColor,
                             ),
-                            Text(
-                              ' ${_nomeRepre == '' ? "Não Informado" : _nomeRepre}',
-                              style: TextStyle(
-                                color: StyleGlobals().textColorMedio,
-                                fontSize: StyleGlobals().sizeText,
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Flexible(
+                              child: Text(
+                                '${_orgao == '' || _orgao == 'null' || _orgao == null ? "Órgão Não Informado" : _orgao}',
+                                style: TextStyle(
+                                  color: StyleGlobals().textColorMedio,
+                                  fontSize: StyleGlobals().sizeText,
+                                ),
                               ),
                             ),
                           ],
@@ -162,15 +165,20 @@ class EmpresasAdmWidget {
                         Row(
                           children: <Widget>[
                             Icon(
-                              FontAwesomeIcons.coins,
+                              FontAwesomeIcons.ticketAlt,
                               size: StyleGlobals().sizeText,
                               color: StyleGlobals().tertiaryColor,
                             ),
-                            Text(
-                              ' ${_plano == 0 ? "Básico" : _plano == 1 ? "Profissional" : "Não Informado"}',
-                              style: TextStyle(
-                                color: StyleGlobals().textColorMedio,
-                                fontSize: StyleGlobals().sizeText,
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Flexible(
+                              child: Text(
+                                '${_categoria == '' || _categoria == null || _categoria == 'null' ? "Categoria Não Informada" : _categoria}',
+                                style: TextStyle(
+                                  color: StyleGlobals().textColorMedio,
+                                  fontSize: StyleGlobals().sizeText,
+                                ),
                               ),
                             ),
                           ],

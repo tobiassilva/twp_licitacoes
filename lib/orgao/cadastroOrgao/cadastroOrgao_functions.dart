@@ -25,7 +25,8 @@ subscription {
     telefone
     endereco
     email
-    
+    cep
+    cidade
   }
 }
 """;

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/tabs/menu.dart';
 
 
+import '../globals.dart';
 import 'Widgets/home_widget.dart';
 import 'home_functions.dart';
 
@@ -23,6 +25,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   var url;
+  bool carregando = false;
+  bool _lerBanco = true;
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
   HomeFunctions homeFunctions;
@@ -32,6 +36,22 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
 
     homeFunctions = Provider.of<HomeFunctions>(context);
+
+    if(_lerBanco){
+      recebeDados();
+      _lerBanco = false;
+    }
+
+
+  }
+
+  Future recebeDados() async {
+    await homeFunctions.getDadosBanco();
+
+    if(!mounted) return false;
+    setState(() {
+      carregando = false;
+    });
 
   }
 
@@ -65,7 +85,11 @@ class _HomePageState extends State<HomePage> {
           key: homeFunctions.scaffoldKey,
 
           drawer: CustomDrawer(),
-          body: Column(
+          body: carregando ? SpinKitThreeBounce(
+            color: StyleGlobals().primaryColor,
+            size: StyleGlobals().sizeTitulo,
+          )
+              : Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
 

@@ -53,6 +53,9 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
 
   Future carregandoCampos() async {
     await carregaDados();
+    setSelectedRadio(jsonOrgaoEsc['id_tipo_orgao']);
+    setSelectedRadioEstados(jsonOrgaoEsc['id_estados']);
+    await atualizaControllers();
 
     setState(() {
       carregando = false;
@@ -79,22 +82,19 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
     editarOrgaoFunctions = Provider.of<UpdateOrgaoFunctions>(context);
     if (leuBanco) {
       leuBanco = false;
-      atualizaControllers();
+      carregandoCampos();
       
     }
   }
 
   Future atualizaControllers() async {
     await editarOrgaoFunctions.atualizaControladores(jsonOrgaoEsc);
-    setState(() {
-      carregando = false;
-    });
+
   }
 @override
   void initState() {
     /*editarOrgaoFunctions.idTipo;
     editarOrgaoFunctions.idEstado;*/
-    carregandoCampos();
     super.initState();
   }
   
@@ -225,7 +225,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                                           groupValue: editarOrgaoFunctions.idTipo,
                                           onChanged: (val) {
                                             print("Radio $val");
-                                            //setSelectedRadio(val);
+                                            setSelectedRadio(val);
                                           }),
                                     ],
                                   );
@@ -395,7 +395,7 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
                                           activeColor: Colors.blue,
                                           onChanged: (val) {
                                             print("Radio $val");
-                                            //setSelectedRadioEstados(val);
+                                            setSelectedRadioEstados(val);
                                           }),
                                     ],
                                   );
@@ -594,6 +594,8 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
 
   String updateQueryOrgao(
       id, nome, cnpj, email, telefone, cep, cidade, endereco) {
+     print('editarOrgaoFunctions.idEstado: ${editarOrgaoFunctions.idEstado}');
+     print('editarOrgaoFunctions.idTipo: ${editarOrgaoFunctions.idTipo}');
     return """
    mutation MyMutation {
    update_orgao(where: {id: {_eq: "$id"}}, _set: {nome: "${editarOrgaoFunctions.nomeOrgao.text}", 
@@ -602,6 +604,8 @@ class _EditarOrgaoPageState extends State<EditarOrgaoPage> {
     telefone: "${editarOrgaoFunctions.telefone.text}", 
     cep: "${editarOrgaoFunctions.cep.text}", 
     cidade: "${editarOrgaoFunctions.cidade.text}", 
+    id_estados: "${editarOrgaoFunctions.idEstado}", 
+    id_tipo_orgao: "${editarOrgaoFunctions.idTipo}", 
     endereco: "${editarOrgaoFunctions.endereco.text}"}){
       returning {
       id
