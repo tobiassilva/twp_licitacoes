@@ -15,13 +15,11 @@ class ConsultarLicitacaoAdmWidget {
   Widget consultarLicitacoesAdmPrincipal(){
     return Container(
       height: MediaQuery.of(context).size.height,
-      child: Scrollbar(
-        child: ListView(
-          children: <Widget>[
-            barraTopo(),
-            listaLicitacoes(),
-          ],
-        ),
+      child: Column(
+        children: <Widget>[
+          barraTopo(),
+          Expanded(child: listaLicitacoes()),
+        ],
       ),
     );
   }
@@ -102,9 +100,9 @@ class ConsultarLicitacaoAdmWidget {
 
   Widget listaLicitacoes(){
 
-    return Container(
+    return Scrollbar(
       child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: globalsAdm.dbLicitacoes.length,
         itemBuilder: (_, index){

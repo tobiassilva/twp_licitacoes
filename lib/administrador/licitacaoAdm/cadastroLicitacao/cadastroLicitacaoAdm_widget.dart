@@ -31,7 +31,7 @@ class CadastroLicitacaoAdmWidget {
           ),
 
 
-          _botaoPago(),
+          _botaoEnviar(),
 
           SizedBox(
             height: 25,
@@ -161,7 +161,7 @@ class CadastroLicitacaoAdmWidget {
                   padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
-                    FontAwesomeIcons.solidBuilding,
+                    FontAwesomeIcons.fileSignature,
                     color: StyleGlobals().secundaryColor,
                     size: 22,
                   ),
@@ -260,7 +260,7 @@ class CadastroLicitacaoAdmWidget {
                   padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
-                    FontAwesomeIcons.at,
+                    FontAwesomeIcons.handHoldingUsd,
                     color: StyleGlobals().secundaryColor,
                     size: 22,
                   ),
@@ -344,7 +344,7 @@ class CadastroLicitacaoAdmWidget {
                   padding: EdgeInsets.only(left: 8, right: 8),
                   margin: EdgeInsets.only(right: 7),
                   child: Icon(
-                    FontAwesomeIcons.solidBuilding,
+                    FontAwesomeIcons.fileInvoice,
                     color: StyleGlobals().secundaryColor,
                     size: 22,
                   ),
@@ -487,7 +487,7 @@ class CadastroLicitacaoAdmWidget {
                       padding: EdgeInsets.only(left: 8, right: 8),
                       margin: EdgeInsets.only(right: 7),
                       child: Icon(
-                        FontAwesomeIcons.userAlt,
+                        FontAwesomeIcons.comments,
                         color: StyleGlobals().secundaryColor,
                         size: 22,
                       ),
@@ -567,7 +567,7 @@ class CadastroLicitacaoAdmWidget {
                       padding: EdgeInsets.only(left: 8, right: 8),
                       margin: EdgeInsets.only(right: 7),
                       child: Icon(
-                        FontAwesomeIcons.userAlt,
+                        FontAwesomeIcons.commentDots,
                         color: StyleGlobals().secundaryColor,
                         size: 22,
                       ),
@@ -2211,7 +2211,7 @@ class CadastroLicitacaoAdmWidget {
 
 
 
-  Widget _botaoPago(){
+  Widget _botaoEnviar(){
 
     final cadastroLicitacaoAdmStore = Provider.of<CadastroLicitacaoAdmStore>(context, listen: false);
     final cadastroLicitacaoAdmFunctions = Provider.of<CadastroLicitacaoAdmFunctions>(context, listen: false);

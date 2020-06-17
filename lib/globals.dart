@@ -25,3 +25,5 @@ class StyleGlobals {
     var sizeSubtitulo = 18.0;
 }
 
+
+

@@ -3,7 +3,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/home/home.dart';
+
+import '../../globals.dart';
+import '../../globalsVars.dart';
 
 class EditarCadastroFunctions{
 
@@ -13,9 +17,8 @@ class EditarCadastroFunctions{
 
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  var user;
-  var empresaUserFirebase;
+
+
   var empresaUserBD;
 
 
@@ -68,10 +71,10 @@ class EditarCadastroFunctions{
   }
 
 
-  String updateQueryEmpresa() {
+  String updateQueryEmpresa(idEmp) {
     return """
     mutation MyMutation {
-      update_empresa(where: {id: {_eq: ${empresaUserFirebase['id_empresa']}}}, _set: {nome_empresa: "${nomeEmpresa.text}", nome_representante: "${nomeRepresentante.text}", logradouro: "${logradouro.text}", numero: "${numero.text}", telefone: "${telefone.text}", cep: "${cep.text}", cidade: "${cidade.text}", cnpj: "${cnpj.text}", complemento: "${complemento.text}", email: "${email.text}", estado: "${estado.text}"}) {
+      update_empresa(where: {id: {_eq: $idEmp}}}, _set: {nome_empresa: "${nomeEmpresa.text}", nome_representante: "${nomeRepresentante.text}", logradouro: "${logradouro.text}", numero: "${numero.text}", telefone: "${telefone.text}", cep: "${cep.text}", cidade: "${cidade.text}", cnpj: "${cnpj.text}", complemento: "${complemento.text}", email: "${email.text}", estado: "${estado.text}"}) {
         returning {
           id
           id_categoria
@@ -100,10 +103,13 @@ class EditarCadastroFunctions{
 
   Future verificaUser() async {
 
-    await getEmpresaFirebase();
+    //final globalsVariaveis = Provider.of<GlobalsVariaveis>(context);
+    //GlobalsVariaveis globalsVariaveis = GlobalsVariaveis();
 
-    print("empresaUserFirebase['id_empresa']: ${empresaUserFirebase['id_empresa']}");
-    var snapshot = await hasuraConnect.query(queryEmpresa(empresaUserFirebase['id_empresa']));
+
+    print("empresaUserFirebase['id_empresa']: ${GlobalsVariaveis.dbUserLicitacoes.length}");
+    print("empresaUserFirebase['id_empresa']: ${GlobalsVariaveis.empresaUserFirebase['id_empresa']}");
+    var snapshot = await hasuraConnect.query(queryEmpresa(GlobalsVariaveis.empresaUserFirebase['id_empresa']));
 
     //print(snapshot);
     empresaUserBD = snapshot['data']['empresa'][0];
@@ -123,29 +129,15 @@ class EditarCadastroFunctions{
 
   }
 
-  Future getEmpresaFirebase() async {
-    user = await _auth.currentUser();
 
-    final notesReference = FirebaseDatabase.instance
-        .reference()
-        .child('userProfile/${user.uid}');
-
-    print('AQUIIIII');
-
-    await notesReference.once().then((DataSnapshot snapshot){
-      if(snapshot.value != null){
-        empresaUserFirebase = snapshot.value;
-      }
-    });
-    print('empresaUserFirebase: $empresaUserFirebase');
-  }
 
   Future<bool> updateEmpresa() async {
 
     print('FFFFFFF');
+    GlobalsVariaveis globalsVariaveis = GlobalsVariaveis();
 
 
-    var snapshot = await hasuraConnect.mutation(updateQueryEmpresa());
+    var snapshot = await hasuraConnect.mutation(updateQueryEmpresa(GlobalsVariaveis.empresaUserFirebase['id_empresa']));
     /*var snapshot = await hasuraConnect.mutation(mutations, variables: {
       'nome' : nomeEmpresa.text,
       'representante': nomeRepresentante.text
