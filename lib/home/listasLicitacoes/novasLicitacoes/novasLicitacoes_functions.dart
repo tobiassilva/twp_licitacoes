@@ -23,6 +23,7 @@ class NovasLicitacoesFunctions{
     List<String> myListUser = (prefs.getStringList('userFav') ?? List<String>());
 
     for(int i=0; i < myList.length; i++){
+      //se encontrar na lista, tira dos favoritos e apaga da lista
       if(myList[i] == id && myListUser[i] == idUser){
         homeStore.setFavorito(false);
 
@@ -38,7 +39,7 @@ class NovasLicitacoesFunctions{
       }
     }
     
-    
+    // se não encontrou, aciona o botao favorito e adiciona na lista
     if(naoncontrou){
       myList.add(id);
       myListUser.add(idUser);
