@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/editarAtividade/consultarAtividade_page.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_page.dart';
+import 'package:twp_licitacoes/administrador/subCategoriaAtividadeAdm/editarSubCategoria/consultarSubAtividade_page.dart';
 import 'package:twp_licitacoes/login/login_page.dart';
 
 import '../globals.dart';
@@ -48,7 +49,11 @@ class CustomDrawer extends StatelessWidget {
             SizedBox(
               height: 5,
             ),*/
-            _botoesMenuPush(FontAwesomeIcons.search, "Consultar Atividades", ConsultarAtividades(), context),
+            _botoesMenuPush(FontAwesomeIcons.search, "Atividades", ConsultarAtividades(), context),
+            SizedBox(
+              height: 5,
+            ),
+            _botoesMenuPush(FontAwesomeIcons.search, "SubCategorias de Ativ.", ConsultarSubAtividades(), context),
             SizedBox(
               height: 5,
             ),
