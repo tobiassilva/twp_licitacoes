@@ -6,6 +6,7 @@ import 'package:twp_licitacoes/empresa/cadastro/cadastro_page.dart';
 
 import 'package:twp_licitacoes/home/home.dart';
 import 'package:twp_licitacoes/orgao/cadastroOrgao/cadastroOrgao_functions.dart';
+import 'package:twp_licitacoes/requisicoes.dart';
 
 import 'login_store.dart';
 
@@ -137,7 +138,7 @@ class LoginFunctions {
         );
       }
     }
-
+    RequisicoesNecessariasNoLogin().requisitaNecessarias();
 
 
     return;
