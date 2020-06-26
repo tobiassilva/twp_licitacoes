@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twp_licitacoes/administrador/categoriaAtividadeAdm/cadastrarAtividade/cadastrarAtividade_functions.dart';
+
 import 'package:twp_licitacoes/administrador/subCategoriaAtividadeAdm/cadastrarSubCategoria/cadastrarSubAtividade_functions.dart';
 import 'package:twp_licitacoes/administrador/subCategoriaAtividadeAdm/editarSubCategoria/consultarSubAtividade_page.dart';
 import 'package:twp_licitacoes/globals.dart';
