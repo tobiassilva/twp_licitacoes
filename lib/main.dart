@@ -6,6 +6,7 @@ import 'package:twp_licitacoes/administrador/licitacaoAdm/cadastroLicitacao/cada
 import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/consultarLicitacaoAdm_store.dart';
 import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/detalhesLicitacaoAdm/detalhesLicitacaoAdm_store.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
+import 'package:twp_licitacoes/administrador/subCategoriaAtividadeAdm/editarSubCategoria/editarSubAtividade_functions.dart';
 import 'package:twp_licitacoes/globalsVars.dart';
 import 'package:twp_licitacoes/home/Store/home_store.dart';
 
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         Provider<EmpresasAdmFunctions>(create: (_) => EmpresasAdmFunctions(context)),
         Provider<UpdateOrgaoFunctions>(create: (_) => UpdateOrgaoFunctions(context)),
         Provider<UpdateAtividadesFunctions>(create: (_) => UpdateAtividadesFunctions(context)),
+        Provider<UpdateSubAtividadesFunctions>(create: (_) => UpdateSubAtividadesFunctions(context)),
         Provider<DetalhesEmpresasAdmFunctions>(create: (_) => DetalhesEmpresasAdmFunctions(context)),
         Provider<DetalhesEmpresasAdmStore>(create: (_) => DetalhesEmpresasAdmStore()),
         Provider<HomeAdmAnalytics>(create: (_) => HomeAdmAnalytics(context)),
