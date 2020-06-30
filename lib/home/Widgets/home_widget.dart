@@ -5,7 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:twp_licitacoes/empresa/editarCadastro/editarCadastro_page.dart';
+import 'package:twp_licitacoes/globalsVars.dart';
+import 'package:twp_licitacoes/home/listasLicitacoes/favoritasLicitacoes/favoritasLicitacoes_page.dart';
 import 'package:twp_licitacoes/home/listasLicitacoes/novasLicitacoes/novasLicitacoes_page.dart';
+import 'package:twp_licitacoes/home/listasLicitacoes/visualizadasLicitacoes/visualizadasLicitacoes_page.dart';
 import '../../globals.dart';
 import '../home_functions.dart';
 
@@ -122,7 +125,7 @@ class HomeWidget {
     );
   }
 
-  Widget botoesTopo(titulo, icone) {
+  Widget botoesTopo(titulo, icone) {  ///TODO: TIRAR ESSA TRETA DAQUI PQ NAO VAI USAR PRA NADA
     return FlatButton(
       padding: EdgeInsets.all(0),
       onPressed: () {
@@ -166,6 +169,31 @@ class HomeWidget {
     );
   }
 
+  Widget msgOla(){
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(children: <TextSpan>[
+        TextSpan(
+          text: 'Olá\n',
+          style: TextStyle(
+            fontSize: StyleGlobals().sizeSubtitulo + 5,
+            color: StyleGlobals().textColorMedio,
+          ),
+        ),
+        GlobalsVariaveis.nomeUser == null
+        ? Container()
+        : TextSpan(
+          text: '${GlobalsVariaveis.nomeUser}',
+          style: TextStyle(
+            fontSize: StyleGlobals().sizeTitulo + 5,
+            color: StyleGlobals().textColorForte,
+            //fontWeight: FontWeight.bold
+          ),
+        ),
+      ]),
+    );
+  }
+
   Widget botoes() {
     return GridView.count(
         shrinkWrap: true,
@@ -188,7 +216,9 @@ class HomeWidget {
           ),
           FlatButton(
             onPressed: (){
-
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => VisualizadasLicitacoesPage())
+              );
             },
 
             splashColor: Colors.transparent,
@@ -197,12 +227,14 @@ class HomeWidget {
           ),
           FlatButton(
             onPressed: (){
-
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => FavoritasLicitacoesPage())
+              );
             },
 
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            child: _cardCamposLicit('Favoritas', Icons.favorite),
+            child: _cardCamposLicit('Favoritas', Icons.star),
           ),
           FlatButton(
             onPressed: (){

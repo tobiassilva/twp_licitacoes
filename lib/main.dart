@@ -9,6 +9,8 @@ import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
 import 'package:twp_licitacoes/administrador/subCategoriaAtividadeAdm/editarSubCategoria/editarSubAtividade_functions.dart';
 import 'package:twp_licitacoes/globalsVars.dart';
 import 'package:twp_licitacoes/home/Store/home_store.dart';
+import 'package:twp_licitacoes/home/listasLicitacoes/favoritasLicitacoes/favoritasLicitacoes_functions.dart';
+import 'package:twp_licitacoes/home/listasLicitacoes/visualizadasLicitacoes/visualizadasLicitacoes_functions.dart';
 
 import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_store.dart';
 import 'administrador/empresasAdm/detalhesEmpresasAdm/detalhesEmpresasAdm_functions.dart';
@@ -23,6 +25,7 @@ import 'empresa/cadastro/cadastro_functions.dart';
 import 'empresa/editarCadastro/editarCadastro_functions.dart';
 import 'empresa/editarCadastro/editarCadastro_store.dart';
 import 'home/home_functions.dart';
+import 'home/listasLicitacoes/novasLicitacoes/novasLicitacoes_functions.dart';
 import 'login/login_functions.dart';
 import 'login/login_page.dart';
 import 'login/login_store.dart';
@@ -62,6 +65,9 @@ class MyApp extends StatelessWidget {
         Provider<ConsultarLicitacaoAdmStore>(create: (_) => ConsultarLicitacaoAdmStore()),
         Provider<GlobalsVariaveis>(create: (_) => GlobalsVariaveis()),
         Provider<HomeStore>(create: (_) => HomeStore()),
+        Provider<FavoritasLicitacoesFunctions>(create: (_) => FavoritasLicitacoesFunctions(context)),
+        Provider<VisualizadasLicitacoesFunctions>(create: (_) => VisualizadasLicitacoesFunctions(context)),
+        Provider<NovasLicitacoesFunctions>(create: (_) => NovasLicitacoesFunctions(context)),
       ],
       child: MaterialApp(
         title: 'TWP Licitações',

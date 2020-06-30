@@ -24,6 +24,21 @@ mixin _$HomeStore on _HomeStore, Store {
     });
   }
 
+  final _$visualizadoAtom = Atom(name: '_HomeStore.visualizado');
+
+  @override
+  bool get visualizado {
+    _$visualizadoAtom.reportRead();
+    return super.visualizado;
+  }
+
+  @override
+  set visualizado(bool value) {
+    _$visualizadoAtom.reportWrite(value, super.visualizado, () {
+      super.visualizado = value;
+    });
+  }
+
   final _$_HomeStoreActionController = ActionController(name: '_HomeStore');
 
   @override
@@ -38,9 +53,21 @@ mixin _$HomeStore on _HomeStore, Store {
   }
 
   @override
+  void setVisualizado(dynamic value) {
+    final _$actionInfo = _$_HomeStoreActionController.startAction(
+        name: '_HomeStore.setVisualizado');
+    try {
+      return super.setVisualizado(value);
+    } finally {
+      _$_HomeStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-favorito: ${favorito}
+favorito: ${favorito},
+visualizado: ${visualizado}
     ''';
   }
 }
