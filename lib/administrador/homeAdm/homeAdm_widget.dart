@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:twp_licitacoes/administrador/empresasAdm/empresasAdm_page.dart';
 import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/consultarLicitacaoAdm_page.dart';
+import 'package:twp_licitacoes/administrador/relatoriosAdm/relatorios_page.dart';
 import 'package:twp_licitacoes/home/home.dart';
 import 'package:twp_licitacoes/orgao/editarOrgao/consultarOrgao_page.dart';
 
@@ -249,18 +250,18 @@ class HomeAdmWidget {
                         ],
                       )));
                 } else {
-                  /*Navigator.of(context).push(
+                  Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          ConsultarOrgaoPage()));*/
+                          RelatoriosPage()));
                 }
               },
               child: _cardOpcoes(
-                  "Estados",
+                  "Relatórios",
                   Colors.deepPurple,
                   Colors.deepPurpleAccent,
-                  FontAwesomeIcons.city,
-                  globalsAdm.dbEstados.length),
+                  FontAwesomeIcons.thList,
+                  -1),//globalsAdm.dbEstados.length),
             ),
           ],
         );
@@ -373,7 +374,14 @@ class HomeAdmWidget {
                                 strokeWidth: 3,
                               ),
                             )
-                          : Text(
+                          : _qtde == -1 ?
+                          Icon(
+                            FontAwesomeIcons.listUl,
+                              color: StyleGlobals().textColorSecundary,
+                              size: StyleGlobals().sizeSubtitulo,
+                          )
+
+                      : Text(
                               '$_qtde',
                               style: TextStyle(
                                 color: StyleGlobals().textColorSecundary,
@@ -429,7 +437,22 @@ class HomeAdmWidget {
                   strokeWidth: 3,
                 ),
               )*/
-                  : PieChart(dataMap: homeAdmAnalytics.chartPieCategorias),
+                  : Container(
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        'Área de interesse das Empresas',
+                        style: TextStyle(
+                          fontSize: StyleGlobals().sizeTitulo,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      PieChart(dataMap: homeAdmAnalytics.chartPieCategorias),
+                    ],
+                  )),
             ],
           ),
         );

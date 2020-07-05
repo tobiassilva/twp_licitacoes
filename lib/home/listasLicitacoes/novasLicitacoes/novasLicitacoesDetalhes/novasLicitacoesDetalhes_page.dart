@@ -31,6 +31,7 @@ class _NovasLicitacoesDetalhesPageState extends State<NovasLicitacoesDetalhesPag
 
     if(iniciaInfos){
       novasLicitacoesFunctions.verificaFavoritos(jsonLicitacao['id'].toString());
+      novasLicitacoesFunctions.verificaVisualizados(jsonLicitacao['id'].toString());
       iniciaInfos = false;
     }
 

@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:twp_licitacoes/home/Store/home_store.dart';
+import 'package:twp_licitacoes/globals.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../globals.dart';
-import '../novasLicitacoes_functions.dart';
-
-class NovasLicitacoesDetalhesWidget {
+class FavoritasLicitacoesDetalhesWidget {
 
   BuildContext context;
   var jsonLicitacao;
-  NovasLicitacoesDetalhesWidget(this.context, this.jsonLicitacao);
+  FavoritasLicitacoesDetalhesWidget(this.context, this.jsonLicitacao);
 
 
-  Widget novasLicitacoesPrincipal() {
+  Widget favoritasLicitacoesPrincipal() {
     return ListView(
       children: <Widget>[
         barraTopo(),
@@ -33,10 +28,12 @@ class NovasLicitacoesDetalhesWidget {
     );
   }
 
+
+
   Widget barraTopo() {
 
-    final homeStore = Provider.of<HomeStore>(context);
-    NovasLicitacoesFunctions novasLicitacoesFunctions = NovasLicitacoesFunctions(context);
+    //final homeStore = Provider.of<HomeStore>(context);
+    //NovasLicitacoesFunctions novasLicitacoesFunctions = NovasLicitacoesFunctions(context);
 
     return Container(
       height: 75,
@@ -88,90 +85,52 @@ class NovasLicitacoesDetalhesWidget {
             ),
           ),
 
-          /// BOTÕES APPBAR END
+          /// BOTÃO FAVORITO
           ///
-          Row(
-            children: <Widget>[
-              /// BOTÃO VISUALIZADO
-              ///
-              /*Observer(
-                builder: (_){
-                  return Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: GestureDetector(
-                      //clipBehavior: Clip.none,
-
-                      onTap: () {
-                        novasLicitacoesFunctions.salvaJaVisualizado(jsonLicitacao['id'].toString(), false);
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            height: 75,
-                            color: Colors.transparent,
-                            //color: Colors.red,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  !homeStore.visualizado ?FontAwesomeIcons.eyeSlash: FontAwesomeIcons.eye, color: StyleGlobals().tertiaryColor,
-                                  size: StyleGlobals().sizeTitulo,
-
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),*/
-              /// BOTÃO FAVORITO
-              ///
-              Observer(
-                builder: (_){
-                  return Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: GestureDetector(
-                      //clipBehavior: Clip.none,
-
-                      onTap: () {
-                        novasLicitacoesFunctions.salvaFavoritos(jsonLicitacao['id'].toString());
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            height: 75,
-                            //width: 75,
-                            color: Colors.transparent,
-                            //color: Colors.red,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  !homeStore.favorito ?Icons.star_border: Icons.star, color: StyleGlobals().primaryColor,
-                                  size: StyleGlobals().sizeTitulo+2,
-
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
+          Container( ///TODO: TIRAR ESSA GAMBIARRA
+            margin: EdgeInsets.only(left: 20, right: 20),
           ),
+          /*Observer( ///TODO: ATIVAR ESSE BOTÃO DE FAVORITOS EM BREVE
+            builder: (_){
+              return Container(
+                //margin: EdgeInsets.only(left: 20, right: 20),
+                child: GestureDetector(
+                  //clipBehavior: Clip.none,
+
+                  onTap: () {
+                    novasLicitacoesFunctions.salvaFavoritos(jsonLicitacao['id'].toString());
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: 75,
+                        width: 75,
+                        color: Colors.transparent,
+                        //color: Colors.red,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              !homeStore.favorito ?Icons.star_border: Icons.star, color: StyleGlobals().primaryColor,
+                              size: StyleGlobals().sizeTitulo+2,
+
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),*/
 
         ],
       ),
     );
   }
+
 
   Widget _detalhesLicitacao() {
     return Column(
@@ -251,6 +210,7 @@ class NovasLicitacoesDetalhesWidget {
     );
   }
 
+
   Widget _informacaoDadoTexto(text, value){
     return Container(
       child: Column(
@@ -289,6 +249,8 @@ class NovasLicitacoesDetalhesWidget {
       ),
     );
   }
+
+
 
   Widget _links(_numeroTel) {
     return Row(
@@ -336,5 +298,5 @@ class NovasLicitacoesDetalhesWidget {
   }
 
 
-}
 
+}

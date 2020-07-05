@@ -12,4 +12,10 @@ abstract class _HomeStore with Store {
   @action
   void setFavorito(value) => favorito = value;
 
+  @observable
+  bool visualizado = false;
+
+  @action
+  void setVisualizado(value) => visualizado = value;
+
 }

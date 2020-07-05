@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   var url;
-  bool carregando = false;
+  bool carregando = true;
   bool _lerBanco = true;
   HasuraConnect hasuraConnect = HasuraConnect('https://twplicitacoes.herokuapp.com/v1/graphql');
 
@@ -112,13 +112,15 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),*/
 
-              Row(
+              HomeWidget(context).msgOla(),
+
+              /*Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   HomeWidget(context).botoesTopo('Órgãos', FontAwesomeIcons.landmark),
                   HomeWidget(context).botoesTopo('Licitações', FontAwesomeIcons.fileSignature),
                 ],
-              ),
+              ),*/
 
           HomeWidget(context).botoes(),
 

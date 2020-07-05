@@ -179,6 +179,7 @@ class HomeFunctions {
 
     print(snapshotEmp);
     GlobalsVariaveis.empresaUserDB = await snapshotEmp['data']['empresa'][0];
+    GlobalsVariaveis.nomeUser = GlobalsVariaveis.empresaUserDB['nome_representante'];
 
 
     /// ENCONTRA OS ESTADOS DE INTERESSE DA EMPRESA
