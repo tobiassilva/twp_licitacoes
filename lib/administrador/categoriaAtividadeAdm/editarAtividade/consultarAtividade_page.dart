@@ -127,43 +127,59 @@ class _ConsultarAtividadesState extends State<ConsultarAtividades> {
                                             [index])));
                           },
                           child: Container(
+                             margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                            padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
+                                //color: Colors.white,
+                                gradient:  LinearGradient(
+                                          colors: [Colors.white, Colors.white]),
+                                borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 5,
+                                      color: Colors.black12,
+                                      blurRadius: 10,
                                       spreadRadius: 2,
                                       offset: Offset(
-                                        5,
-                                        5,
+                                        1,
+                                        1,
                                       )),
                                 ]),
-                            margin: EdgeInsets.only(
-                                top: 10, bottom: 0, left: 20, right: 10),
-                            padding: EdgeInsets.fromLTRB(10, 10, 30, 0),
+                            
                             child: Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
+                                   Container(
+                                          child: Icon(
+                                            FontAwesomeIcons.industry,
+                                            size: 35,
+                                            color: StyleGlobals().primaryColor,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 15,
+                                        ),
                                   Flexible(
-                                    child: Text(
-                                      "${editarAtividadesFunctions.jsonAtividades['data']['categorias_de_atividades'][index]['nome']}",
-                                      maxLines: 1,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        color: StyleGlobals().textColorForte,
-                                        fontSize: StyleGlobals().sizeTextMedio,
-                                      ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          "${editarAtividadesFunctions.jsonAtividades['data']['categorias_de_atividades'][index]['nome']}",
+                                          maxLines: 1,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            color: StyleGlobals().textColorMedio,
+                                            fontSize: StyleGlobals().sizeText,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   Text(
                                     "...",
                                     style: TextStyle(
                                         color: StyleGlobals().primaryColor,
-                                        fontSize: StyleGlobals().sizeTextMedio),
+                                        fontSize: StyleGlobals().sizeText),
                                   ),
                                   SizedBox(
                                     height: 5,
