@@ -6,7 +6,9 @@ import 'package:twp_licitacoes/administrador/licitacaoAdm/cadastroLicitacao/cada
 import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/consultarLicitacaoAdm_store.dart';
 import 'package:twp_licitacoes/administrador/licitacaoAdm/consultarLicitacao/detalhesLicitacaoAdm/detalhesLicitacaoAdm_store.dart';
 import 'package:twp_licitacoes/administrador/loginAdm/loginAdm_store.dart';
+import 'package:twp_licitacoes/administrador/relatoriosAdm/relatorioDetalhes/relatorioDetalhes_functions.dart';
 import 'package:twp_licitacoes/administrador/relatoriosAdm/relatorios_functions.dart';
+import 'package:twp_licitacoes/administrador/relatoriosAdm/store/relatorios_store.dart';
 import 'package:twp_licitacoes/administrador/subCategoriaAtividadeAdm/editarSubCategoria/editarSubAtividade_functions.dart';
 import 'package:twp_licitacoes/globalsVars.dart';
 import 'package:twp_licitacoes/home/Store/home_store.dart';
@@ -70,6 +72,8 @@ class MyApp extends StatelessWidget {
         Provider<VisualizadasLicitacoesFunctions>(create: (_) => VisualizadasLicitacoesFunctions(context)),
         Provider<NovasLicitacoesFunctions>(create: (_) => NovasLicitacoesFunctions(context)),
         Provider<RelatoriosFunctions>(create: (_) => RelatoriosFunctions(context)),
+        Provider<RelatoriosStore>(create: (_) => RelatoriosStore()),
+        Provider<RelatoriosDetalhesFunctions>(create: (_) => RelatoriosDetalhesFunctions(context)),
       ],
       child: MaterialApp(
         title: 'TWP Licitações',
