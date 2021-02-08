@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hasura_connect/hasura_connect.dart';
-import 'package:provider/provider.dart';
 import 'package:twp_licitacoes/globals.dart';
 
 import '../globalsVars.dart';
